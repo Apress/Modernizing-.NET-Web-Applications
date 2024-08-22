@@ -1,0 +1,47 @@
+﻿<table>
+    <tr>
+        @foreach (var pageIndex in Enumerable.Range(0, PagesCount))
+        {
+            <td>
+                @if (PageIndex != pageIndex)
+                {
+                    <a href="" @onclick="() => GoToPage(pageIndex)" @onclick:preventDefault>
+                        @(pageIndex + 1)
+                    </a>
+                }
+                else
+                {
+                    <span>
+                        @(pageIndex + 1)
+                    </span>
+                }
+            </td>
+        }
+    </tr>
+</table>
+
+@code {
+    [Parameter] 
+    public int PageSize { get; set; }
+
+    [Parameter] 
+    public int PageIndex { get; set; }
+
+    [Parameter] 
+    public int TotalRecordsCount { get; set; }
+
+    public int PagesCount => (int)Math.Ceiling((double) TotalRecordsCount / PageSize);
+
+    [Parameter]
+    public EventCallback<int> OnPageIndexChanged { get; set; }
+
+    public async Task GoToPage(int index)
+    {
+        await OnPageIndexChanged.InvokeAsync(index);
+    }
+
+    public async Task GoToNextPage()
+    {
+        await OnPageIndexChanged.InvokeAsync(PageIndex + 1);
+    }
+}

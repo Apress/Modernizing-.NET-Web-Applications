@@ -1,0 +1,54 @@
+﻿@using System.Web.Mvc.Html
+@using ModernizationDemo.App
+@using ModernizationDemo.BackendClient
+@{
+    Layout = "~/_Layout.cshtml";
+
+    Validation.RequireField("UserName", "User name is required!");
+    Validation.RequireField("Password", "Password is required!");
+
+    string failureText = "";
+    if (IsPost && Validation.IsValid())
+    {
+        try
+        {
+            // NOTE - in order to make the things simple, we are not using the tokens to communicate with the backend API
+            Global.GetApiClient().ValidateCredentials(Request.Form["UserName"], Request.Form["Password"]);
+
+            FormsAuthentication.SetAuthCookie(Request.Form["UserName"], false);
+
+            Response.Redirect("/admin/products");
+        }
+        catch (ApiException ex)
+        {
+            failureText = "Invalid username or password.";
+        }
+    }
+}
+
+<div class="row">
+    <div class="col col-md-4 mx-auto">
+            
+        <h2>Sign in</h2>
+        <p>Use your Contoso Shop account to sign in.</p>
+        
+        <form method="post">
+            <div class="mb-3">
+                <label for="UserName" class="form-label">User name</label>
+                <input name="UserName" id="UserName" value="@Request.Form["UserName"]" class="form-control" />
+                @Html.ValidationMessage("UserName", new { @class = "text-danger" })
+            </div>
+            <div class="mb-3">
+                <label for="Password" class="form-label">Password</label>
+                <input name="Password" id="Password" type="password" class="form-control" />
+                @Html.ValidationMessage("Password", new { @class = "text-danger" })
+            </div>
+            <div class="mb-4">
+                <input value="Sign In" class="btn btn-primary" type="submit" />
+            </div>
+            <p class="text-danger">
+                @failureText
+            </p>
+        </form>
+    </div>
+</div>

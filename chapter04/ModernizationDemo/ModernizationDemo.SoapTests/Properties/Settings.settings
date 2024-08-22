@@ -1,0 +1,12 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="ModernizationDemo.SoapTests.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="ModernizationDemo_SoapTests_ProductsClient_Products" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://localhost:50933/Products.asmx</Value>
+    </Setting>
+    <Setting Name="ModernizationDemo_SoapTests_OrdersClient_Orders" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://localhost:50933/Orders.asmx</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

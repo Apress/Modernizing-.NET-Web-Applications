@@ -1,0 +1,93 @@
+﻿@page "/login"
+@inject ApiClient apiClient
+@inject NavigationManager navigation
+@inject IHttpContextAccessor httpContextAccessor
+@using System.ComponentModel.DataAnnotations
+@using System.Security.Claims
+@using Microsoft.AspNetCore.Authentication
+@using Microsoft.AspNetCore.Authentication.Cookies
+@using ModernizationDemo.BackendClient
+
+<div class="row">
+    <div class="col col-md-4 mx-auto">
+            
+        <h2>Sign in</h2>
+        <p>Use your Contoso Shop account to sign in.</p>
+        <EditForm EditContext="editContext" 
+                  OnValidSubmit="async () => await SignIn()" 
+                  FormName="LoginForm">
+            <DataAnnotationsValidator />
+
+            <div class="mb-3">
+                <label for="UserName" class="form-label">User name</label>
+                <InputText id="UserName" class="form-control" 
+                           @bind-Value="Model.UserName" />
+                <ValidationMessage For="() => Model.UserName" class="text-danger" />
+            </div>
+            <div class="mb-3">
+                <label for="Password" class="form-label">Password</label>
+                <InputText id="Password" class="form-control" type="password"
+                           @bind-Value="Model.Password" />
+                <ValidationMessage For="() => Model.Password" class="text-danger" />
+            </div>
+            <div class="mb-4">
+                <button type="submit" class="btn btn-primary">Sign In</button>
+            </div>
+            <p class="text-danger">@FailureText</p>
+        </EditForm>
+
+    </div>
+</div>
+
+@code {
+
+    private EditContext? editContext;
+
+    public string FailureText { get; set; } = "";
+
+    [SupplyParameterFromForm]
+    public LoginModel Model { get; set; } = new();
+
+    protected override Task OnInitializedAsync()
+    {
+        if (httpContextAccessor.HttpContext.WebSockets.IsWebSocketRequest)
+        {
+            navigation.Refresh(forceReload: true);
+        }
+
+        editContext = new EditContext(Model);
+
+        return base.OnInitializedAsync();
+    }
+
+    public async Task SignIn()
+    {
+        try
+        {
+            FailureText = "";
+
+            // NOTE - in order to make the things simple, we are not using the tokens to communicate with the backend API
+            await apiClient.ValidateCredentialsAsync(Model.UserName, Model.Password);
+
+            // use Cookie authentication
+            var identity = new ClaimsIdentity([new Claim(ClaimTypes.Name, Model.UserName)], CookieAuthenticationDefaults.AuthenticationScheme);
+            await httpContextAccessor.HttpContext!.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(identity));
+
+            navigation.NavigateTo("/admin/products");
+        }
+        catch (ApiException ex) when (ex.StatusCode == 401)
+        {
+            FailureText = "Invalid username or password.";
+        }
+    }
+
+    public class LoginModel
+    {
+        [Required(ErrorMessage = "User name is required!")]
+        public string UserName { get; set; } = "";
+
+        [Required(ErrorMessage = "Password is required!")]
+        public string Password { get; set; } = "";
+    }
+
+}

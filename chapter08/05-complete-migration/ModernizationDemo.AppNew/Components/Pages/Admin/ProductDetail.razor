@@ -1,0 +1,290 @@
+﻿@using ModernizationDemo.BackendClient
+@using BlazorWebFormsComponents
+@using Microsoft.AspNetCore.Authorization
+@page "/admin/product/{id:guid?}"
+@inject ApiClient apiClient
+@inject NavigationManager navigation
+@inject Utils utils
+@attribute [Authorize]
+
+@if (Item != null)
+{
+    if (Id == null)    
+    {
+        <EditForm EditContext="editContext" OnValidSubmit="InsertProduct">
+            <DataAnnotationsValidator />
+            <h2>Create product</h2>
+
+            <div class="mb-3">
+                <label for="NameTextBox"
+                       class="form-label">Product name</label>
+                <InputText id="NameTextBox"
+                           class="form-control"
+                           @bind-Value="Item.Name"/>
+                <ValidationMessage For="() => Item.Name" class="text-danger"/>
+            </div>
+            <div class="mb-3">
+                <label for="DescriptionTextBox"
+                       class="form-label">Product description</label>
+                <InputTextArea id="DescriptionTextBox"
+                               class="form-control"
+                               rows="5"
+                               @bind-Value="Item.Description"/>
+                <ValidationMessage For="() => Item.Description" class="text-danger"/>
+            </div>
+            <div class="mb-3">
+                <label for="ImageUrlTextBox"
+                       class="form-label">Image URL</label>
+                <InputText id="ImageUrlTextBox"
+                           class="form-control"
+                           @bind-Value="Item.ImageUrl"/>
+                <ValidationMessage For="() => Item.ImageUrl" class="text-danger"/>
+            </div>
+
+            <div class="text-center">
+                <button type="submit" class="btn btn-primary">Add product</button>
+                <a href="/admin/products" class="btn btn-secondary">Cancel</a>
+            </div>
+        </EditForm>
+    }
+    else
+    {
+        <EditForm EditContext="editContext" OnValidSubmit="UpdateProduct" id="EditForm">
+            <DataAnnotationsValidator />
+            <h2>Edit product</h2>
+
+            <div class="mb-3">
+                <label for="NameTextBox"
+                       class="form-label">Product name</label>
+                <InputText id="NameTextBox"
+                           class="form-control"
+                           @bind-Value="Item.Name" />
+                <ValidationMessage For="() => Item.Name" class="text-danger" />
+            </div>
+            <div class="mb-3">
+                <label for="DescriptionTextBox"
+                       class="form-label">Product description</label>
+                <InputTextArea id="DescriptionTextBox"
+                               class="form-control"
+                               rows="5"
+                               @bind-Value="Item.Description" />
+                <ValidationMessage For="() => Item.Description" class="text-danger" />
+            </div>
+            <div class="mb-3">
+                <label for="ImageUrlTextBox"
+                       class="form-label">Image URL</label>
+                <InputText id="ImageUrlTextBox"
+                           class="form-control"
+                           @bind-Value="Item.ImageUrl" />
+                <ValidationMessage For="() => Item.ImageUrl" class="text-danger" />
+            </div>
+        </EditForm>
+
+        <GridView 
+            CssClass="table table-bordered"
+            Items="Prices"
+            ItemType="ProductPriceModel"
+            AutoGenerateColumns="false">
+            <Columns>
+                <BoundField ItemType="ProductPriceModel" DataField="CurrencyCode" HeaderText="Currency" />
+                <TemplateField ItemType="ProductPriceModel" HeaderText="Price">
+                    <ItemTemplate Context="item">
+                        @if (EditedCurrency != item.CurrencyCode)
+                        {
+                            @item.Price.ToString("n2")
+                        }
+                        else
+                        {
+                            <EditForm EditContext="priceEditContext">
+                                <InputNumber @bind-Value="item.Price" class="form-control" />
+                                <ValidationMessage For="() => item.Price" class="text-danger" />
+                            </EditForm>
+                        }
+                    </ItemTemplate>
+                </TemplateField>
+                <TemplateField ItemType="ProductPriceModel" HeaderText="Price">
+                    <ItemTemplate Context="item">
+                        @if (EditedCurrency != item.CurrencyCode)
+                        {
+                            <a href="" @onclick="() => EditPrice(item)" @onclick:preventDefault>
+                                <i class="bi bi-pencil"></i>
+                            </a>
+                        }
+                        else
+                        {
+                            <a href="" @onclick="async () => await UpdatePrice(item)" @onclick:preventDefault class="btn btn-primary">
+                                <i class="bi bi-check"></i>
+                            </a>
+                            <a href="" @onclick="async () => await CancelEditPrice()" @onclick:preventDefault class="btn btn-secondary">
+                                <i class="bi bi-x"></i>
+                            </a>
+                        }
+                    </ItemTemplate>
+                </TemplateField>
+                <TemplateField ItemType="ProductPriceModel" HeaderText="Price">
+                    <ItemTemplate Context="item">
+                        <a href="" @onclick="() => DeletePrice(item)" @onclick:preventDefault>
+                            <i class="bi bi-trash"></i>
+                        </a>
+                    </ItemTemplate>
+                </TemplateField>
+            </Columns>
+        </GridView>
+
+        <EditForm EditContext="newPriceEditContext" OnValidSubmit="InsertPrice">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <div class="d-flex gap-4 align-items-center">
+                        <div class="flex-grow-1">
+                            <label for="InsertCurrencyDropDown" class="form-label">Currency</label>
+                            <InputSelect id="InsertCurrencyDropDown"
+                                    class="form-select me-2"
+                                    @bind-Value="NewPrice.CurrencyCode">
+                                <option value="USD">USD</option>
+                                <option value="EUR">EUR</option>
+                                <option value="JPY">JPY</option>
+                                <option value="GBP">GBP</option>
+                            </InputSelect>
+                            <ValidationMessage For="() => NewPrice.CurrencyCode" class="text-danger"/>
+                        </div>
+                        <div class="flex-grow-1">
+                            <label for="InsertPriceTextBox" class="form-label">Price</label>
+                            <InputNumber id="InsertPriceTextBox"
+                                         class="form-control"
+                                         @bind-Value="NewPrice.Price"/>
+                            <ValidationMessage For="() => NewPrice.Price" class="text-danger"/>
+                        </div>
+                        <div>
+                            <button type="submit" class="btn btn-secondary">
+                                <i class="bi bi-plus"></i> Add price
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </EditForm>
+
+        <div class="text-center">
+            <button type="submit" class="btn btn-primary" form="EditForm">Update product</button>
+            <a href="/admin/products" class="btn btn-secondary">Cancel</a>
+        </div>
+    }
+}
+
+
+@code {
+    private EditContext? editContext;
+    private EditContext? priceEditContext;
+    private EditContext? newPriceEditContext;
+    private ValidationMessageStore? newPriceValidationMessages;
+
+    [Parameter]
+    public Guid? Id { get; set; }
+
+    [SupplyParameterFromForm]
+    public ProductCreateEditModel? Item { get; set; }
+
+    [SupplyParameterFromForm]
+    public ProductPriceModel? NewPrice { get; set; }
+
+    public ICollection<ProductPriceModel>? Prices { get; set; }
+
+    public string? EditedCurrency { get; set; }
+
+
+    protected override async Task OnInitializedAsync()
+    {
+        if (Id == null)
+        {
+            Item = new ProductCreateEditModel();
+        }
+        else
+        {
+            var product = await apiClient.GetProductAsync(Id.Value);
+            Item = new ProductCreateEditModel
+            {
+                Name = product.Name,
+                Description = product.Description,
+                ImageUrl = product.ImageUrl
+            };
+            await LoadPrices();
+        }
+        editContext = new(Item);
+
+        InitNewPriceForm();
+
+        await base.OnInitializedAsync();
+    }
+
+    private void InitNewPriceForm()
+    {
+        NewPrice = new ProductPriceModel() { CurrencyCode = "USD" };
+        newPriceEditContext = new(NewPrice);
+        newPriceEditContext.OnFieldChanged += (sender, eventArgs) => newPriceValidationMessages?.Clear(eventArgs.FieldIdentifier);
+        newPriceValidationMessages = new(newPriceEditContext);
+    }
+    
+    private async Task LoadPrices()
+    {
+        Prices = await apiClient.GetProductPricesAsync(Id.Value);
+    }
+
+    private async Task InsertProduct(EditContext context)
+    {
+        var productId = await apiClient.AddProductAsync(Item);
+        navigation.NavigateTo($"/admin/product/{productId}");
+    }
+
+    private async Task UpdateProduct(EditContext context)
+    {
+        await apiClient.UpdateProductAsync(Id.Value, Item);
+        navigation.NavigateTo("/admin/products");
+    }
+
+    public async Task InsertPrice(EditContext context)
+    {
+        var existingPrices = await apiClient.GetProductPricesAsync(Id.Value);
+        if (existingPrices.Any(p => p.CurrencyCode == NewPrice.CurrencyCode))
+		{
+            newPriceValidationMessages?.Add(() => NewPrice.CurrencyCode, "Price for this currency is already set!");
+			return;
+		}
+
+        await apiClient.AddOrUpdateProductPriceAsync(Id.Value, NewPrice.CurrencyCode, NewPrice.Price);
+        utils.ResetProductPriceWithCache(Id.Value, NewPrice.CurrencyCode);
+
+        InitNewPriceForm();
+        await CancelEditPrice();
+    }
+
+    public void EditPrice(ProductPriceModel item)
+    {
+        EditedCurrency = item.CurrencyCode;
+        priceEditContext = new(item);
+    }
+
+    public async Task UpdatePrice(ProductPriceModel item)
+	{
+        if (priceEditContext!.Validate())
+        {
+            await apiClient.AddOrUpdateProductPriceAsync(Id.Value, item.CurrencyCode, item.Price);
+            await CancelEditPrice();
+            utils.ResetProductPriceWithCache(Id.Value, item.CurrencyCode);
+        }
+	}
+
+    public async Task DeletePrice(ProductPriceModel item)
+    {
+        await apiClient.DeleteProductPriceAsync(Id.Value, item.CurrencyCode);
+        await CancelEditPrice();
+        utils.ResetProductPriceWithCache(Id.Value, item.CurrencyCode);
+    }
+
+    public async Task CancelEditPrice()
+    {
+        EditedCurrency = null;
+        priceEditContext = null;
+        await LoadPrices();
+    }
+}

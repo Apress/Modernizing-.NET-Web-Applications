@@ -1,0 +1,7 @@
+﻿#chat-ui {
+    height: calc(100vh - 12em);
+}
+
+#chat-area {
+    flex-grow: 1;
+}

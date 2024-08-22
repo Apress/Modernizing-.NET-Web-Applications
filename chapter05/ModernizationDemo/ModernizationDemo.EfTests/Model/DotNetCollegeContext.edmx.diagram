@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="b7cdf4bb87ee4d759cf914dcfd391624" Name="Diagram1" ZoomLevel="64">
+        <EntityTypeShape EntityType="Model.Account" Width="1.5" PointX="15" PointY="12" />
+        <EntityTypeShape EntityType="Model.AccountTransaction" Width="1.5" PointX="12.75" PointY="17.125" />
+        <EntityTypeShape EntityType="Model.Address" Width="1.5" PointX="3" PointY="27" />
+        <EntityTypeShape EntityType="Model.Attachment" Width="1.5" PointX="9.75" PointY="31.875" />
+        <EntityTypeShape EntityType="Model.AttendeeRegistration" Width="1.5" PointX="17.25" PointY="17.75" />
+        <EntityTypeShape EntityType="Model.Category" Width="1.5" PointX="3" PointY="18" />
+        <EntityTypeShape EntityType="Model.Country" Width="1.5" PointX="0.75" PointY="28.375" />
+        <EntityTypeShape EntityType="Model.CourseDate" Width="1.5" PointX="9.75" PointY="20.25" />
+        <EntityTypeShape EntityType="Model.CourseReminder" Width="1.5" PointX="9.75" PointY="34.875" />
+        <EntityTypeShape EntityType="Model.Course" Width="1.5" PointX="7.5" PointY="15.5" />
+        <EntityTypeShape EntityType="Model.CourseTemplateRelation" Width="1.5" PointX="7.5" PointY="33" />
+        <EntityTypeShape EntityType="Model.CourseTemplate" Width="1.5" PointX="5.25" PointY="17.25" />
+        <EntityTypeShape EntityType="Model.Customer" Width="1.5" PointX="5.25" PointY="28.25" />
+        <EntityTypeShape EntityType="Model.DiscountCoupon" Width="1.5" PointX="9.75" PointY="23" />
+        <EntityTypeShape EntityType="Model.InvoiceLine" Width="1.5" PointX="13" PointY="6" />
+        <EntityTypeShape EntityType="Model.Invoice" Width="1.5" PointX="10.5" PointY="4.5" />
+        <EntityTypeShape EntityType="Model.Lector" Width="1.5" PointX="9.75" PointY="10.875" />
+        <EntityTypeShape EntityType="Model.Location" Width="1.5" PointX="5.25" PointY="13.25" />
+        <EntityTypeShape EntityType="Model.MainCategory" Width="1.5" PointX="0.75" PointY="18.375" />
+        <EntityTypeShape EntityType="Model.OrderAvailableDate" Width="1.5" PointX="17.25" PointY="21.625" />
+        <EntityTypeShape EntityType="Model.Order" Width="1.5" PointX="15" PointY="17.25" />
+        <EntityTypeShape EntityType="Model.PrivateCourseRequest" Width="1.5" PointX="12" PointY="12.125" />
+        <EntityTypeShape EntityType="Model.Recording" Width="1.5" PointX="9.75" PointY="17.375" />
+        <EntityTypeShape EntityType="Model.Supplier" Width="1.5" PointX="5.25" PointY="23" />
+        <AssociationConnector Association="Model.FK_Accounts_Lectors_LectorId" />
+        <AssociationConnector Association="Model.FK_Accounts_Suppliers_SupplierId" />
+        <AssociationConnector Association="Model.FK_AccountTransactions_Accounts_AccountId" />
+        <AssociationConnector Association="Model.FK_Lectors_Accounts_CommissionAccountId" />
+        <AssociationConnector Association="Model.FK_AccountTransactions_Courses_CourseId" />
+        <AssociationConnector Association="Model.FK_AccountTransactions_Invoices_InvoiceId" />
+        <AssociationConnector Association="Model.FK_Addresses_Countries_CountryId" />
+        <AssociationConnector Association="Model.FK_Customers_Addresses_AddressId" />
+        <AssociationConnector Association="Model.FK_Invoices_Addresses_AddressId" />
+        <AssociationConnector Association="Model.FK_Orders_Addresses_BillingAddressId" />
+        <AssociationConnector Association="Model.FK_Suppliers_Addresses_AddressId" />
+        <AssociationConnector Association="Model.FK_Attachments_Courses_CourseId" />
+        <AssociationConnector Association="Model.FK_AttendeeRegistrations_Orders_OrderId" />
+        <AssociationConnector Association="Model.FK_Categories_MainCategories_MainCategoryId" />
+        <AssociationConnector Association="Model.FK_CourseDates_Courses_CourseId" />
+        <AssociationConnector Association="Model.FK_CourseReminders_Courses_CourseId" />
+        <AssociationConnector Association="Model.FK_Courses_CourseTemplates_CourseTemplateId" />
+        <AssociationConnector Association="Model.FK_Courses_Customers_CustomerId" />
+        <AssociationConnector Association="Model.FK_Courses_Locations_LocationId" />
+        <AssociationConnector Association="Model.FK_Courses_Suppliers_SupplierId" />
+        <AssociationConnector Association="Model.FK_DiscountCoupons_Courses_RestrictToCourseId" />
+        <AssociationConnector Association="Model.FK_Orders_Courses_CourseId" />
+        <AssociationConnector Association="Model.FK_Recordings_Courses_CourseId" />
+        <AssociationConnector Association="Model.FK_CourseTemplateRelations_CourseTemplates_CourseTemplateId" />
+        <AssociationConnector Association="Model.FK_CourseTemplateRelations_CourseTemplates_RelatedCourseTemplateId" />
+        <AssociationConnector Association="Model.FK_Orders_CourseTemplates_CourseTemplateId" />
+        <AssociationConnector Association="Model.FK_Invoices_Customers_CustomerId" />
+        <AssociationConnector Association="Model.FK_Orders_DiscountCoupons_DiscountCouponId" />
+        <AssociationConnector Association="Model.FK_InvoiceLines_Invoices_InvoiceId" />
+        <AssociationConnector Association="Model.FK_Invoices_Suppliers_SupplierId" />
+        <AssociationConnector Association="Model.FK_Orders_Invoices_FinalInvoiceId" />
+        <AssociationConnector Association="Model.FK_Orders_Invoices_ProformaInvoiceId" />
+        <AssociationConnector Association="Model.FK_Lectors_Suppliers_DefaultSupplierId" />
+        <AssociationConnector Association="Model.FK_OrderAvailableDates_Orders_OrderId" />
+        <AssociationConnector Association="Model.CategoryCourseTemplate" />
+        <AssociationConnector Association="Model.CourseLector" />
+        <AssociationConnector Association="Model.LectorPrivateCourseRequest" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

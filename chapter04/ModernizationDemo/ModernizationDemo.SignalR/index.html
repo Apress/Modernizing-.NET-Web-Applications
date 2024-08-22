@@ -1,0 +1,48 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>SignalR chat</title>
+    <link href="Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="Content/chat.css" rel="stylesheet" />
+    <script src="Scripts/jquery-1.6.4.min.js"></script>
+    <script src="Scripts/jquery.signalR-2.4.3.min.js"></script>
+    <script src="signalr/hubs"></script>
+    <script src="Scripts/chat.js"></script>
+</head>
+<body>
+
+    <div class="container">
+        <h1 class="display-1 mb-4">SignalR chat</h1>
+
+        <div id="select-room">
+            <h2>Select room</h2>
+            <div class="list-group">
+                <button class="list-group-item list-group-item-action" onclick="enterRoom('room1');">Room1</button>
+                <button class="list-group-item list-group-item-action" onclick="enterRoom('room2');">Room2</button>
+                <button class="list-group-item list-group-item-action" onclick="enterRoom('room3');">Room3</button>
+            </div>
+        </div>
+
+        <div id="chat-ui"
+             class="d-flex flex-column"
+             style="display: none !important">
+
+            <div id="chat-header" class="d-flex flex-row align-items-center gap-4 mb-4">
+                <label class="flex-shrink-0">Your name: </label>
+                <input type="text" id="chat-name" onchange="changeName();" 
+                       class="flex-grow-1 form-control"/>
+            </div>
+            <div class="card flex-grow-1">
+                <div class="card-body bg-light" id="chat-area"></div>
+            </div>
+            <form id="chat-form" onsubmit="sendMessage(); return false;"
+                  class="d-flex flex-row align-items-center gap-4 mt-4">
+                <input type="text" id="chat-message" disabled class="form-control flex-grow-1"/>
+                <button type="submit" id="chat-button" disabled class="btn btn-primary flex-shrink-0">Send</button>
+            </form>
+        </div>
+    </div>
+
+</body>
+</html>

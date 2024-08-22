@@ -1,0 +1,2508 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Accounts">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" />
+          <Property Name="SupplierId" Type="int" />
+          <Property Name="LectorId" Type="int" />
+          <Property Name="Discriminator" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AccountTransactions">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AccountId" Type="int" Nullable="false" />
+          <Property Name="Amount" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="CreatedDate" Type="datetime2" Precision="7" />
+          <Property Name="PaidDate" Type="datetime2" Precision="7" />
+          <Property Name="CourseId" Type="int" />
+          <Property Name="LectorInvoiceUrl" Type="nvarchar" MaxLength="200" />
+          <Property Name="Discriminator" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="InvoiceId" Type="int" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="InvoiceUrl" Type="nvarchar" MaxLength="200" />
+          <Property Name="CustomAccountTransaction_Amount" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="CustomAccountTransaction_CreatedDate" Type="datetime2" Precision="7" />
+          <Property Name="CustomAccountTransaction_PaidDate" Type="datetime2" Precision="7" />
+        </EntityType>
+        <EntityType Name="Addresses">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="200" />
+          <Property Name="Street" Type="nvarchar" MaxLength="200" />
+          <Property Name="City" Type="nvarchar" MaxLength="200" />
+          <Property Name="ZIP" Type="nvarchar" MaxLength="20" />
+          <Property Name="IC" Type="nvarchar" MaxLength="20" />
+          <Property Name="DIC" Type="nvarchar" MaxLength="20" />
+          <Property Name="CountryId" Type="int" />
+          <Property Name="CompanyRegistration" Type="nvarchar" MaxLength="200" />
+          <Property Name="BankAccount" Type="nvarchar" MaxLength="50" />
+          <Property Name="Iban" Type="nvarchar" MaxLength="50" />
+          <Property Name="Swift" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Attachments">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Url" Type="nvarchar" MaxLength="200" />
+          <Property Name="CourseId" Type="int" Nullable="false" />
+          <Property Name="FileName" Type="nvarchar" MaxLength="200" />
+          <Property Name="Description" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="AttendeeRegistrations">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="int" />
+          <Property Name="OrderId" Type="int" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="200" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="200" />
+          <Property Name="Email" Type="nvarchar" MaxLength="200" />
+          <Property Name="IsUnknown" Type="bit" Nullable="false" />
+          <Property Name="Day" Type="int" />
+        </EntityType>
+        <EntityType Name="Categories">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="200" />
+          <Property Name="UrlName" Type="nvarchar" MaxLength="200" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="PromotionOrder" Type="int" />
+          <Property Name="MainCategoryId" Type="int" Nullable="false" />
+          <Property Name="ImageUrl" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="CategoryCourseTemplate">
+          <Key>
+            <PropertyRef Name="CategoriesId" />
+            <PropertyRef Name="CourseTemplatesId" />
+          </Key>
+          <Property Name="CategoriesId" Type="int" Nullable="false" />
+          <Property Name="CourseTemplatesId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Countries">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="CourseDates">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CourseId" Type="int" Nullable="false" />
+          <Property Name="BeginDate" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="EndDate" Type="datetime2" Precision="7" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CourseLector">
+          <Key>
+            <PropertyRef Name="CoursesId" />
+            <PropertyRef Name="LectorsId" />
+          </Key>
+          <Property Name="CoursesId" Type="int" Nullable="false" />
+          <Property Name="LectorsId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CourseReminders">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CourseId" Type="int" Nullable="false" />
+          <Property Name="AppUserId" Type="int" Nullable="false" />
+          <Property Name="ReminderDate" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="WasReminded" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Courses">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BeginDate" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="IsEveningCourse" Type="bit" Nullable="false" />
+          <Property Name="NumberOfDays" Type="int" Nullable="false" />
+          <Property Name="CourseTemplateId" Type="int" Nullable="false" />
+          <Property Name="LocationNotes" Type="nvarchar(max)" />
+          <Property Name="ContentNotes" Type="nvarchar(max)" />
+          <Property Name="Type" Type="int" Nullable="false" />
+          <Property Name="LocationId" Type="int" />
+          <Property Name="Price" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="IsApproved" Type="bit" Nullable="false" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+          <Property Name="SupplierId" Type="int" Nullable="false" />
+          <Property Name="CourseSubtitle" Type="nvarchar" MaxLength="200" />
+          <Property Name="IsRegistrationClosed" Type="bit" Nullable="false" />
+          <Property Name="AllowOnlinePayments" Type="bit" Nullable="false" />
+          <Property Name="AllowCashPayments" Type="bit" Nullable="false" />
+          <Property Name="ClosedDate" Type="datetime2" Precision="7" />
+          <Property Name="CustomerId" Type="int" />
+          <Property Name="Margin" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="PricePerDay" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="MinimumNumberOfAttendees" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CourseTemplateRelations">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CourseTemplateId" Type="int" Nullable="false" />
+          <Property Name="RelatedCourseTemplateId" Type="int" Nullable="false" />
+          <Property Name="Type" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CourseTemplates">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="200" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="RequiredKnowledge" Type="nvarchar" MaxLength="200" />
+          <Property Name="TypicalNumberOfDays" Type="int" Nullable="false" />
+          <Property Name="IsPrivate" Type="bit" Nullable="false" />
+          <Property Name="Code" Type="nvarchar" MaxLength="50" />
+          <Property Name="UrlName" Type="nvarchar" MaxLength="200" />
+          <Property Name="Keywords" Type="nvarchar" MaxLength="500" />
+          <Property Name="PromotionOrder" Type="int" />
+        </EntityType>
+        <EntityType Name="Customers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AddressId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DiscountCoupons">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Code" Type="nvarchar" MaxLength="100" />
+          <Property Name="Percent" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="RestrictToCourseId" Type="int" />
+          <Property Name="IsOneTime" Type="bit" Nullable="false" />
+          <Property Name="ExpirationDate" Type="datetime2" Precision="7" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="InvoiceLines">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="InvoiceId" Type="int" Nullable="false" />
+          <Property Name="Text" Type="nvarchar(max)" />
+          <Property Name="UnitPrice" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="VATRate" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Units" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="UnitName" Type="nvarchar(max)" />
+          <Property Name="TotalAmount" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Invoices">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Number" Type="nvarchar" MaxLength="20" />
+          <Property Name="CreatedDate" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="DueDate" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="PaidDate" Type="datetime2" Precision="7" />
+          <Property Name="Notes" Type="nvarchar(max)" />
+          <Property Name="IsFinalInvoice" Type="bit" Nullable="false" />
+          <Property Name="FileUrl" Type="nvarchar" MaxLength="200" />
+          <Property Name="Currency" Type="nvarchar(max)" />
+          <Property Name="TotalAmount" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="SupplierId" Type="int" Nullable="false" />
+          <Property Name="AddressId" Type="int" Nullable="false" />
+          <Property Name="CustomerId" Type="int" />
+          <Property Name="IsCorrectionInvoice" Type="bit" Nullable="false" />
+          <Property Name="CorrectedInvoiceNumber" Type="nvarchar" MaxLength="20" />
+          <Property Name="TotalAmountWithoutVAT" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="TaxDate" Type="datetime2" Precision="7" />
+        </EntityType>
+        <EntityType Name="LectorPrivateCourseRequest">
+          <Key>
+            <PropertyRef Name="LectorsId" />
+            <PropertyRef Name="PrivateCourseRequestsId" />
+          </Key>
+          <Property Name="LectorsId" Type="int" Nullable="false" />
+          <Property Name="PrivateCourseRequestsId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Lectors">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Bio" Type="nvarchar(max)" />
+          <Property Name="Blog" Type="nvarchar" MaxLength="200" />
+          <Property Name="LinkedIn" Type="nvarchar" MaxLength="200" />
+          <Property Name="Twitter" Type="nvarchar" MaxLength="200" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="UrlName" Type="nvarchar" MaxLength="200" />
+          <Property Name="Website" Type="nvarchar" MaxLength="200" />
+          <Property Name="Order" Type="int" Nullable="false" />
+          <Property Name="AvatarUrl" Type="nvarchar" MaxLength="200" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+          <Property Name="CommissionPrice" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="CommissionPercent" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="CommissionAccountId" Type="int" />
+          <Property Name="DefaultSupplierId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Locations">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="200" />
+          <Property Name="Address" Type="nvarchar" MaxLength="200" />
+          <Property Name="City" Type="nvarchar" MaxLength="200" />
+          <Property Name="ZIP" Type="nvarchar" MaxLength="200" />
+          <Property Name="Latitude" Type="float" Nullable="false" />
+          <Property Name="Longitude" Type="float" Nullable="false" />
+          <Property Name="HowToGetThere" Type="nvarchar(max)" />
+          <Property Name="GeekcoreLocationId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MainCategories">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="200" />
+          <Property Name="UrlName" Type="nvarchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="OrderAvailableDates">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="OrderId" Type="int" Nullable="false" />
+          <Property Name="Date" Type="datetime2" Precision="7" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Orders">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="UserId" Type="int" />
+          <Property Name="Notes" Type="nvarchar(max)" />
+          <Property Name="BillingAddressId" Type="int" />
+          <Property Name="CourseId" Type="int" Nullable="false" />
+          <Property Name="CourseTemplateId" Type="int" />
+          <Property Name="DiscountCouponId" Type="int" />
+          <Property Name="ContactEmail" Type="nvarchar(max)" />
+          <Property Name="ContactPhone" Type="nvarchar(max)" />
+          <Property Name="TotalPrice" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="VATRate" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="HasVAT" Type="bit" Nullable="false" />
+          <Property Name="PaidDate" Type="datetime2" Precision="7" />
+          <Property Name="Currency" Type="nvarchar" MaxLength="20" />
+          <Property Name="UnitPrice" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="DiscountPercent" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="ProformaInvoiceId" Type="int" />
+          <Property Name="FinalInvoiceId" Type="int" />
+          <Property Name="CanceledDate" Type="datetime2" Precision="7" />
+          <Property Name="BraintreeTransactionId" Type="nvarchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="PrivateCourseRequests">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Topic" Type="nvarchar(max)" />
+          <Property Name="CompanyName" Type="nvarchar" MaxLength="100" />
+          <Property Name="City" Type="nvarchar" MaxLength="100" />
+          <Property Name="NumberOfAttendees" Type="int" Nullable="false" />
+          <Property Name="Dates" Type="nvarchar(max)" />
+          <Property Name="Notes" Type="nvarchar(max)" />
+          <Property Name="AppUserId" Type="int" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="CourseLength" Type="int" Nullable="false" />
+          <Property Name="GrantFinancing" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Recordings">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AzureAssetId" Type="nvarchar(max)" />
+          <Property Name="PublicLinkUrl" Type="nvarchar(max)" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="CourseId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Suppliers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="200" />
+          <Property Name="AddressId" Type="int" Nullable="false" />
+          <Property Name="Currency" Type="nvarchar" MaxLength="20" />
+          <Property Name="VATRate" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="IsVATPayer" Type="bit" Nullable="false" />
+          <Property Name="IsAutomated" Type="bit" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Accounts_Lectors_LectorId">
+          <End Role="Lectors" Type="Self.Lectors" Multiplicity="0..1" />
+          <End Role="Accounts" Type="Self.Accounts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Lectors">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Accounts">
+              <PropertyRef Name="LectorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Accounts_Suppliers_SupplierId">
+          <End Role="Suppliers" Type="Self.Suppliers" Multiplicity="0..1" />
+          <End Role="Accounts" Type="Self.Accounts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Suppliers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Accounts">
+              <PropertyRef Name="SupplierId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AccountTransactions_Accounts_AccountId">
+          <End Role="Accounts" Type="Self.Accounts" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AccountTransactions" Type="Self.AccountTransactions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Accounts">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AccountTransactions">
+              <PropertyRef Name="AccountId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AccountTransactions_Courses_CourseId">
+          <End Role="Courses" Type="Self.Courses" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AccountTransactions" Type="Self.AccountTransactions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Courses">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AccountTransactions">
+              <PropertyRef Name="CourseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AccountTransactions_Invoices_InvoiceId">
+          <End Role="Invoices" Type="Self.Invoices" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AccountTransactions" Type="Self.AccountTransactions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Invoices">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AccountTransactions">
+              <PropertyRef Name="InvoiceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Addresses_Countries_CountryId">
+          <End Role="Countries" Type="Self.Countries" Multiplicity="0..1" />
+          <End Role="Addresses" Type="Self.Addresses" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Countries">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Addresses">
+              <PropertyRef Name="CountryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Attachments_Courses_CourseId">
+          <End Role="Courses" Type="Self.Courses" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Attachments" Type="Self.Attachments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Courses">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Attachments">
+              <PropertyRef Name="CourseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AttendeeRegistrations_Orders_OrderId">
+          <End Role="Orders" Type="Self.Orders" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AttendeeRegistrations" Type="Self.AttendeeRegistrations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Orders">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AttendeeRegistrations">
+              <PropertyRef Name="OrderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Categories_MainCategories_MainCategoryId">
+          <End Role="MainCategories" Type="Self.MainCategories" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Categories" Type="Self.Categories" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MainCategories">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Categories">
+              <PropertyRef Name="MainCategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CategoryCourseTemplate_Categories_CategoriesId">
+          <End Role="Categories" Type="Self.Categories" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="CategoryCourseTemplate" Type="Self.CategoryCourseTemplate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categories">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CategoryCourseTemplate">
+              <PropertyRef Name="CategoriesId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CategoryCourseTemplate_CourseTemplates_CourseTemplatesId">
+          <End Role="CourseTemplates" Type="Self.CourseTemplates" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="CategoryCourseTemplate" Type="Self.CategoryCourseTemplate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CourseTemplates">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CategoryCourseTemplate">
+              <PropertyRef Name="CourseTemplatesId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CourseDates_Courses_CourseId">
+          <End Role="Courses" Type="Self.Courses" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="CourseDates" Type="Self.CourseDates" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Courses">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CourseDates">
+              <PropertyRef Name="CourseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CourseLector_Courses_CoursesId">
+          <End Role="Courses" Type="Self.Courses" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="CourseLector" Type="Self.CourseLector" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Courses">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CourseLector">
+              <PropertyRef Name="CoursesId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CourseLector_Lectors_LectorsId">
+          <End Role="Lectors" Type="Self.Lectors" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="CourseLector" Type="Self.CourseLector" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Lectors">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CourseLector">
+              <PropertyRef Name="LectorsId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CourseReminders_Courses_CourseId">
+          <End Role="Courses" Type="Self.Courses" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="CourseReminders" Type="Self.CourseReminders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Courses">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CourseReminders">
+              <PropertyRef Name="CourseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Courses_CourseTemplates_CourseTemplateId">
+          <End Role="CourseTemplates" Type="Self.CourseTemplates" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Courses" Type="Self.Courses" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CourseTemplates">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Courses">
+              <PropertyRef Name="CourseTemplateId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Courses_Customers_CustomerId">
+          <End Role="Customers" Type="Self.Customers" Multiplicity="0..1" />
+          <End Role="Courses" Type="Self.Courses" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Courses">
+              <PropertyRef Name="CustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Courses_Locations_LocationId">
+          <End Role="Locations" Type="Self.Locations" Multiplicity="0..1" />
+          <End Role="Courses" Type="Self.Courses" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Locations">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Courses">
+              <PropertyRef Name="LocationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Courses_Suppliers_SupplierId">
+          <End Role="Suppliers" Type="Self.Suppliers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Courses" Type="Self.Courses" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Suppliers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Courses">
+              <PropertyRef Name="SupplierId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CourseTemplateRelations_CourseTemplates_CourseTemplateId">
+          <End Role="CourseTemplates" Type="Self.CourseTemplates" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="CourseTemplateRelations" Type="Self.CourseTemplateRelations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CourseTemplates">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CourseTemplateRelations">
+              <PropertyRef Name="CourseTemplateId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CourseTemplateRelations_CourseTemplates_RelatedCourseTemplateId">
+          <End Role="CourseTemplates" Type="Self.CourseTemplates" Multiplicity="1" />
+          <End Role="CourseTemplateRelations" Type="Self.CourseTemplateRelations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CourseTemplates">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CourseTemplateRelations">
+              <PropertyRef Name="RelatedCourseTemplateId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Customers_Addresses_AddressId">
+          <End Role="Addresses" Type="Self.Addresses" Multiplicity="1" />
+          <End Role="Customers" Type="Self.Customers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Addresses">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Customers">
+              <PropertyRef Name="AddressId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DiscountCoupons_Courses_RestrictToCourseId">
+          <End Role="Courses" Type="Self.Courses" Multiplicity="0..1" />
+          <End Role="DiscountCoupons" Type="Self.DiscountCoupons" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Courses">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DiscountCoupons">
+              <PropertyRef Name="RestrictToCourseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_InvoiceLines_Invoices_InvoiceId">
+          <End Role="Invoices" Type="Self.Invoices" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="InvoiceLines" Type="Self.InvoiceLines" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Invoices">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="InvoiceLines">
+              <PropertyRef Name="InvoiceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Invoices_Addresses_AddressId">
+          <End Role="Addresses" Type="Self.Addresses" Multiplicity="1" />
+          <End Role="Invoices" Type="Self.Invoices" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Addresses">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Invoices">
+              <PropertyRef Name="AddressId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Invoices_Customers_CustomerId">
+          <End Role="Customers" Type="Self.Customers" Multiplicity="0..1" />
+          <End Role="Invoices" Type="Self.Invoices" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Invoices">
+              <PropertyRef Name="CustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Invoices_Suppliers_SupplierId">
+          <End Role="Suppliers" Type="Self.Suppliers" Multiplicity="1" />
+          <End Role="Invoices" Type="Self.Invoices" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Suppliers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Invoices">
+              <PropertyRef Name="SupplierId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LectorPrivateCourseRequest_Lectors_LectorsId">
+          <End Role="Lectors" Type="Self.Lectors" Multiplicity="1" />
+          <End Role="LectorPrivateCourseRequest" Type="Self.LectorPrivateCourseRequest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Lectors">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="LectorPrivateCourseRequest">
+              <PropertyRef Name="LectorsId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LectorPrivateCourseRequest_PrivateCourseRequests_PrivateCourseRequestsId">
+          <End Role="PrivateCourseRequests" Type="Self.PrivateCourseRequests" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="LectorPrivateCourseRequest" Type="Self.LectorPrivateCourseRequest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PrivateCourseRequests">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="LectorPrivateCourseRequest">
+              <PropertyRef Name="PrivateCourseRequestsId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Lectors_Accounts_CommissionAccountId">
+          <End Role="Accounts" Type="Self.Accounts" Multiplicity="0..1" />
+          <End Role="Lectors" Type="Self.Lectors" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Accounts">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Lectors">
+              <PropertyRef Name="CommissionAccountId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Lectors_Suppliers_DefaultSupplierId">
+          <End Role="Suppliers" Type="Self.Suppliers" Multiplicity="1" />
+          <End Role="Lectors" Type="Self.Lectors" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Suppliers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Lectors">
+              <PropertyRef Name="DefaultSupplierId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderAvailableDates_Orders_OrderId">
+          <End Role="Orders" Type="Self.Orders" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="OrderAvailableDates" Type="Self.OrderAvailableDates" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Orders">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="OrderAvailableDates">
+              <PropertyRef Name="OrderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Orders_Addresses_BillingAddressId">
+          <End Role="Addresses" Type="Self.Addresses" Multiplicity="0..1" />
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Addresses">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="BillingAddressId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Orders_Courses_CourseId">
+          <End Role="Courses" Type="Self.Courses" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Courses">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="CourseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Orders_CourseTemplates_CourseTemplateId">
+          <End Role="CourseTemplates" Type="Self.CourseTemplates" Multiplicity="0..1" />
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CourseTemplates">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="CourseTemplateId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Orders_DiscountCoupons_DiscountCouponId">
+          <End Role="DiscountCoupons" Type="Self.DiscountCoupons" Multiplicity="0..1" />
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DiscountCoupons">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="DiscountCouponId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Orders_Invoices_FinalInvoiceId">
+          <End Role="Invoices" Type="Self.Invoices" Multiplicity="0..1" />
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Invoices">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="FinalInvoiceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Orders_Invoices_ProformaInvoiceId">
+          <End Role="Invoices" Type="Self.Invoices" Multiplicity="0..1" />
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Invoices">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="ProformaInvoiceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Recordings_Courses_CourseId">
+          <End Role="Courses" Type="Self.Courses" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Recordings" Type="Self.Recordings" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Courses">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Recordings">
+              <PropertyRef Name="CourseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Suppliers_Addresses_AddressId">
+          <End Role="Addresses" Type="Self.Addresses" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Suppliers" Type="Self.Suppliers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Addresses">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Suppliers">
+              <PropertyRef Name="AddressId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ModelStoreContainer">
+          <EntitySet Name="Accounts" EntityType="Self.Accounts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AccountTransactions" EntityType="Self.AccountTransactions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Addresses" EntityType="Self.Addresses" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Attachments" EntityType="Self.Attachments" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AttendeeRegistrations" EntityType="Self.AttendeeRegistrations" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Categories" EntityType="Self.Categories" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CategoryCourseTemplate" EntityType="Self.CategoryCourseTemplate" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Countries" EntityType="Self.Countries" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CourseDates" EntityType="Self.CourseDates" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CourseLector" EntityType="Self.CourseLector" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CourseReminders" EntityType="Self.CourseReminders" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Courses" EntityType="Self.Courses" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CourseTemplateRelations" EntityType="Self.CourseTemplateRelations" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CourseTemplates" EntityType="Self.CourseTemplates" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Customers" EntityType="Self.Customers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DiscountCoupons" EntityType="Self.DiscountCoupons" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="InvoiceLines" EntityType="Self.InvoiceLines" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Invoices" EntityType="Self.Invoices" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LectorPrivateCourseRequest" EntityType="Self.LectorPrivateCourseRequest" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Lectors" EntityType="Self.Lectors" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Locations" EntityType="Self.Locations" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MainCategories" EntityType="Self.MainCategories" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OrderAvailableDates" EntityType="Self.OrderAvailableDates" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Orders" EntityType="Self.Orders" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PrivateCourseRequests" EntityType="Self.PrivateCourseRequests" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Recordings" EntityType="Self.Recordings" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Suppliers" EntityType="Self.Suppliers" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Accounts_Lectors_LectorId" Association="Self.FK_Accounts_Lectors_LectorId">
+            <End Role="Lectors" EntitySet="Lectors" />
+            <End Role="Accounts" EntitySet="Accounts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Accounts_Suppliers_SupplierId" Association="Self.FK_Accounts_Suppliers_SupplierId">
+            <End Role="Suppliers" EntitySet="Suppliers" />
+            <End Role="Accounts" EntitySet="Accounts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AccountTransactions_Accounts_AccountId" Association="Self.FK_AccountTransactions_Accounts_AccountId">
+            <End Role="Accounts" EntitySet="Accounts" />
+            <End Role="AccountTransactions" EntitySet="AccountTransactions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AccountTransactions_Courses_CourseId" Association="Self.FK_AccountTransactions_Courses_CourseId">
+            <End Role="Courses" EntitySet="Courses" />
+            <End Role="AccountTransactions" EntitySet="AccountTransactions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AccountTransactions_Invoices_InvoiceId" Association="Self.FK_AccountTransactions_Invoices_InvoiceId">
+            <End Role="Invoices" EntitySet="Invoices" />
+            <End Role="AccountTransactions" EntitySet="AccountTransactions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Addresses_Countries_CountryId" Association="Self.FK_Addresses_Countries_CountryId">
+            <End Role="Countries" EntitySet="Countries" />
+            <End Role="Addresses" EntitySet="Addresses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Attachments_Courses_CourseId" Association="Self.FK_Attachments_Courses_CourseId">
+            <End Role="Courses" EntitySet="Courses" />
+            <End Role="Attachments" EntitySet="Attachments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AttendeeRegistrations_Orders_OrderId" Association="Self.FK_AttendeeRegistrations_Orders_OrderId">
+            <End Role="Orders" EntitySet="Orders" />
+            <End Role="AttendeeRegistrations" EntitySet="AttendeeRegistrations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Categories_MainCategories_MainCategoryId" Association="Self.FK_Categories_MainCategories_MainCategoryId">
+            <End Role="MainCategories" EntitySet="MainCategories" />
+            <End Role="Categories" EntitySet="Categories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CategoryCourseTemplate_Categories_CategoriesId" Association="Self.FK_CategoryCourseTemplate_Categories_CategoriesId">
+            <End Role="Categories" EntitySet="Categories" />
+            <End Role="CategoryCourseTemplate" EntitySet="CategoryCourseTemplate" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CategoryCourseTemplate_CourseTemplates_CourseTemplatesId" Association="Self.FK_CategoryCourseTemplate_CourseTemplates_CourseTemplatesId">
+            <End Role="CourseTemplates" EntitySet="CourseTemplates" />
+            <End Role="CategoryCourseTemplate" EntitySet="CategoryCourseTemplate" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CourseDates_Courses_CourseId" Association="Self.FK_CourseDates_Courses_CourseId">
+            <End Role="Courses" EntitySet="Courses" />
+            <End Role="CourseDates" EntitySet="CourseDates" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CourseLector_Courses_CoursesId" Association="Self.FK_CourseLector_Courses_CoursesId">
+            <End Role="Courses" EntitySet="Courses" />
+            <End Role="CourseLector" EntitySet="CourseLector" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CourseLector_Lectors_LectorsId" Association="Self.FK_CourseLector_Lectors_LectorsId">
+            <End Role="Lectors" EntitySet="Lectors" />
+            <End Role="CourseLector" EntitySet="CourseLector" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CourseReminders_Courses_CourseId" Association="Self.FK_CourseReminders_Courses_CourseId">
+            <End Role="Courses" EntitySet="Courses" />
+            <End Role="CourseReminders" EntitySet="CourseReminders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Courses_CourseTemplates_CourseTemplateId" Association="Self.FK_Courses_CourseTemplates_CourseTemplateId">
+            <End Role="CourseTemplates" EntitySet="CourseTemplates" />
+            <End Role="Courses" EntitySet="Courses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Courses_Customers_CustomerId" Association="Self.FK_Courses_Customers_CustomerId">
+            <End Role="Customers" EntitySet="Customers" />
+            <End Role="Courses" EntitySet="Courses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Courses_Locations_LocationId" Association="Self.FK_Courses_Locations_LocationId">
+            <End Role="Locations" EntitySet="Locations" />
+            <End Role="Courses" EntitySet="Courses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Courses_Suppliers_SupplierId" Association="Self.FK_Courses_Suppliers_SupplierId">
+            <End Role="Suppliers" EntitySet="Suppliers" />
+            <End Role="Courses" EntitySet="Courses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CourseTemplateRelations_CourseTemplates_CourseTemplateId" Association="Self.FK_CourseTemplateRelations_CourseTemplates_CourseTemplateId">
+            <End Role="CourseTemplates" EntitySet="CourseTemplates" />
+            <End Role="CourseTemplateRelations" EntitySet="CourseTemplateRelations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CourseTemplateRelations_CourseTemplates_RelatedCourseTemplateId" Association="Self.FK_CourseTemplateRelations_CourseTemplates_RelatedCourseTemplateId">
+            <End Role="CourseTemplates" EntitySet="CourseTemplates" />
+            <End Role="CourseTemplateRelations" EntitySet="CourseTemplateRelations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Customers_Addresses_AddressId" Association="Self.FK_Customers_Addresses_AddressId">
+            <End Role="Addresses" EntitySet="Addresses" />
+            <End Role="Customers" EntitySet="Customers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DiscountCoupons_Courses_RestrictToCourseId" Association="Self.FK_DiscountCoupons_Courses_RestrictToCourseId">
+            <End Role="Courses" EntitySet="Courses" />
+            <End Role="DiscountCoupons" EntitySet="DiscountCoupons" />
+          </AssociationSet>
+          <AssociationSet Name="FK_InvoiceLines_Invoices_InvoiceId" Association="Self.FK_InvoiceLines_Invoices_InvoiceId">
+            <End Role="Invoices" EntitySet="Invoices" />
+            <End Role="InvoiceLines" EntitySet="InvoiceLines" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Invoices_Addresses_AddressId" Association="Self.FK_Invoices_Addresses_AddressId">
+            <End Role="Addresses" EntitySet="Addresses" />
+            <End Role="Invoices" EntitySet="Invoices" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Invoices_Customers_CustomerId" Association="Self.FK_Invoices_Customers_CustomerId">
+            <End Role="Customers" EntitySet="Customers" />
+            <End Role="Invoices" EntitySet="Invoices" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Invoices_Suppliers_SupplierId" Association="Self.FK_Invoices_Suppliers_SupplierId">
+            <End Role="Suppliers" EntitySet="Suppliers" />
+            <End Role="Invoices" EntitySet="Invoices" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LectorPrivateCourseRequest_Lectors_LectorsId" Association="Self.FK_LectorPrivateCourseRequest_Lectors_LectorsId">
+            <End Role="Lectors" EntitySet="Lectors" />
+            <End Role="LectorPrivateCourseRequest" EntitySet="LectorPrivateCourseRequest" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LectorPrivateCourseRequest_PrivateCourseRequests_PrivateCourseRequestsId" Association="Self.FK_LectorPrivateCourseRequest_PrivateCourseRequests_PrivateCourseRequestsId">
+            <End Role="PrivateCourseRequests" EntitySet="PrivateCourseRequests" />
+            <End Role="LectorPrivateCourseRequest" EntitySet="LectorPrivateCourseRequest" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Lectors_Accounts_CommissionAccountId" Association="Self.FK_Lectors_Accounts_CommissionAccountId">
+            <End Role="Accounts" EntitySet="Accounts" />
+            <End Role="Lectors" EntitySet="Lectors" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Lectors_Suppliers_DefaultSupplierId" Association="Self.FK_Lectors_Suppliers_DefaultSupplierId">
+            <End Role="Suppliers" EntitySet="Suppliers" />
+            <End Role="Lectors" EntitySet="Lectors" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderAvailableDates_Orders_OrderId" Association="Self.FK_OrderAvailableDates_Orders_OrderId">
+            <End Role="Orders" EntitySet="Orders" />
+            <End Role="OrderAvailableDates" EntitySet="OrderAvailableDates" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Orders_Addresses_BillingAddressId" Association="Self.FK_Orders_Addresses_BillingAddressId">
+            <End Role="Addresses" EntitySet="Addresses" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Orders_Courses_CourseId" Association="Self.FK_Orders_Courses_CourseId">
+            <End Role="Courses" EntitySet="Courses" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Orders_CourseTemplates_CourseTemplateId" Association="Self.FK_Orders_CourseTemplates_CourseTemplateId">
+            <End Role="CourseTemplates" EntitySet="CourseTemplates" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Orders_DiscountCoupons_DiscountCouponId" Association="Self.FK_Orders_DiscountCoupons_DiscountCouponId">
+            <End Role="DiscountCoupons" EntitySet="DiscountCoupons" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Orders_Invoices_FinalInvoiceId" Association="Self.FK_Orders_Invoices_FinalInvoiceId">
+            <End Role="Invoices" EntitySet="Invoices" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Orders_Invoices_ProformaInvoiceId" Association="Self.FK_Orders_Invoices_ProformaInvoiceId">
+            <End Role="Invoices" EntitySet="Invoices" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Recordings_Courses_CourseId" Association="Self.FK_Recordings_Courses_CourseId">
+            <End Role="Courses" EntitySet="Courses" />
+            <End Role="Recordings" EntitySet="Recordings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Suppliers_Addresses_AddressId" Association="Self.FK_Suppliers_Addresses_AddressId">
+            <End Role="Addresses" EntitySet="Addresses" />
+            <End Role="Suppliers" EntitySet="Suppliers" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="DotNetCollegeContext" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Accounts" EntityType="Model.Account" />
+          <EntitySet Name="AccountTransactions" EntityType="Model.AccountTransaction" />
+          <EntitySet Name="Addresses" EntityType="Model.Address" />
+          <EntitySet Name="Attachments" EntityType="Model.Attachment" />
+          <EntitySet Name="AttendeeRegistrations" EntityType="Model.AttendeeRegistration" />
+          <EntitySet Name="Categories" EntityType="Model.Category" />
+          <EntitySet Name="Countries" EntityType="Model.Country" />
+          <EntitySet Name="CourseDates" EntityType="Model.CourseDate" />
+          <EntitySet Name="CourseReminders" EntityType="Model.CourseReminder" />
+          <EntitySet Name="Courses" EntityType="Model.Course" />
+          <EntitySet Name="CourseTemplateRelations" EntityType="Model.CourseTemplateRelation" />
+          <EntitySet Name="CourseTemplates" EntityType="Model.CourseTemplate" />
+          <EntitySet Name="Customers" EntityType="Model.Customer" />
+          <EntitySet Name="DiscountCoupons" EntityType="Model.DiscountCoupon" />
+          <EntitySet Name="InvoiceLines" EntityType="Model.InvoiceLine" />
+          <EntitySet Name="Invoices" EntityType="Model.Invoice" />
+          <EntitySet Name="Lectors" EntityType="Model.Lector" />
+          <EntitySet Name="Locations" EntityType="Model.Location" />
+          <EntitySet Name="MainCategories" EntityType="Model.MainCategory" />
+          <EntitySet Name="OrderAvailableDates" EntityType="Model.OrderAvailableDate" />
+          <EntitySet Name="Orders" EntityType="Model.Order" />
+          <EntitySet Name="PrivateCourseRequests" EntityType="Model.PrivateCourseRequest" />
+          <EntitySet Name="Recordings" EntityType="Model.Recording" />
+          <EntitySet Name="Suppliers" EntityType="Model.Supplier" />
+          <AssociationSet Name="FK_Accounts_Lectors_LectorId" Association="Model.FK_Accounts_Lectors_LectorId">
+            <End Role="Lector" EntitySet="Lectors" />
+            <End Role="Account" EntitySet="Accounts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Accounts_Suppliers_SupplierId" Association="Model.FK_Accounts_Suppliers_SupplierId">
+            <End Role="Supplier" EntitySet="Suppliers" />
+            <End Role="Account" EntitySet="Accounts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AccountTransactions_Accounts_AccountId" Association="Model.FK_AccountTransactions_Accounts_AccountId">
+            <End Role="Account" EntitySet="Accounts" />
+            <End Role="AccountTransaction" EntitySet="AccountTransactions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Lectors_Accounts_CommissionAccountId" Association="Model.FK_Lectors_Accounts_CommissionAccountId">
+            <End Role="Account" EntitySet="Accounts" />
+            <End Role="Lector" EntitySet="Lectors" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AccountTransactions_Courses_CourseId" Association="Model.FK_AccountTransactions_Courses_CourseId">
+            <End Role="Cours" EntitySet="Courses" />
+            <End Role="AccountTransaction" EntitySet="AccountTransactions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AccountTransactions_Invoices_InvoiceId" Association="Model.FK_AccountTransactions_Invoices_InvoiceId">
+            <End Role="Invoice" EntitySet="Invoices" />
+            <End Role="AccountTransaction" EntitySet="AccountTransactions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Addresses_Countries_CountryId" Association="Model.FK_Addresses_Countries_CountryId">
+            <End Role="Country" EntitySet="Countries" />
+            <End Role="Address" EntitySet="Addresses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Customers_Addresses_AddressId" Association="Model.FK_Customers_Addresses_AddressId">
+            <End Role="Address" EntitySet="Addresses" />
+            <End Role="Customer" EntitySet="Customers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Invoices_Addresses_AddressId" Association="Model.FK_Invoices_Addresses_AddressId">
+            <End Role="Address" EntitySet="Addresses" />
+            <End Role="Invoice" EntitySet="Invoices" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Orders_Addresses_BillingAddressId" Association="Model.FK_Orders_Addresses_BillingAddressId">
+            <End Role="Address" EntitySet="Addresses" />
+            <End Role="Order" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Suppliers_Addresses_AddressId" Association="Model.FK_Suppliers_Addresses_AddressId">
+            <End Role="Address" EntitySet="Addresses" />
+            <End Role="Supplier" EntitySet="Suppliers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Attachments_Courses_CourseId" Association="Model.FK_Attachments_Courses_CourseId">
+            <End Role="Cours" EntitySet="Courses" />
+            <End Role="Attachment" EntitySet="Attachments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AttendeeRegistrations_Orders_OrderId" Association="Model.FK_AttendeeRegistrations_Orders_OrderId">
+            <End Role="Order" EntitySet="Orders" />
+            <End Role="AttendeeRegistration" EntitySet="AttendeeRegistrations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Categories_MainCategories_MainCategoryId" Association="Model.FK_Categories_MainCategories_MainCategoryId">
+            <End Role="MainCategory" EntitySet="MainCategories" />
+            <End Role="Category" EntitySet="Categories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CourseDates_Courses_CourseId" Association="Model.FK_CourseDates_Courses_CourseId">
+            <End Role="Cours" EntitySet="Courses" />
+            <End Role="CourseDate" EntitySet="CourseDates" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CourseReminders_Courses_CourseId" Association="Model.FK_CourseReminders_Courses_CourseId">
+            <End Role="Cours" EntitySet="Courses" />
+            <End Role="CourseReminder" EntitySet="CourseReminders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Courses_CourseTemplates_CourseTemplateId" Association="Model.FK_Courses_CourseTemplates_CourseTemplateId">
+            <End Role="CourseTemplate" EntitySet="CourseTemplates" />
+            <End Role="Cours" EntitySet="Courses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Courses_Customers_CustomerId" Association="Model.FK_Courses_Customers_CustomerId">
+            <End Role="Customer" EntitySet="Customers" />
+            <End Role="Cours" EntitySet="Courses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Courses_Locations_LocationId" Association="Model.FK_Courses_Locations_LocationId">
+            <End Role="Location" EntitySet="Locations" />
+            <End Role="Cours" EntitySet="Courses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Courses_Suppliers_SupplierId" Association="Model.FK_Courses_Suppliers_SupplierId">
+            <End Role="Supplier" EntitySet="Suppliers" />
+            <End Role="Cours" EntitySet="Courses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DiscountCoupons_Courses_RestrictToCourseId" Association="Model.FK_DiscountCoupons_Courses_RestrictToCourseId">
+            <End Role="Cours" EntitySet="Courses" />
+            <End Role="DiscountCoupon" EntitySet="DiscountCoupons" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Orders_Courses_CourseId" Association="Model.FK_Orders_Courses_CourseId">
+            <End Role="Cours" EntitySet="Courses" />
+            <End Role="Order" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Recordings_Courses_CourseId" Association="Model.FK_Recordings_Courses_CourseId">
+            <End Role="Cours" EntitySet="Courses" />
+            <End Role="Recording" EntitySet="Recordings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CourseTemplateRelations_CourseTemplates_CourseTemplateId" Association="Model.FK_CourseTemplateRelations_CourseTemplates_CourseTemplateId">
+            <End Role="CourseTemplate" EntitySet="CourseTemplates" />
+            <End Role="CourseTemplateRelation" EntitySet="CourseTemplateRelations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CourseTemplateRelations_CourseTemplates_RelatedCourseTemplateId" Association="Model.FK_CourseTemplateRelations_CourseTemplates_RelatedCourseTemplateId">
+            <End Role="CourseTemplate" EntitySet="CourseTemplates" />
+            <End Role="CourseTemplateRelation" EntitySet="CourseTemplateRelations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Orders_CourseTemplates_CourseTemplateId" Association="Model.FK_Orders_CourseTemplates_CourseTemplateId">
+            <End Role="CourseTemplate" EntitySet="CourseTemplates" />
+            <End Role="Order" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Invoices_Customers_CustomerId" Association="Model.FK_Invoices_Customers_CustomerId">
+            <End Role="Customer" EntitySet="Customers" />
+            <End Role="Invoice" EntitySet="Invoices" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Orders_DiscountCoupons_DiscountCouponId" Association="Model.FK_Orders_DiscountCoupons_DiscountCouponId">
+            <End Role="DiscountCoupon" EntitySet="DiscountCoupons" />
+            <End Role="Order" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_InvoiceLines_Invoices_InvoiceId" Association="Model.FK_InvoiceLines_Invoices_InvoiceId">
+            <End Role="Invoice" EntitySet="Invoices" />
+            <End Role="InvoiceLine" EntitySet="InvoiceLines" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Invoices_Suppliers_SupplierId" Association="Model.FK_Invoices_Suppliers_SupplierId">
+            <End Role="Supplier" EntitySet="Suppliers" />
+            <End Role="Invoice" EntitySet="Invoices" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Orders_Invoices_FinalInvoiceId" Association="Model.FK_Orders_Invoices_FinalInvoiceId">
+            <End Role="Invoice" EntitySet="Invoices" />
+            <End Role="Order" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Orders_Invoices_ProformaInvoiceId" Association="Model.FK_Orders_Invoices_ProformaInvoiceId">
+            <End Role="Invoice" EntitySet="Invoices" />
+            <End Role="Order" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Lectors_Suppliers_DefaultSupplierId" Association="Model.FK_Lectors_Suppliers_DefaultSupplierId">
+            <End Role="Supplier" EntitySet="Suppliers" />
+            <End Role="Lector" EntitySet="Lectors" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderAvailableDates_Orders_OrderId" Association="Model.FK_OrderAvailableDates_Orders_OrderId">
+            <End Role="Order" EntitySet="Orders" />
+            <End Role="OrderAvailableDate" EntitySet="OrderAvailableDates" />
+          </AssociationSet>
+          <AssociationSet Name="CategoryCourseTemplate" Association="Model.CategoryCourseTemplate">
+            <End Role="Category" EntitySet="Categories" />
+            <End Role="CourseTemplate" EntitySet="CourseTemplates" />
+          </AssociationSet>
+          <AssociationSet Name="CourseLector" Association="Model.CourseLector">
+            <End Role="Cours" EntitySet="Courses" />
+            <End Role="Lector" EntitySet="Lectors" />
+          </AssociationSet>
+          <AssociationSet Name="LectorPrivateCourseRequest" Association="Model.LectorPrivateCourseRequest">
+            <End Role="Lector" EntitySet="Lectors" />
+            <End Role="PrivateCourseRequest" EntitySet="PrivateCourseRequests" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Account">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="SupplierId" Type="Int32" />
+          <Property Name="LectorId" Type="Int32" />
+          <Property Name="Discriminator" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Lector" Relationship="Model.FK_Accounts_Lectors_LectorId" FromRole="Account" ToRole="Lector" />
+          <NavigationProperty Name="Supplier" Relationship="Model.FK_Accounts_Suppliers_SupplierId" FromRole="Account" ToRole="Supplier" />
+          <NavigationProperty Name="AccountTransactions" Relationship="Model.FK_AccountTransactions_Accounts_AccountId" FromRole="Account" ToRole="AccountTransaction" />
+          <NavigationProperty Name="Lectors" Relationship="Model.FK_Lectors_Accounts_CommissionAccountId" FromRole="Account" ToRole="Lector" />
+        </EntityType>
+        <EntityType Name="AccountTransaction">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AccountId" Type="Int32" Nullable="false" />
+          <Property Name="Amount" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="7" />
+          <Property Name="PaidDate" Type="DateTime" Precision="7" />
+          <Property Name="CourseId" Type="Int32" />
+          <Property Name="LectorInvoiceUrl" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Discriminator" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="InvoiceId" Type="Int32" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="InvoiceUrl" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="CustomAccountTransaction_Amount" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="CustomAccountTransaction_CreatedDate" Type="DateTime" Precision="7" />
+          <Property Name="CustomAccountTransaction_PaidDate" Type="DateTime" Precision="7" />
+          <NavigationProperty Name="Account" Relationship="Model.FK_AccountTransactions_Accounts_AccountId" FromRole="AccountTransaction" ToRole="Account" />
+          <NavigationProperty Name="Cours" Relationship="Model.FK_AccountTransactions_Courses_CourseId" FromRole="AccountTransaction" ToRole="Cours" />
+          <NavigationProperty Name="Invoice" Relationship="Model.FK_AccountTransactions_Invoices_InvoiceId" FromRole="AccountTransaction" ToRole="Invoice" />
+        </EntityType>
+        <EntityType Name="Address">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Street" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="City" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="ZIP" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="IC" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="DIC" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="CountryId" Type="Int32" />
+          <Property Name="CompanyRegistration" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="BankAccount" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Iban" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Swift" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Country" Relationship="Model.FK_Addresses_Countries_CountryId" FromRole="Address" ToRole="Country" />
+          <NavigationProperty Name="Customers" Relationship="Model.FK_Customers_Addresses_AddressId" FromRole="Address" ToRole="Customer" />
+          <NavigationProperty Name="Invoices" Relationship="Model.FK_Invoices_Addresses_AddressId" FromRole="Address" ToRole="Invoice" />
+          <NavigationProperty Name="Orders" Relationship="Model.FK_Orders_Addresses_BillingAddressId" FromRole="Address" ToRole="Order" />
+          <NavigationProperty Name="Suppliers" Relationship="Model.FK_Suppliers_Addresses_AddressId" FromRole="Address" ToRole="Supplier" />
+        </EntityType>
+        <EntityType Name="Attachment">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Url" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="CourseId" Type="Int32" Nullable="false" />
+          <Property Name="FileName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Cours" Relationship="Model.FK_Attachments_Courses_CourseId" FromRole="Attachment" ToRole="Cours" />
+        </EntityType>
+        <EntityType Name="AttendeeRegistration">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" />
+          <Property Name="OrderId" Type="Int32" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <Property Name="FirstName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="IsUnknown" Type="Boolean" Nullable="false" />
+          <Property Name="Day" Type="Int32" />
+          <NavigationProperty Name="Order" Relationship="Model.FK_AttendeeRegistrations_Orders_OrderId" FromRole="AttendeeRegistration" ToRole="Order" />
+        </EntityType>
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="UrlName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PromotionOrder" Type="Int32" />
+          <Property Name="MainCategoryId" Type="Int32" Nullable="false" />
+          <Property Name="ImageUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="MainCategory" Relationship="Model.FK_Categories_MainCategories_MainCategoryId" FromRole="Category" ToRole="MainCategory" />
+          <NavigationProperty Name="CourseTemplates" Relationship="Model.CategoryCourseTemplate" FromRole="Category" ToRole="CourseTemplate" />
+        </EntityType>
+        <EntityType Name="Country">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Addresses" Relationship="Model.FK_Addresses_Countries_CountryId" FromRole="Country" ToRole="Address" />
+        </EntityType>
+        <EntityType Name="CourseDate">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CourseId" Type="Int32" Nullable="false" />
+          <Property Name="BeginDate" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="EndDate" Type="DateTime" Nullable="false" Precision="7" />
+          <NavigationProperty Name="Cours" Relationship="Model.FK_CourseDates_Courses_CourseId" FromRole="CourseDate" ToRole="Cours" />
+        </EntityType>
+        <EntityType Name="CourseReminder">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CourseId" Type="Int32" Nullable="false" />
+          <Property Name="AppUserId" Type="Int32" Nullable="false" />
+          <Property Name="ReminderDate" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="WasReminded" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Cours" Relationship="Model.FK_CourseReminders_Courses_CourseId" FromRole="CourseReminder" ToRole="Cours" />
+        </EntityType>
+        <EntityType Name="Course">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BeginDate" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="IsEveningCourse" Type="Boolean" Nullable="false" />
+          <Property Name="NumberOfDays" Type="Int32" Nullable="false" />
+          <Property Name="CourseTemplateId" Type="Int32" Nullable="false" />
+          <Property Name="LocationNotes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ContentNotes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Type" Type="Int32" Nullable="false" />
+          <Property Name="LocationId" Type="Int32" />
+          <Property Name="Price" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="IsApproved" Type="Boolean" Nullable="false" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <Property Name="SupplierId" Type="Int32" Nullable="false" />
+          <Property Name="CourseSubtitle" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="IsRegistrationClosed" Type="Boolean" Nullable="false" />
+          <Property Name="AllowOnlinePayments" Type="Boolean" Nullable="false" />
+          <Property Name="AllowCashPayments" Type="Boolean" Nullable="false" />
+          <Property Name="ClosedDate" Type="DateTime" Precision="7" />
+          <Property Name="CustomerId" Type="Int32" />
+          <Property Name="Margin" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="PricePerDay" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="MinimumNumberOfAttendees" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="AccountTransactions" Relationship="Model.FK_AccountTransactions_Courses_CourseId" FromRole="Cours" ToRole="AccountTransaction" />
+          <NavigationProperty Name="Attachments" Relationship="Model.FK_Attachments_Courses_CourseId" FromRole="Cours" ToRole="Attachment" />
+          <NavigationProperty Name="CourseDates" Relationship="Model.FK_CourseDates_Courses_CourseId" FromRole="Cours" ToRole="CourseDate" />
+          <NavigationProperty Name="CourseReminders" Relationship="Model.FK_CourseReminders_Courses_CourseId" FromRole="Cours" ToRole="CourseReminder" />
+          <NavigationProperty Name="CourseTemplate" Relationship="Model.FK_Courses_CourseTemplates_CourseTemplateId" FromRole="Cours" ToRole="CourseTemplate" />
+          <NavigationProperty Name="Customer" Relationship="Model.FK_Courses_Customers_CustomerId" FromRole="Cours" ToRole="Customer" />
+          <NavigationProperty Name="Location" Relationship="Model.FK_Courses_Locations_LocationId" FromRole="Cours" ToRole="Location" />
+          <NavigationProperty Name="Supplier" Relationship="Model.FK_Courses_Suppliers_SupplierId" FromRole="Cours" ToRole="Supplier" />
+          <NavigationProperty Name="DiscountCoupons" Relationship="Model.FK_DiscountCoupons_Courses_RestrictToCourseId" FromRole="Cours" ToRole="DiscountCoupon" />
+          <NavigationProperty Name="Orders" Relationship="Model.FK_Orders_Courses_CourseId" FromRole="Cours" ToRole="Order" />
+          <NavigationProperty Name="Recordings" Relationship="Model.FK_Recordings_Courses_CourseId" FromRole="Cours" ToRole="Recording" />
+          <NavigationProperty Name="Lectors" Relationship="Model.CourseLector" FromRole="Cours" ToRole="Lector" />
+        </EntityType>
+        <EntityType Name="CourseTemplateRelation">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CourseTemplateId" Type="Int32" Nullable="false" />
+          <Property Name="RelatedCourseTemplateId" Type="Int32" Nullable="false" />
+          <Property Name="Type" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="CourseTemplate" Relationship="Model.FK_CourseTemplateRelations_CourseTemplates_CourseTemplateId" FromRole="CourseTemplateRelation" ToRole="CourseTemplate" />
+          <NavigationProperty Name="CourseTemplate1" Relationship="Model.FK_CourseTemplateRelations_CourseTemplates_RelatedCourseTemplateId" FromRole="CourseTemplateRelation" ToRole="CourseTemplate" />
+        </EntityType>
+        <EntityType Name="CourseTemplate">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="RequiredKnowledge" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="TypicalNumberOfDays" Type="Int32" Nullable="false" />
+          <Property Name="IsPrivate" Type="Boolean" Nullable="false" />
+          <Property Name="Code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UrlName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Keywords" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="PromotionOrder" Type="Int32" />
+          <NavigationProperty Name="Courses" Relationship="Model.FK_Courses_CourseTemplates_CourseTemplateId" FromRole="CourseTemplate" ToRole="Cours" />
+          <NavigationProperty Name="CourseTemplateRelations" Relationship="Model.FK_CourseTemplateRelations_CourseTemplates_CourseTemplateId" FromRole="CourseTemplate" ToRole="CourseTemplateRelation" />
+          <NavigationProperty Name="CourseTemplateRelations1" Relationship="Model.FK_CourseTemplateRelations_CourseTemplates_RelatedCourseTemplateId" FromRole="CourseTemplate" ToRole="CourseTemplateRelation" />
+          <NavigationProperty Name="Orders" Relationship="Model.FK_Orders_CourseTemplates_CourseTemplateId" FromRole="CourseTemplate" ToRole="Order" />
+          <NavigationProperty Name="Categories" Relationship="Model.CategoryCourseTemplate" FromRole="CourseTemplate" ToRole="Category" />
+        </EntityType>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AddressId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Address" Relationship="Model.FK_Customers_Addresses_AddressId" FromRole="Customer" ToRole="Address" />
+          <NavigationProperty Name="Courses" Relationship="Model.FK_Courses_Customers_CustomerId" FromRole="Customer" ToRole="Cours" />
+          <NavigationProperty Name="Invoices" Relationship="Model.FK_Invoices_Customers_CustomerId" FromRole="Customer" ToRole="Invoice" />
+        </EntityType>
+        <EntityType Name="DiscountCoupon">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Code" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Percent" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="RestrictToCourseId" Type="Int32" />
+          <Property Name="IsOneTime" Type="Boolean" Nullable="false" />
+          <Property Name="ExpirationDate" Type="DateTime" Precision="7" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Cours" Relationship="Model.FK_DiscountCoupons_Courses_RestrictToCourseId" FromRole="DiscountCoupon" ToRole="Cours" />
+          <NavigationProperty Name="Orders" Relationship="Model.FK_Orders_DiscountCoupons_DiscountCouponId" FromRole="DiscountCoupon" ToRole="Order" />
+        </EntityType>
+        <EntityType Name="InvoiceLine">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="InvoiceId" Type="Int32" Nullable="false" />
+          <Property Name="Text" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="UnitPrice" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="VATRate" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="Units" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="UnitName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="TotalAmount" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <NavigationProperty Name="Invoice" Relationship="Model.FK_InvoiceLines_Invoices_InvoiceId" FromRole="InvoiceLine" ToRole="Invoice" />
+        </EntityType>
+        <EntityType Name="Invoice">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Number" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="DueDate" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="PaidDate" Type="DateTime" Precision="7" />
+          <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsFinalInvoice" Type="Boolean" Nullable="false" />
+          <Property Name="FileUrl" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Currency" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="TotalAmount" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="SupplierId" Type="Int32" Nullable="false" />
+          <Property Name="AddressId" Type="Int32" Nullable="false" />
+          <Property Name="CustomerId" Type="Int32" />
+          <Property Name="IsCorrectionInvoice" Type="Boolean" Nullable="false" />
+          <Property Name="CorrectedInvoiceNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="TotalAmountWithoutVAT" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="TaxDate" Type="DateTime" Precision="7" />
+          <NavigationProperty Name="AccountTransactions" Relationship="Model.FK_AccountTransactions_Invoices_InvoiceId" FromRole="Invoice" ToRole="AccountTransaction" />
+          <NavigationProperty Name="Address" Relationship="Model.FK_Invoices_Addresses_AddressId" FromRole="Invoice" ToRole="Address" />
+          <NavigationProperty Name="Customer" Relationship="Model.FK_Invoices_Customers_CustomerId" FromRole="Invoice" ToRole="Customer" />
+          <NavigationProperty Name="InvoiceLines" Relationship="Model.FK_InvoiceLines_Invoices_InvoiceId" FromRole="Invoice" ToRole="InvoiceLine" />
+          <NavigationProperty Name="Supplier" Relationship="Model.FK_Invoices_Suppliers_SupplierId" FromRole="Invoice" ToRole="Supplier" />
+          <NavigationProperty Name="Orders" Relationship="Model.FK_Orders_Invoices_FinalInvoiceId" FromRole="Invoice" ToRole="Order" />
+          <NavigationProperty Name="Orders1" Relationship="Model.FK_Orders_Invoices_ProformaInvoiceId" FromRole="Invoice" ToRole="Order" />
+        </EntityType>
+        <EntityType Name="Lector">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Bio" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Blog" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="LinkedIn" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Twitter" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="UrlName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Website" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Order" Type="Int32" Nullable="false" />
+          <Property Name="AvatarUrl" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <Property Name="CommissionPrice" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="CommissionPercent" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="CommissionAccountId" Type="Int32" />
+          <Property Name="DefaultSupplierId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Accounts" Relationship="Model.FK_Accounts_Lectors_LectorId" FromRole="Lector" ToRole="Account" />
+          <NavigationProperty Name="Account" Relationship="Model.FK_Lectors_Accounts_CommissionAccountId" FromRole="Lector" ToRole="Account" />
+          <NavigationProperty Name="Supplier" Relationship="Model.FK_Lectors_Suppliers_DefaultSupplierId" FromRole="Lector" ToRole="Supplier" />
+          <NavigationProperty Name="Courses" Relationship="Model.CourseLector" FromRole="Lector" ToRole="Cours" />
+          <NavigationProperty Name="PrivateCourseRequests" Relationship="Model.LectorPrivateCourseRequest" FromRole="Lector" ToRole="PrivateCourseRequest" />
+        </EntityType>
+        <EntityType Name="Location">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="City" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="ZIP" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Latitude" Type="Double" Nullable="false" />
+          <Property Name="Longitude" Type="Double" Nullable="false" />
+          <Property Name="HowToGetThere" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="GeekcoreLocationId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Courses" Relationship="Model.FK_Courses_Locations_LocationId" FromRole="Location" ToRole="Cours" />
+        </EntityType>
+        <EntityType Name="MainCategory">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="UrlName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Categories" Relationship="Model.FK_Categories_MainCategories_MainCategoryId" FromRole="MainCategory" ToRole="Category" />
+        </EntityType>
+        <EntityType Name="OrderAvailableDate">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OrderId" Type="Int32" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="7" />
+          <NavigationProperty Name="Order" Relationship="Model.FK_OrderAvailableDates_Orders_OrderId" FromRole="OrderAvailableDate" ToRole="Order" />
+        </EntityType>
+        <EntityType Name="Order">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="UserId" Type="Int32" />
+          <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="BillingAddressId" Type="Int32" />
+          <Property Name="CourseId" Type="Int32" Nullable="false" />
+          <Property Name="CourseTemplateId" Type="Int32" />
+          <Property Name="DiscountCouponId" Type="Int32" />
+          <Property Name="ContactEmail" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ContactPhone" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="TotalPrice" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="VATRate" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="HasVAT" Type="Boolean" Nullable="false" />
+          <Property Name="PaidDate" Type="DateTime" Precision="7" />
+          <Property Name="Currency" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="UnitPrice" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="DiscountPercent" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="ProformaInvoiceId" Type="Int32" />
+          <Property Name="FinalInvoiceId" Type="Int32" />
+          <Property Name="CanceledDate" Type="DateTime" Precision="7" />
+          <Property Name="BraintreeTransactionId" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Address" Relationship="Model.FK_Orders_Addresses_BillingAddressId" FromRole="Order" ToRole="Address" />
+          <NavigationProperty Name="AttendeeRegistrations" Relationship="Model.FK_AttendeeRegistrations_Orders_OrderId" FromRole="Order" ToRole="AttendeeRegistration" />
+          <NavigationProperty Name="Cours" Relationship="Model.FK_Orders_Courses_CourseId" FromRole="Order" ToRole="Cours" />
+          <NavigationProperty Name="CourseTemplate" Relationship="Model.FK_Orders_CourseTemplates_CourseTemplateId" FromRole="Order" ToRole="CourseTemplate" />
+          <NavigationProperty Name="DiscountCoupon" Relationship="Model.FK_Orders_DiscountCoupons_DiscountCouponId" FromRole="Order" ToRole="DiscountCoupon" />
+          <NavigationProperty Name="Invoice" Relationship="Model.FK_Orders_Invoices_FinalInvoiceId" FromRole="Order" ToRole="Invoice" />
+          <NavigationProperty Name="Invoice1" Relationship="Model.FK_Orders_Invoices_ProformaInvoiceId" FromRole="Order" ToRole="Invoice" />
+          <NavigationProperty Name="OrderAvailableDates" Relationship="Model.FK_OrderAvailableDates_Orders_OrderId" FromRole="Order" ToRole="OrderAvailableDate" />
+        </EntityType>
+        <EntityType Name="PrivateCourseRequest">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Topic" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CompanyName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="City" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="NumberOfAttendees" Type="Int32" Nullable="false" />
+          <Property Name="Dates" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="AppUserId" Type="Int32" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="CourseLength" Type="Int32" Nullable="false" />
+          <Property Name="GrantFinancing" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Lectors" Relationship="Model.LectorPrivateCourseRequest" FromRole="PrivateCourseRequest" ToRole="Lector" />
+        </EntityType>
+        <EntityType Name="Recording">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AzureAssetId" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PublicLinkUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CourseId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Cours" Relationship="Model.FK_Recordings_Courses_CourseId" FromRole="Recording" ToRole="Cours" />
+        </EntityType>
+        <EntityType Name="Supplier">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="AddressId" Type="Int32" Nullable="false" />
+          <Property Name="Currency" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="VATRate" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="IsVATPayer" Type="Boolean" Nullable="false" />
+          <Property Name="IsAutomated" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Accounts" Relationship="Model.FK_Accounts_Suppliers_SupplierId" FromRole="Supplier" ToRole="Account" />
+          <NavigationProperty Name="Address" Relationship="Model.FK_Suppliers_Addresses_AddressId" FromRole="Supplier" ToRole="Address" />
+          <NavigationProperty Name="Courses" Relationship="Model.FK_Courses_Suppliers_SupplierId" FromRole="Supplier" ToRole="Cours" />
+          <NavigationProperty Name="Invoices" Relationship="Model.FK_Invoices_Suppliers_SupplierId" FromRole="Supplier" ToRole="Invoice" />
+          <NavigationProperty Name="Lectors" Relationship="Model.FK_Lectors_Suppliers_DefaultSupplierId" FromRole="Supplier" ToRole="Lector" />
+        </EntityType>
+        <Association Name="FK_Accounts_Lectors_LectorId">
+          <End Type="Model.Lector" Role="Lector" Multiplicity="0..1" />
+          <End Type="Model.Account" Role="Account" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Lector">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Account">
+              <PropertyRef Name="LectorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Accounts_Suppliers_SupplierId">
+          <End Type="Model.Supplier" Role="Supplier" Multiplicity="0..1" />
+          <End Type="Model.Account" Role="Account" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Supplier">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Account">
+              <PropertyRef Name="SupplierId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AccountTransactions_Accounts_AccountId">
+          <End Type="Model.Account" Role="Account" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="Model.AccountTransaction" Role="AccountTransaction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AccountTransaction">
+              <PropertyRef Name="AccountId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Lectors_Accounts_CommissionAccountId">
+          <End Type="Model.Account" Role="Account" Multiplicity="0..1" />
+          <End Type="Model.Lector" Role="Lector" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Lector">
+              <PropertyRef Name="CommissionAccountId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AccountTransactions_Courses_CourseId">
+          <End Type="Model.Course" Role="Cours" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="Model.AccountTransaction" Role="AccountTransaction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cours">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AccountTransaction">
+              <PropertyRef Name="CourseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AccountTransactions_Invoices_InvoiceId">
+          <End Type="Model.Invoice" Role="Invoice" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="Model.AccountTransaction" Role="AccountTransaction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Invoice">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AccountTransaction">
+              <PropertyRef Name="InvoiceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Addresses_Countries_CountryId">
+          <End Type="Model.Country" Role="Country" Multiplicity="0..1" />
+          <End Type="Model.Address" Role="Address" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Country">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Address">
+              <PropertyRef Name="CountryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Customers_Addresses_AddressId">
+          <End Type="Model.Address" Role="Address" Multiplicity="1" />
+          <End Type="Model.Customer" Role="Customer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Address">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Customer">
+              <PropertyRef Name="AddressId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Invoices_Addresses_AddressId">
+          <End Type="Model.Address" Role="Address" Multiplicity="1" />
+          <End Type="Model.Invoice" Role="Invoice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Address">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Invoice">
+              <PropertyRef Name="AddressId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Orders_Addresses_BillingAddressId">
+          <End Type="Model.Address" Role="Address" Multiplicity="0..1" />
+          <End Type="Model.Order" Role="Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Address">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="BillingAddressId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Suppliers_Addresses_AddressId">
+          <End Type="Model.Address" Role="Address" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="Model.Supplier" Role="Supplier" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Address">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Supplier">
+              <PropertyRef Name="AddressId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Attachments_Courses_CourseId">
+          <End Type="Model.Course" Role="Cours" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="Model.Attachment" Role="Attachment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cours">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Attachment">
+              <PropertyRef Name="CourseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AttendeeRegistrations_Orders_OrderId">
+          <End Type="Model.Order" Role="Order" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="Model.AttendeeRegistration" Role="AttendeeRegistration" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Order">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AttendeeRegistration">
+              <PropertyRef Name="OrderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Categories_MainCategories_MainCategoryId">
+          <End Type="Model.MainCategory" Role="MainCategory" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="Model.Category" Role="Category" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MainCategory">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Category">
+              <PropertyRef Name="MainCategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CourseDates_Courses_CourseId">
+          <End Type="Model.Course" Role="Cours" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="Model.CourseDate" Role="CourseDate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cours">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CourseDate">
+              <PropertyRef Name="CourseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CourseReminders_Courses_CourseId">
+          <End Type="Model.Course" Role="Cours" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="Model.CourseReminder" Role="CourseReminder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cours">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CourseReminder">
+              <PropertyRef Name="CourseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Courses_CourseTemplates_CourseTemplateId">
+          <End Type="Model.CourseTemplate" Role="CourseTemplate" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="Model.Course" Role="Cours" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CourseTemplate">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Cours">
+              <PropertyRef Name="CourseTemplateId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Courses_Customers_CustomerId">
+          <End Type="Model.Customer" Role="Customer" Multiplicity="0..1" />
+          <End Type="Model.Course" Role="Cours" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Cours">
+              <PropertyRef Name="CustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Courses_Locations_LocationId">
+          <End Type="Model.Location" Role="Location" Multiplicity="0..1" />
+          <End Type="Model.Course" Role="Cours" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Location">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Cours">
+              <PropertyRef Name="LocationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Courses_Suppliers_SupplierId">
+          <End Type="Model.Supplier" Role="Supplier" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="Model.Course" Role="Cours" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Supplier">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Cours">
+              <PropertyRef Name="SupplierId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DiscountCoupons_Courses_RestrictToCourseId">
+          <End Type="Model.Course" Role="Cours" Multiplicity="0..1" />
+          <End Type="Model.DiscountCoupon" Role="DiscountCoupon" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cours">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DiscountCoupon">
+              <PropertyRef Name="RestrictToCourseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Orders_Courses_CourseId">
+          <End Type="Model.Course" Role="Cours" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="Model.Order" Role="Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cours">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="CourseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Recordings_Courses_CourseId">
+          <End Type="Model.Course" Role="Cours" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="Model.Recording" Role="Recording" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cours">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Recording">
+              <PropertyRef Name="CourseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CourseTemplateRelations_CourseTemplates_CourseTemplateId">
+          <End Type="Model.CourseTemplate" Role="CourseTemplate" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="Model.CourseTemplateRelation" Role="CourseTemplateRelation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CourseTemplate">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CourseTemplateRelation">
+              <PropertyRef Name="CourseTemplateId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CourseTemplateRelations_CourseTemplates_RelatedCourseTemplateId">
+          <End Type="Model.CourseTemplate" Role="CourseTemplate" Multiplicity="1" />
+          <End Type="Model.CourseTemplateRelation" Role="CourseTemplateRelation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CourseTemplate">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CourseTemplateRelation">
+              <PropertyRef Name="RelatedCourseTemplateId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Orders_CourseTemplates_CourseTemplateId">
+          <End Type="Model.CourseTemplate" Role="CourseTemplate" Multiplicity="0..1" />
+          <End Type="Model.Order" Role="Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CourseTemplate">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="CourseTemplateId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Invoices_Customers_CustomerId">
+          <End Type="Model.Customer" Role="Customer" Multiplicity="0..1" />
+          <End Type="Model.Invoice" Role="Invoice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Invoice">
+              <PropertyRef Name="CustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Orders_DiscountCoupons_DiscountCouponId">
+          <End Type="Model.DiscountCoupon" Role="DiscountCoupon" Multiplicity="0..1" />
+          <End Type="Model.Order" Role="Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DiscountCoupon">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="DiscountCouponId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_InvoiceLines_Invoices_InvoiceId">
+          <End Type="Model.Invoice" Role="Invoice" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="Model.InvoiceLine" Role="InvoiceLine" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Invoice">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="InvoiceLine">
+              <PropertyRef Name="InvoiceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Invoices_Suppliers_SupplierId">
+          <End Type="Model.Supplier" Role="Supplier" Multiplicity="1" />
+          <End Type="Model.Invoice" Role="Invoice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Supplier">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Invoice">
+              <PropertyRef Name="SupplierId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Orders_Invoices_FinalInvoiceId">
+          <End Type="Model.Invoice" Role="Invoice" Multiplicity="0..1" />
+          <End Type="Model.Order" Role="Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Invoice">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="FinalInvoiceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Orders_Invoices_ProformaInvoiceId">
+          <End Type="Model.Invoice" Role="Invoice" Multiplicity="0..1" />
+          <End Type="Model.Order" Role="Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Invoice">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="ProformaInvoiceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Lectors_Suppliers_DefaultSupplierId">
+          <End Type="Model.Supplier" Role="Supplier" Multiplicity="1" />
+          <End Type="Model.Lector" Role="Lector" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Supplier">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Lector">
+              <PropertyRef Name="DefaultSupplierId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderAvailableDates_Orders_OrderId">
+          <End Type="Model.Order" Role="Order" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="Model.OrderAvailableDate" Role="OrderAvailableDate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Order">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="OrderAvailableDate">
+              <PropertyRef Name="OrderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="CategoryCourseTemplate">
+          <End Type="Model.Category" Role="Category" Multiplicity="*" />
+          <End Type="Model.CourseTemplate" Role="CourseTemplate" Multiplicity="*" />
+        </Association>
+        <Association Name="CourseLector">
+          <End Type="Model.Course" Role="Cours" Multiplicity="*" />
+          <End Type="Model.Lector" Role="Lector" Multiplicity="*" />
+        </Association>
+        <Association Name="LectorPrivateCourseRequest">
+          <End Type="Model.Lector" Role="Lector" Multiplicity="*" />
+          <End Type="Model.PrivateCourseRequest" Role="PrivateCourseRequest" Multiplicity="*" />
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ModelStoreContainer" CdmEntityContainer="DotNetCollegeContext">
+          <EntitySetMapping Name="Accounts">
+            <EntityTypeMapping TypeName="Model.Account">
+              <MappingFragment StoreEntitySet="Accounts">
+                <ScalarProperty Name="Discriminator" ColumnName="Discriminator" />
+                <ScalarProperty Name="LectorId" ColumnName="LectorId" />
+                <ScalarProperty Name="SupplierId" ColumnName="SupplierId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AccountTransactions">
+            <EntityTypeMapping TypeName="Model.AccountTransaction">
+              <MappingFragment StoreEntitySet="AccountTransactions">
+                <ScalarProperty Name="CustomAccountTransaction_PaidDate" ColumnName="CustomAccountTransaction_PaidDate" />
+                <ScalarProperty Name="CustomAccountTransaction_CreatedDate" ColumnName="CustomAccountTransaction_CreatedDate" />
+                <ScalarProperty Name="CustomAccountTransaction_Amount" ColumnName="CustomAccountTransaction_Amount" />
+                <ScalarProperty Name="InvoiceUrl" ColumnName="InvoiceUrl" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="InvoiceId" ColumnName="InvoiceId" />
+                <ScalarProperty Name="Discriminator" ColumnName="Discriminator" />
+                <ScalarProperty Name="LectorInvoiceUrl" ColumnName="LectorInvoiceUrl" />
+                <ScalarProperty Name="CourseId" ColumnName="CourseId" />
+                <ScalarProperty Name="PaidDate" ColumnName="PaidDate" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="AccountId" ColumnName="AccountId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Addresses">
+            <EntityTypeMapping TypeName="Model.Address">
+              <MappingFragment StoreEntitySet="Addresses">
+                <ScalarProperty Name="Swift" ColumnName="Swift" />
+                <ScalarProperty Name="Iban" ColumnName="Iban" />
+                <ScalarProperty Name="BankAccount" ColumnName="BankAccount" />
+                <ScalarProperty Name="CompanyRegistration" ColumnName="CompanyRegistration" />
+                <ScalarProperty Name="CountryId" ColumnName="CountryId" />
+                <ScalarProperty Name="DIC" ColumnName="DIC" />
+                <ScalarProperty Name="IC" ColumnName="IC" />
+                <ScalarProperty Name="ZIP" ColumnName="ZIP" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Street" ColumnName="Street" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Attachments">
+            <EntityTypeMapping TypeName="Model.Attachment">
+              <MappingFragment StoreEntitySet="Attachments">
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="FileName" ColumnName="FileName" />
+                <ScalarProperty Name="CourseId" ColumnName="CourseId" />
+                <ScalarProperty Name="Url" ColumnName="Url" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AttendeeRegistrations">
+            <EntityTypeMapping TypeName="Model.AttendeeRegistration">
+              <MappingFragment StoreEntitySet="AttendeeRegistrations">
+                <ScalarProperty Name="Day" ColumnName="Day" />
+                <ScalarProperty Name="IsUnknown" ColumnName="IsUnknown" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="OrderId" ColumnName="OrderId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Categories">
+            <EntityTypeMapping TypeName="Model.Category">
+              <MappingFragment StoreEntitySet="Categories">
+                <ScalarProperty Name="ImageUrl" ColumnName="ImageUrl" />
+                <ScalarProperty Name="MainCategoryId" ColumnName="MainCategoryId" />
+                <ScalarProperty Name="PromotionOrder" ColumnName="PromotionOrder" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="UrlName" ColumnName="UrlName" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Countries">
+            <EntityTypeMapping TypeName="Model.Country">
+              <MappingFragment StoreEntitySet="Countries">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CourseDates">
+            <EntityTypeMapping TypeName="Model.CourseDate">
+              <MappingFragment StoreEntitySet="CourseDates">
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="BeginDate" ColumnName="BeginDate" />
+                <ScalarProperty Name="CourseId" ColumnName="CourseId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CourseReminders">
+            <EntityTypeMapping TypeName="Model.CourseReminder">
+              <MappingFragment StoreEntitySet="CourseReminders">
+                <ScalarProperty Name="WasReminded" ColumnName="WasReminded" />
+                <ScalarProperty Name="ReminderDate" ColumnName="ReminderDate" />
+                <ScalarProperty Name="AppUserId" ColumnName="AppUserId" />
+                <ScalarProperty Name="CourseId" ColumnName="CourseId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Courses">
+            <EntityTypeMapping TypeName="Model.Course">
+              <MappingFragment StoreEntitySet="Courses">
+                <ScalarProperty Name="MinimumNumberOfAttendees" ColumnName="MinimumNumberOfAttendees" />
+                <ScalarProperty Name="PricePerDay" ColumnName="PricePerDay" />
+                <ScalarProperty Name="Margin" ColumnName="Margin" />
+                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+                <ScalarProperty Name="ClosedDate" ColumnName="ClosedDate" />
+                <ScalarProperty Name="AllowCashPayments" ColumnName="AllowCashPayments" />
+                <ScalarProperty Name="AllowOnlinePayments" ColumnName="AllowOnlinePayments" />
+                <ScalarProperty Name="IsRegistrationClosed" ColumnName="IsRegistrationClosed" />
+                <ScalarProperty Name="CourseSubtitle" ColumnName="CourseSubtitle" />
+                <ScalarProperty Name="SupplierId" ColumnName="SupplierId" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="IsApproved" ColumnName="IsApproved" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="LocationId" ColumnName="LocationId" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="ContentNotes" ColumnName="ContentNotes" />
+                <ScalarProperty Name="LocationNotes" ColumnName="LocationNotes" />
+                <ScalarProperty Name="CourseTemplateId" ColumnName="CourseTemplateId" />
+                <ScalarProperty Name="NumberOfDays" ColumnName="NumberOfDays" />
+                <ScalarProperty Name="IsEveningCourse" ColumnName="IsEveningCourse" />
+                <ScalarProperty Name="BeginDate" ColumnName="BeginDate" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CourseTemplateRelations">
+            <EntityTypeMapping TypeName="Model.CourseTemplateRelation">
+              <MappingFragment StoreEntitySet="CourseTemplateRelations">
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="RelatedCourseTemplateId" ColumnName="RelatedCourseTemplateId" />
+                <ScalarProperty Name="CourseTemplateId" ColumnName="CourseTemplateId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CourseTemplates">
+            <EntityTypeMapping TypeName="Model.CourseTemplate">
+              <MappingFragment StoreEntitySet="CourseTemplates">
+                <ScalarProperty Name="PromotionOrder" ColumnName="PromotionOrder" />
+                <ScalarProperty Name="Keywords" ColumnName="Keywords" />
+                <ScalarProperty Name="UrlName" ColumnName="UrlName" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="IsPrivate" ColumnName="IsPrivate" />
+                <ScalarProperty Name="TypicalNumberOfDays" ColumnName="TypicalNumberOfDays" />
+                <ScalarProperty Name="RequiredKnowledge" ColumnName="RequiredKnowledge" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Customers">
+            <EntityTypeMapping TypeName="Model.Customer">
+              <MappingFragment StoreEntitySet="Customers">
+                <ScalarProperty Name="AddressId" ColumnName="AddressId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DiscountCoupons">
+            <EntityTypeMapping TypeName="Model.DiscountCoupon">
+              <MappingFragment StoreEntitySet="DiscountCoupons">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ExpirationDate" ColumnName="ExpirationDate" />
+                <ScalarProperty Name="IsOneTime" ColumnName="IsOneTime" />
+                <ScalarProperty Name="RestrictToCourseId" ColumnName="RestrictToCourseId" />
+                <ScalarProperty Name="Percent" ColumnName="Percent" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="InvoiceLines">
+            <EntityTypeMapping TypeName="Model.InvoiceLine">
+              <MappingFragment StoreEntitySet="InvoiceLines">
+                <ScalarProperty Name="TotalAmount" ColumnName="TotalAmount" />
+                <ScalarProperty Name="UnitName" ColumnName="UnitName" />
+                <ScalarProperty Name="Units" ColumnName="Units" />
+                <ScalarProperty Name="VATRate" ColumnName="VATRate" />
+                <ScalarProperty Name="UnitPrice" ColumnName="UnitPrice" />
+                <ScalarProperty Name="Text" ColumnName="Text" />
+                <ScalarProperty Name="InvoiceId" ColumnName="InvoiceId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Invoices">
+            <EntityTypeMapping TypeName="Model.Invoice">
+              <MappingFragment StoreEntitySet="Invoices">
+                <ScalarProperty Name="TaxDate" ColumnName="TaxDate" />
+                <ScalarProperty Name="TotalAmountWithoutVAT" ColumnName="TotalAmountWithoutVAT" />
+                <ScalarProperty Name="CorrectedInvoiceNumber" ColumnName="CorrectedInvoiceNumber" />
+                <ScalarProperty Name="IsCorrectionInvoice" ColumnName="IsCorrectionInvoice" />
+                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+                <ScalarProperty Name="AddressId" ColumnName="AddressId" />
+                <ScalarProperty Name="SupplierId" ColumnName="SupplierId" />
+                <ScalarProperty Name="TotalAmount" ColumnName="TotalAmount" />
+                <ScalarProperty Name="Currency" ColumnName="Currency" />
+                <ScalarProperty Name="FileUrl" ColumnName="FileUrl" />
+                <ScalarProperty Name="IsFinalInvoice" ColumnName="IsFinalInvoice" />
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+                <ScalarProperty Name="PaidDate" ColumnName="PaidDate" />
+                <ScalarProperty Name="DueDate" ColumnName="DueDate" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="Number" ColumnName="Number" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Lectors">
+            <EntityTypeMapping TypeName="Model.Lector">
+              <MappingFragment StoreEntitySet="Lectors">
+                <ScalarProperty Name="DefaultSupplierId" ColumnName="DefaultSupplierId" />
+                <ScalarProperty Name="CommissionAccountId" ColumnName="CommissionAccountId" />
+                <ScalarProperty Name="CommissionPercent" ColumnName="CommissionPercent" />
+                <ScalarProperty Name="CommissionPrice" ColumnName="CommissionPrice" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="AvatarUrl" ColumnName="AvatarUrl" />
+                <ScalarProperty Name="Order" ColumnName="Order" />
+                <ScalarProperty Name="Website" ColumnName="Website" />
+                <ScalarProperty Name="UrlName" ColumnName="UrlName" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Twitter" ColumnName="Twitter" />
+                <ScalarProperty Name="LinkedIn" ColumnName="LinkedIn" />
+                <ScalarProperty Name="Blog" ColumnName="Blog" />
+                <ScalarProperty Name="Bio" ColumnName="Bio" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Locations">
+            <EntityTypeMapping TypeName="Model.Location">
+              <MappingFragment StoreEntitySet="Locations">
+                <ScalarProperty Name="GeekcoreLocationId" ColumnName="GeekcoreLocationId" />
+                <ScalarProperty Name="HowToGetThere" ColumnName="HowToGetThere" />
+                <ScalarProperty Name="Longitude" ColumnName="Longitude" />
+                <ScalarProperty Name="Latitude" ColumnName="Latitude" />
+                <ScalarProperty Name="ZIP" ColumnName="ZIP" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MainCategories">
+            <EntityTypeMapping TypeName="Model.MainCategory">
+              <MappingFragment StoreEntitySet="MainCategories">
+                <ScalarProperty Name="UrlName" ColumnName="UrlName" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrderAvailableDates">
+            <EntityTypeMapping TypeName="Model.OrderAvailableDate">
+              <MappingFragment StoreEntitySet="OrderAvailableDates">
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="OrderId" ColumnName="OrderId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Orders">
+            <EntityTypeMapping TypeName="Model.Order">
+              <MappingFragment StoreEntitySet="Orders">
+                <ScalarProperty Name="BraintreeTransactionId" ColumnName="BraintreeTransactionId" />
+                <ScalarProperty Name="CanceledDate" ColumnName="CanceledDate" />
+                <ScalarProperty Name="FinalInvoiceId" ColumnName="FinalInvoiceId" />
+                <ScalarProperty Name="ProformaInvoiceId" ColumnName="ProformaInvoiceId" />
+                <ScalarProperty Name="DiscountPercent" ColumnName="DiscountPercent" />
+                <ScalarProperty Name="UnitPrice" ColumnName="UnitPrice" />
+                <ScalarProperty Name="Currency" ColumnName="Currency" />
+                <ScalarProperty Name="PaidDate" ColumnName="PaidDate" />
+                <ScalarProperty Name="HasVAT" ColumnName="HasVAT" />
+                <ScalarProperty Name="VATRate" ColumnName="VATRate" />
+                <ScalarProperty Name="TotalPrice" ColumnName="TotalPrice" />
+                <ScalarProperty Name="ContactPhone" ColumnName="ContactPhone" />
+                <ScalarProperty Name="ContactEmail" ColumnName="ContactEmail" />
+                <ScalarProperty Name="DiscountCouponId" ColumnName="DiscountCouponId" />
+                <ScalarProperty Name="CourseTemplateId" ColumnName="CourseTemplateId" />
+                <ScalarProperty Name="CourseId" ColumnName="CourseId" />
+                <ScalarProperty Name="BillingAddressId" ColumnName="BillingAddressId" />
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PrivateCourseRequests">
+            <EntityTypeMapping TypeName="Model.PrivateCourseRequest">
+              <MappingFragment StoreEntitySet="PrivateCourseRequests">
+                <ScalarProperty Name="GrantFinancing" ColumnName="GrantFinancing" />
+                <ScalarProperty Name="CourseLength" ColumnName="CourseLength" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="AppUserId" ColumnName="AppUserId" />
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+                <ScalarProperty Name="Dates" ColumnName="Dates" />
+                <ScalarProperty Name="NumberOfAttendees" ColumnName="NumberOfAttendees" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+                <ScalarProperty Name="Topic" ColumnName="Topic" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Recordings">
+            <EntityTypeMapping TypeName="Model.Recording">
+              <MappingFragment StoreEntitySet="Recordings">
+                <ScalarProperty Name="CourseId" ColumnName="CourseId" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="PublicLinkUrl" ColumnName="PublicLinkUrl" />
+                <ScalarProperty Name="AzureAssetId" ColumnName="AzureAssetId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Suppliers">
+            <EntityTypeMapping TypeName="Model.Supplier">
+              <MappingFragment StoreEntitySet="Suppliers">
+                <ScalarProperty Name="IsAutomated" ColumnName="IsAutomated" />
+                <ScalarProperty Name="IsVATPayer" ColumnName="IsVATPayer" />
+                <ScalarProperty Name="VATRate" ColumnName="VATRate" />
+                <ScalarProperty Name="Currency" ColumnName="Currency" />
+                <ScalarProperty Name="AddressId" ColumnName="AddressId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="CategoryCourseTemplate" TypeName="Model.CategoryCourseTemplate" StoreEntitySet="CategoryCourseTemplate">
+            <EndProperty Name="CourseTemplate">
+              <ScalarProperty Name="Id" ColumnName="CourseTemplatesId" />
+            </EndProperty>
+            <EndProperty Name="Category">
+              <ScalarProperty Name="Id" ColumnName="CategoriesId" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="CourseLector" TypeName="Model.CourseLector" StoreEntitySet="CourseLector">
+            <EndProperty Name="Lector">
+              <ScalarProperty Name="Id" ColumnName="LectorsId" />
+            </EndProperty>
+            <EndProperty Name="Cours">
+              <ScalarProperty Name="Id" ColumnName="CoursesId" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="LectorPrivateCourseRequest" TypeName="Model.LectorPrivateCourseRequest" StoreEntitySet="LectorPrivateCourseRequest">
+            <EndProperty Name="PrivateCourseRequest">
+              <ScalarProperty Name="Id" ColumnName="PrivateCourseRequestsId" />
+            </EndProperty>
+            <EndProperty Name="Lector">
+              <ScalarProperty Name="Id" ColumnName="LectorsId" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

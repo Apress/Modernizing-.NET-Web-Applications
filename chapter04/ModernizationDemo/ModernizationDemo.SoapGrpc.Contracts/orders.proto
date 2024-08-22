@@ -1,0 +1,73 @@
+syntax = "proto3";
+option csharp_namespace = "ModernizationDemo.SoapGrpc";
+import "google/protobuf/wrappers.proto";
+import "google/protobuf/timestamp.proto";
+package Orders;
+
+service Orders {
+  rpc GetOrders (GetOrdersRequest) returns (GetOrdersResponse);
+  rpc GetOrder (GetOrderRequest) returns (GetOrderResponse);
+  rpc AddOrder (AddOrderRequest) returns (AddOrderResponse);
+  rpc CalculateTotalPrice (CalculateTotalPriceRequest) returns (CalculateTotalPriceResponse);
+  rpc CompleteOrder (CompleteOrderRequest) returns (CompleteOrderResponse);
+  rpc CancelOrder (CancelOrderRequest) returns (CancelOrderResponse);
+}
+
+message GetOrdersRequest {
+}
+message GetOrdersResponse {
+	repeated OrderModel Result = 1;
+}
+message GetOrderRequest {
+	int32 Id = 1;
+}
+message GetOrderResponse {
+	OrderModel Result = 1;
+}
+message AddOrderRequest {
+	OrderCreateModel Model = 1;
+}
+message AddOrderResponse {
+	int32 Result = 1;
+}
+message CalculateTotalPriceRequest {
+	OrderCreateModel Model = 1;
+}
+message CalculateTotalPriceResponse {
+	double Result = 1;
+}
+message CompleteOrderRequest {
+	int32 Id = 1;
+}
+message CompleteOrderResponse {
+}
+message CancelOrderRequest {
+	int32 Id = 1;
+}
+message CancelOrderResponse {
+}
+
+message OrderModel {
+  int32 Id = 1;
+  repeated OrderItemModel OrderItems = 2;
+  google.protobuf.Timestamp CreatedAt = 3;
+  google.protobuf.Timestamp CompletedAt = 4;
+  google.protobuf.Timestamp CanceledAt = 5;
+  double TotalPrice = 6;
+  string Status = 7;
+}
+
+message OrderItemModel {
+  int32 ProductId = 1;
+  double Quantity = 2;
+  double UnitPrice = 3;
+}
+
+message OrderCreateModel {
+  repeated OrderCreateItemModel OrderItems = 2;
+}
+
+message OrderCreateItemModel {
+  int32 ProductId = 1;
+  double Quantity = 2;
+}

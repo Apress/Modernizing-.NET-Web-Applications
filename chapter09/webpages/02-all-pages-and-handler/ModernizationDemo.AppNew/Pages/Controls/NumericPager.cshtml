@@ -1,0 +1,18 @@
+﻿@model ModernizationDemo.AppNew.Model.PagerModel
+@foreach (var pageIndex in Enumerable.Range(0, Model.PagesCount))
+{
+    <td>
+        @if (Model.PageIndex != pageIndex)
+        {
+            <a href="@Model.Url?page=@pageIndex" >
+                @(pageIndex + 1)
+            </a>
+        }
+        else
+        {
+            <span>
+                @(pageIndex + 1)
+            </span>
+        }
+    </td>
+}

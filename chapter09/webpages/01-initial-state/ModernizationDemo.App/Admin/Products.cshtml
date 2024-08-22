@@ -1,0 +1,82 @@
+﻿@using ModernizationDemo.App
+@using ModernizationDemo.App.Model
+@{
+    Layout = "../_Layout.cshtml";
+
+    if (!User.Identity.IsAuthenticated)
+    {
+        FormsAuthentication.RedirectToLoginPage();
+    }
+
+    if (IsPost
+        && Request.Form["action"] == "deleteProduct")
+    {
+        Global.GetApiClient().DeleteProduct(new Guid(Request.Form["id"]));
+        Response.Redirect(Request.RawUrl);
+    }
+
+    const int pageSize = 12;
+    var pageIndex = Convert.ToInt32(Request.QueryString["page"]);
+    var currency = Session["Currency"] as string ?? "USD";
+
+    var products = Global.GetApiClient().GetProducts(pageIndex * pageSize, pageSize);
+    var productPrices = products.Results.ToDictionary(p => p.Id, p => Utils.GetProductPriceWithCaching(p.Id, currency));
+
+    var pagerModel = new PagerModel() { PageIndex = pageIndex, PagesCount = (int)Math.Ceiling((double)products.TotalRecordCount / pageSize) };
+}
+
+<h2>Products</h2>
+
+<div class="my-4">
+    
+    <a href="/admin/product"
+       class="btn btn-primary">
+        <i class="bi bi-plus"></i> Add product
+    </a>
+</div>
+
+<table class="table table-bordered">
+    <tr>
+        <th>Image</th>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Price</th>
+        <th></th>
+        <th></th>
+    </tr>
+    @foreach (var product in products.Results)
+    {
+        <tr>
+            <td>
+                <img src="@product.ImageUrl" alt="@product.Name" class="img-fluid"/>
+            </td>
+            <td>@product.Name</td>
+            <td>@product.Description</td>
+            <td>@productPrices[product.Id]</td>
+            <td>
+                <a href="/admin/product/@product.Id" class="btn btn-secondary">
+                    <i class="bi bi-pencil"></i>
+                </a>
+            </td>
+            <td>
+                <form method="post">
+                    <input type="hidden" name="action" value="deleteProduct" />
+                    <input type="hidden" name="id" value="@product.Id" />
+                    <button type="submit" class="btn btn-danger">
+                        <i class="bi bi-trash"></i>
+                    </button>
+                    @AntiForgery.GetHtml()
+                </form>
+            </td>
+        </tr>
+    }
+    <tr>
+        <td class="grid-pager-row" colspan="6">
+            <table>
+                <tr>
+                    @RenderPage("../Controls/NumericPager.cshtml", pagerModel)
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>

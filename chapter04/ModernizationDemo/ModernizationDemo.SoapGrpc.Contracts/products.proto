@@ -1,0 +1,52 @@
+syntax = "proto3";
+option csharp_namespace = "ModernizationDemo.SoapGrpc";
+
+import "google/protobuf/wrappers.proto";
+
+package Products;
+
+service Products {
+  rpc GetProducts (GetProductsRequest) returns (GetProductsResponse);
+  rpc GetProduct (GetProductRequest) returns (GetProductResponse);
+  rpc AddProduct (AddProductRequest) returns (AddProductResponse);
+  rpc UpdateProduct (UpdateProductRequest) returns (UpdateProductResponse);
+  rpc RemoveProduct (RemoveProductRequest) returns (RemoveProductResponse);
+}
+
+message GetProductsRequest {
+}
+message GetProductsResponse {
+	repeated ProductModel Result = 1;
+}
+message GetProductRequest {
+	int32 Id = 1;
+}
+message GetProductResponse {
+	ProductModel Result = 1;
+}
+message AddProductRequest {
+	ProductModel Model = 1;
+}
+message AddProductResponse {
+	int32 Result = 1;
+}
+message UpdateProductRequest {
+	ProductModel Model = 1;
+}
+message UpdateProductResponse {
+}
+message RemoveProductRequest {
+	int32 Id = 1;
+}
+message RemoveProductResponse {
+}
+
+message ProductModel {
+  int32 Id = 1;
+  string Title = 2;
+  string Description = 3;
+  google.protobuf.StringValue ImageUrl = 4;
+  bool IsOnSale = 5;
+  string Unit = 6;
+  double UnitPrice = 7;
+}

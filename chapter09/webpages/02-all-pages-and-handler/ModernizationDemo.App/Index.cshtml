@@ -1,0 +1,40 @@
+﻿@using ModernizationDemo.App
+@using ModernizationDemo.App.Model
+@{
+    Layout = "~/_Layout.cshtml";
+
+    const int pageSize = 12;
+    var pageIndex = Convert.ToInt32(Request.QueryString["page"]);
+    var currency = Session["Currency"] as string ?? "USD";
+
+    var products = Global.GetApiClient().GetProducts(pageIndex * pageSize, pageSize);
+    var productPrices = products.Results.ToDictionary(p => p.Id, p => Utils.GetProductPriceWithCaching(p.Id, currency));
+
+    var pagerModel = new PagerModel() { PageIndex = pageIndex, PagesCount = (int)Math.Ceiling((double)products.TotalRecordCount / pageSize) };
+}
+
+<div class="row row-cols-1 row-cols-md-3 g-4">
+    @foreach (var product in products.Results)
+    {
+        <div class="col">
+            <div class="card h-100">
+
+                <img src="@product.ImageUrl" alt="@product.Name" />
+
+                <div class="card-body">
+                    <h5 class="card-title">@product.Name</h5>
+                    <p class="card-text">@product.Description</p>
+                    <a class="btn btn-primary"
+                       href="@($"/product/{product.Id}")">
+                        @productPrices[product.Id]
+                    </a>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+<div class="mt-4 text-center">
+    @RenderPage("Controls/Pager.cshtml", pagerModel)
+</div>
+

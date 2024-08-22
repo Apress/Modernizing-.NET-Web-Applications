@@ -1,0 +1,83 @@
+﻿@viewModel ModernizationDemo.App.ViewModels.SiteViewModel, ModernizationDemo.App
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title></title>
+    <script src="~/Scripts/bootstrap.bundle.min.js"></script>
+    <link href="~/Styles/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Styles/bootstrap-icons.min.css" rel="stylesheet" />
+    <link href="~/Styles/app.css" rel="stylesheet" />
+    <dot:ContentPlaceHolder ID="head">
+    </dot:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form1">
+        <div class="container">
+
+            <nav class="navbar navbar-expand-lg bg-body-tertiary mb-4">
+                <div class="container-fluid">
+                    <a class="navbar-brand" href="#">Contoso Shop</a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                            <li class="nav-item">
+                                <a class="nav-link active" aria-current="page" href="/">Products</a>
+                            </li>
+                        </ul>
+                        <ul class="navbar-nav mb-2 mb-lg-0 me-4">
+                            <dot:AuthenticatedView>
+                                <AuthenticatedTemplate>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="/Admin/Products">Admin</a>
+                                    </li>
+                                </AuthenticatedTemplate>
+                            </dot:AuthenticatedView>
+                            <li class="nav-item">
+                                <dot:AuthenticatedView>
+                                    <NotAuthenticatedTemplate>
+                                        <webforms:HybridRouteLink RouteName="Login"
+                                                                  Text="Sign in"
+                                                                  class="nav-link" />
+                                    </NotAuthenticatedTemplate>
+                                    <AuthenticatedTemplate>
+                                        <dot:LinkButton Text="Sign out"
+                                                        Click="{command: SignOut()}"
+                                                        Validation.Enabled="false"
+                                                        class="nav-link" />
+                                    </AuthenticatedTemplate>
+                                </dot:AuthenticatedView>
+                            </li>
+                        </ul>
+                        <div class="ms-4 d-flex">
+                            <dot:ComboBox class="form-select me-2"
+                                          Validation.Enabled="false"
+                                          SelectedValue="{value: SelectedCurrency}"
+                                          DataSource="{value: Currencies}"
+                                          SelectionChanged="{command: OnCurrencyChanged()}" />
+                        </div>
+                    </div>
+                </div>
+            </nav>
+
+            <dot:ContentPlaceHolder ID="ContentPlaceHolder1">
+            </dot:ContentPlaceHolder>
+
+            <div class="card mt-4 bg-light">
+                <div class="card-body">
+                    <div class="text-center">
+                        <small>
+                            <webforms:HybridRouteLink RouteName="ProductsRss">RSS feed</webforms:HybridRouteLink>
+                        </small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</body>
+</html>

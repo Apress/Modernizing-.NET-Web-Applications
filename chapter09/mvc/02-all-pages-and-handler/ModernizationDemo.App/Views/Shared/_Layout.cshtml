@@ -1,0 +1,71 @@
+﻿@using System.Web.Mvc.Html
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title></title>
+    <script src="/Scripts/bootstrap.bundle.min.js"></script>
+    <link href="/Styles/bootstrap.min.css" rel="stylesheet" />
+    <link href="/Styles/bootstrap-icons.min.css" rel="stylesheet" />
+    <link href="/Styles/app.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="container">
+
+        <nav class="navbar navbar-expand-lg bg-body-tertiary mb-4">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#">Contoso Shop</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="/">Products</a>
+                        </li>
+                    </ul>
+                    <ul class="navbar-nav mb-2 mb-lg-0 me-4">
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link" href="/admin/products">Admin</a>
+                            </li>
+                        }
+                        <li class="nav-item">
+                            @if (!User.Identity.IsAuthenticated)
+                            {
+                                <a class="nav-link" href="/login">Sign in</a>
+                            }
+                            else
+                            {
+                                <a class="nav-link" href="/logout">Sign out</a>
+                            }
+                        </li>
+                    </ul>
+                    <div class="ms-4 d-flex">
+                        @using (Html.BeginForm("SwitchLanguage", ViewContext.RouteData.Values["controller"] as string, new { returnUrl = Request.RawUrl }, FormMethod.Post))
+                        {
+                            @Html.DropDownList("currency",
+                                new SelectList(new[] { "USD", "EUR", "JPY", "GBP" }, ViewBag.Currency as string),
+                                new { @class = "form-select me-2", onchange = "this.form.submit()" })
+                            @Html.AntiForgeryToken()
+                        }
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        @RenderBody()
+
+        <div class="card mt-4 bg-light">
+            <div class="card-body">
+                <div class="text-center">
+                    <small><a href="/products/rss">RSS feed</a></small>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

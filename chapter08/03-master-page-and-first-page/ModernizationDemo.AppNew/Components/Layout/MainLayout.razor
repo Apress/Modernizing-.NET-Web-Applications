@@ -1,0 +1,69 @@
+﻿@using Microsoft.AspNetCore.Components.Authorization
+@using ModernizationDemo.AppNew.Services
+@inject SelectedCurrencyService selectedCurrencyService
+@inherits LayoutComponentBase
+
+<div class="container">
+            
+    <nav class="navbar navbar-expand-lg bg-body-tertiary mb-4">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Contoso Shop</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="/">Products</a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav mb-2 mb-lg-0">
+                    <AuthorizeView>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/admin/products">Admin</a>
+                        </li>
+                    </AuthorizeView>
+                    <li class="nav-item">
+                        <AuthorizeView>
+                            <NotAuthorized>
+                                <a href="/login" class="nav-link">Sign in</a>
+                            </NotAuthorized>
+                            <Authorized>
+                                <a href="/logout" class="nav-link">Sign out</a>
+                            </Authorized>
+                        </AuthorizeView>
+                    </li>
+                </ul>
+                <div class="d-flex">
+                    <select class="form-select me-2"
+                            @bind="SelectedCurrency"
+                            @bind:after="async () => await selectedCurrencyService.SetCurrency(SelectedCurrency)">
+                        <option value="USD">USD</option>
+                        <option value="EUR">EUR</option>
+                        <option value="JPY">JPY</option>
+                        <option value="GBP">GBP</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </nav>
+    
+    @Body
+</div>
+
+<div id="blazor-error-ui">
+    An unhandled error has occurred.
+    <a href="" class="reload">Reload</a>
+    <a class="dismiss">🗙</a>
+</div>
+
+
+@code {
+    public string SelectedCurrency { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        SelectedCurrency = await selectedCurrencyService.GetCurrency();
+        await base.OnInitializedAsync();
+    }
+}

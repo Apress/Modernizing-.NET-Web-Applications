@@ -1,0 +1,117 @@
+﻿@viewModel ModernizationDemo.App.ViewModels.Admin.ProductDetailViewModel, ModernizationDemo.App
+@masterPage Views/Site.dotmaster
+
+<dot:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1">
+
+    <h2 Visible="{value: !IsEdit}">Create product</h2>
+    <h2 Visible="{value: IsEdit}">Edit product</h2>
+
+    <div DataContext="{value: Product}">
+        <div class="mb-3">
+            <label for="NameTextBox" InnerText="Product name" class="form-label" />
+            <dot:TextBox ID="NameTextBox" class="form-control" Text="{value: Name}" />
+            <dot:Validator Value="{value: Name}" class="text-danger" ShowErrorMessageText="true" />
+        </div>
+        <div class="mb-3">
+            <label for="DescriptionTextBox" InnerText="Product name" class="form-label" />
+            <dot:TextBox ID="DescriptionTextBox" class="form-control" Type="MultiLine"
+                         rows="5" Text="{value: Description}" />
+            <dot:Validator Value="{value: Description}" class="text-danger" ShowErrorMessageText="true" />
+        </div>
+        <div class="mb-3">
+            <label for="ImageUrlTextBox" InnerText="Image URL" class="form-label" />
+            <dot:TextBox ID="ImageUrlTextBox" class="form-control" Text="{value: ImageUrl}" />
+            <dot:Validator Value="{value: ImageUrl}" class="text-danger" ShowErrorMessageText="true" />
+        </div>
+    </div>
+
+    <div Visible="{value: IsEdit}">
+        <h3>Prices</h3>
+        <dot:GridView DataSource="{value: Prices}" 
+                      ShowHeaderWhenNoData="true"
+                      class="table table-bordered"
+                      InlineEditing="true">
+            <Columns>
+                <dot:GridViewTextColumn HeaderText="Currency" 
+                                        ValueBinding="{value: CurrencyCode}" 
+                                        IsEditable="false" />
+
+                <dot:GridViewTemplateColumn HeaderText="Price">
+                    <ContentTemplate>
+                        {{value: string.Format("{0:n2}", Price)}}
+                    </ContentTemplate>
+                    <EditTemplate>
+                        <dot:TextBox Text="{value: Price}" class="form-control" />
+                        <dot:Validator Value="{value: Price}" class="text-danger" ShowErrorMessageText="true" />
+                    </EditTemplate>
+                </dot:GridViewTemplateColumn>
+
+                <dot:GridViewTemplateColumn>
+                    <ContentTemplate>
+                        <dot:LinkButton Click="{command: _root.Prices.RowEditOptions.EditRowId = CurrencyCode}" 
+                                        Validation.Enabled="false">
+                            <i class="bi bi-pencil"></i>
+                        </dot:LinkButton>
+                    </ContentTemplate>
+                    <EditTemplate>
+                        <dot:LinkButton Click="{command: _root.UpdatePrice(_this)}" 
+                                        Validation.Target="{value: _this}" class="btn btn-primary">
+                            <i class="bi bi-check"></i>
+                        </dot:LinkButton>
+                        <dot:LinkButton Click="{command: _root.Prices.RowEditOptions.EditRowId = null}" 
+                                        Validation.Enabled="false" class="btn btn-secondary">
+                            <i class="bi bi-x"></i>
+                        </dot:LinkButton>
+                    </EditTemplate>
+                </dot:GridViewTemplateColumn>
+                <dot:GridViewTemplateColumn IsEditable="false">
+                    <ContentTemplate>
+                        <dot:LinkButton Click="{command: _root.DeletePrice(_this)}" Validation.Enabled="false">
+                            <i class="bi bi-trash"></i>
+                        </dot:LinkButton>
+                    </ContentTemplate>
+                </dot:GridViewTemplateColumn>
+            </Columns>
+        </dot:GridView>
+        
+        <div class="card mb-4" DataContext="{value: NewPrice}">
+            <div class="card-body">
+                <div class="d-flex gap-4 align-items-center">
+                    <div class="flex-grow-1">
+                        <label for="InsertCurrencyDropDown" InnerText="Currency" />
+                        <dot:ComboBox Id="InsertCurrencyDropDown"
+                                      class="form-select me-2"
+                                      Validation.Enabled="false"
+                                      SelectedValue="{value: CurrencyCode}"
+                                      DataSource="{value: _root.Currencies}" />
+                        <dot:Validator class="text-danger" Value="{value: CurrencyCode}" ShowErrorMessageText="true" />
+                    </div>
+                    <div class="flex-grow-1">
+                        <label for="InsertPriceTextBox" InnerText="Price" />
+                        <dot:TextBox Id="InsertPriceTextBox"
+                                     Text="{value: Price}"
+                                     class="form-control" />
+                        <dot:Validator Value="{value: Price}" class="text-danger" ShowErrorMessageText="true" />
+                    </div>
+                    <div>
+                        <dot:LinkButton ID="AddPriceButton" class="btn btn-secondary"
+                                        Validation.Target="{value: _this}"
+                                        Click="{command: _root.InsertPrice()}">
+                            <i class="bi bi-plus"></i> Add price
+                        </dot:LinkButton>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="mt-4 text-center">
+        <dot:Button Text="Save changes" 
+                    Click="{command: InsertOrUpdate()}"
+                    Validation.Target="{value: Product}"
+                    class="btn btn-primary" />
+        <webforms:HybridRouteLink Text="Cancel" class="btn btn-secondary" RouteName="AdminProducts" />
+    </div>
+
+</dot:Content>
+

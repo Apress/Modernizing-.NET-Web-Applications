@@ -1,0 +1,45 @@
+﻿<div>
+    <button class="btn btn-secondary" 
+            @onclick="() => GoToPage(0)"
+            disabled="@(PageIndex == 0)">First</button>
+
+    <button class="btn btn-secondary"
+            @onclick="() => GoToPage(PageIndex - 1)"
+            disabled="@(PageIndex == 0)">Previous</button>
+
+    <button class="btn btn-secondary"
+            @onclick="() => GoToPage(PageIndex + 1)"
+            disabled="@(PageIndex == PagesCount - 1)">Next</button>
+    
+    <button class="btn btn-secondary"
+            @onclick="() => GoToPage(PagesCount - 1)"
+            disabled="@(PageIndex == PagesCount - 1)">
+        Last
+    </button>
+</div>
+
+@code {
+    [Parameter] 
+    public int PageSize { get; set; }
+
+    [Parameter] 
+    public int PageIndex { get; set; }
+
+    [Parameter] 
+    public int TotalRecordsCount { get; set; }
+
+    public int PagesCount => (int)Math.Ceiling((double) TotalRecordsCount / PageSize);
+
+    [Parameter]
+    public EventCallback<int> OnPageIndexChanged { get; set; }
+
+    public async Task GoToPage(int index)
+    {
+        await OnPageIndexChanged.InvokeAsync(index);
+    }
+
+    public async Task GoToNextPage()
+    {
+        await OnPageIndexChanged.InvokeAsync(PageIndex + 1);
+    }
+}

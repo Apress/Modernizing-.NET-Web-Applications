@@ -1,0 +1,54 @@
+﻿@model ModernizationDemo.App.Model.ProductListModel
+<h2>Products</h2>
+
+<div class="my-4">
+    
+    <a href="@Url.Action("Product", "Admin")"
+       class="btn btn-primary">
+        <i class="bi bi-plus"></i> Add product
+    </a>
+</div>
+
+<table class="table table-bordered">
+    <tr>
+        <th>Image</th>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Price</th>
+        <th></th>
+        <th></th>
+    </tr>
+    @foreach (var product in Model.Products.Results)
+    {
+        <tr>
+            <td>
+                <img src="@product.ImageUrl" alt="@product.Name" class="img-fluid"/>
+            </td>
+            <td>@product.Name</td>
+            <td>@product.Description</td>
+            <td>@Model.ProductPrices[product.Id]</td>
+            <td>
+                <a href="@Url.Action("Product", new { id = product.Id })" class="btn btn-secondary">
+                    <i class="bi bi-pencil"></i>
+                </a>
+            </td>
+            <td>
+                @using (Html.BeginForm("DeleteProduct", "Admin", new { id = product.Id }))
+                {
+                    <button type="submit" class="btn btn-danger">
+                        <i class="bi bi-trash"></i>
+                    </button>
+                }
+            </td>
+        </tr>
+    }
+    <tr>
+        <td class="grid-pager-row" colspan="6">
+            <table>
+                <tr>
+                    @await Html.PartialAsync("../Controls/NumericPager", Model.PagerModel)
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>

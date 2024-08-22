@@ -1,0 +1,75 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="ModernizationDemo.App.Site" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title></title>
+    <script src="~/Scripts/bootstrap.bundle.min.js"></script>
+    <link href="~/Styles/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Styles/bootstrap-icons.min.css" rel="stylesheet" />
+    <link href="~/Styles/app.css" rel="stylesheet" />
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div class="container">
+            
+            <nav class="navbar navbar-expand-lg bg-body-tertiary mb-4">
+                <div class="container-fluid">
+                    <a class="navbar-brand" href="#">Contoso Shop</a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                            <li class="nav-item">
+                                <a class="nav-link active" aria-current="page" href="/">Products</a>
+                            </li>
+                        </ul>
+                        <ul class="navbar-nav mb-2 mb-lg-0 me-4">
+                            <asp:LoginView runat="server">
+                                <LoggedInTemplate>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="/Admin/Products">Admin</a>
+                                    </li>
+                                </LoggedInTemplate>
+                            </asp:LoginView>
+                            <li class="nav-item">
+                                <asp:LoginStatus runat="server" LoginText="Sign in" LogoutText="Sign out" CssClass="nav-link"/>
+                            </li>
+                        </ul>
+                        <div class="ms-4 d-flex">
+                            <asp:DropDownList ID="CurrencyList" runat="server"
+                                              CssClass="form-select me-2"
+                                              AutoPostBack="true"
+                                              OnSelectedIndexChanged="OnSelectedIndexChanged">
+                                <Items>
+                                    <asp:ListItem Text="USD" Value="USD" />
+                                    <asp:ListItem Text="EUR" Value="EUR" />
+                                    <asp:ListItem Text="JPY" Value="JPY" />
+                                    <asp:ListItem Text="GBP" Value="GBP" />
+                                </Items>
+                            </asp:DropDownList>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+
+            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+            </asp:ContentPlaceHolder>
+            
+            <div class="card mt-4 bg-light">
+                <div class="card-body">
+                    <div class="text-center">
+                        <small><a runat="server" href="<%$ RouteUrl: RouteName=ProductsRss %>">RSS feed</a></small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</body>
+</html>

@@ -1,0 +1,30 @@
+﻿@page
+@model ModernizationDemo.AppNew.Pages.IndexModel
+@{
+    Layout = "Shared/_Layout";
+}
+
+<div class="row row-cols-1 row-cols-md-3 g-4">
+    @foreach (var product in Model.Products.Results)
+    {
+        <div class="col">
+            <div class="card h-100">
+
+                <img src="@product.ImageUrl" alt="@product.Name" />
+
+                <div class="card-body">
+                    <h5 class="card-title">@product.Name</h5>
+                    <p class="card-text">@product.Description</p>
+                    <a class="btn btn-primary"
+                       href="@($"/product/{product.Id}")">
+                        @Model.ProductPrices[product.Id]
+                    </a>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+<div class="mt-4 text-center">
+    @await Html.PartialAsync("Controls/Pager.cshtml", Model.PagerModel)
+</div>

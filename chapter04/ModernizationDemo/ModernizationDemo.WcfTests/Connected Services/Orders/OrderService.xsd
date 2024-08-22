@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/ModernizationDemo.BusinessLogic.Models" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/ModernizationDemo.BusinessLogic.Models" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:complexType name="ArrayOfOrderModel">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="OrderModel" nillable="true" type="tns:OrderModel" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfOrderModel" nillable="true" type="tns:ArrayOfOrderModel" />
+  <xs:complexType name="OrderModel">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CanceledAt" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="CompletedAt" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="CreatedAt" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Id" type="xs:int" />
+      <xs:element minOccurs="0" name="OrderItems" nillable="true" type="tns:ArrayOfOrderItemModel" />
+      <xs:element minOccurs="0" name="Status" type="tns:OrderStatus" />
+      <xs:element minOccurs="0" name="TotalPrice" type="xs:decimal" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="OrderModel" nillable="true" type="tns:OrderModel" />
+  <xs:complexType name="ArrayOfOrderItemModel">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="OrderItemModel" nillable="true" type="tns:OrderItemModel" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfOrderItemModel" nillable="true" type="tns:ArrayOfOrderItemModel" />
+  <xs:complexType name="OrderItemModel">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ProductId" type="xs:int" />
+      <xs:element minOccurs="0" name="Quantity" type="xs:decimal" />
+      <xs:element minOccurs="0" name="UnitPrice" type="xs:decimal" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="OrderItemModel" nillable="true" type="tns:OrderItemModel" />
+  <xs:simpleType name="OrderStatus">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Pending" />
+      <xs:enumeration value="Completed" />
+      <xs:enumeration value="Canceled" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="OrderStatus" nillable="true" type="tns:OrderStatus" />
+  <xs:complexType name="OrderCreateModel">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="OrderItems" nillable="true" type="tns:ArrayOfOrderCreateItemModel" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="OrderCreateModel" nillable="true" type="tns:OrderCreateModel" />
+  <xs:complexType name="ArrayOfOrderCreateItemModel">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="OrderCreateItemModel" nillable="true" type="tns:OrderCreateItemModel" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfOrderCreateItemModel" nillable="true" type="tns:ArrayOfOrderCreateItemModel" />
+  <xs:complexType name="OrderCreateItemModel">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ProductId" type="xs:int" />
+      <xs:element minOccurs="0" name="Quantity" type="xs:decimal" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="OrderCreateItemModel" nillable="true" type="tns:OrderCreateItemModel" />
+</xs:schema>

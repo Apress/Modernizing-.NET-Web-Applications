@@ -1,0 +1,34 @@
+﻿@page "new"
+@model ModernizationDemo.AppNew.Pages.LoginModel
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    Layout = "Shared/_Layout";
+}
+
+<div class="row">
+    <div class="col col-md-4 mx-auto">
+
+        <h2>Sign in</h2>
+        <p>Use your Contoso Shop account to sign in.</p>
+
+        <form method="post" asp-page-handler="login">
+            <div class="mb-3">
+                <label asp-for="UserName" class="form-label">User name</label>
+                <input asp-for="UserName" class="form-control"/>
+                @Html.ValidationMessage("UserName", new { @class = "text-danger" })
+            </div>
+            <div class="mb-3">
+                <label asp-for="Password" class="form-label">Password</label>
+                <input asp-for="Password" type="password" class="form-control" />
+                @Html.ValidationMessage("Password", new { @class = "text-danger" })
+            </div>
+            <div class="mb-4">
+                <input value="Sign In" class="btn btn-primary" type="submit" />
+            </div>
+            <p class="text-danger">
+                @Model.FailureText
+            </p>
+        </form>
+    </div>
+</div>
+

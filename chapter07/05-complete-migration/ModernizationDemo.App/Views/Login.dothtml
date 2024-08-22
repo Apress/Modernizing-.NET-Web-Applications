@@ -1,0 +1,31 @@
+﻿@viewModel ModernizationDemo.App.ViewModels.LoginViewModel, ModernizationDemo.App
+@masterPage Views/Site.dotmaster
+
+<dot:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1">
+
+    <div class="row">
+        <div class="col col-md-4 mx-auto">
+
+            <h2>Sign in</h2>
+            <p>Use your Contoso Shop account to sign in.</p>
+
+            <div class="mb-3">
+                <label class="form-label">User name</label>
+                <dot:TextBox ID="UserName" class="form-control" Text="{value: UserName}" />
+            </div>
+            <div class="mb-3">
+                <label for="Password" class="form-label">Password</label>
+                <dot:TextBox ID="Password" class="form-control" TextMode="Password" Text="{value: Password}" />
+            </div>
+            <div class="mb-4">
+                <dot:Button Text="Sign In" class="btn btn-primary" Click="{command: Login()}" />
+            </div>
+            <p class="text-danger">
+                {{value: FailureText}}
+            </p>
+            <dot:ValidationSummary class="text-danger" />
+        </div>
+    </div>
+
+</dot:Content>
+

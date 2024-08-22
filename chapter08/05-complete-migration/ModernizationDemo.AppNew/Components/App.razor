@@ -1,0 +1,40 @@
+﻿@inject IHttpContextAccessor httpContextAccessor
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <base href="/" />
+    <script src="Scripts/bootstrap.bundle.min.js"></script>
+    <link href="Styles/bootstrap.min.css" rel="stylesheet" />
+    <link href="Styles/bootstrap-icons.min.css" rel="stylesheet" />
+    <link href="Styles/app.css" rel="stylesheet" />
+    <link rel="stylesheet" href="ModernizationDemo.AppNew.styles.css" />
+    <HeadOutlet />
+</head>
+
+<body>
+    <Routes @rendermode="PageRenderMode" />
+    <script src="_framework/blazor.web.js"></script>
+</body>
+</html>
+
+@code
+{
+    public IComponentRenderMode? PageRenderMode
+    {
+        get
+        {
+            if (httpContextAccessor.HttpContext!.Request.Path.StartsWithSegments("/login"))
+            {
+                return null;        // server-rendered mode
+            }
+            else
+            {
+                return new InteractiveServerRenderMode(prerender: false);
+            }
+        }
+    }
+}

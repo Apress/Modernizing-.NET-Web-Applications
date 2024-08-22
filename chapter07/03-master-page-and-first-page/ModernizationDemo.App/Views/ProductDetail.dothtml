@@ -1,0 +1,57 @@
+﻿@viewModel ModernizationDemo.App.ViewModels.ProductDetailViewModel, ModernizationDemo.App
+@masterPage Views/Site.dotmaster
+
+<dot:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1">
+
+    <div DataContext="{value: Product}">
+        <div class="row">
+            <div class="col col-md-4">
+                <img src="{value: ImageUrl}" alt="{value: Name}" class="img-fluid" />
+            </div>
+
+            <div class="col col-md-8">
+                <h2>{{value: Name}}</h2>
+                <p class="mb-4">
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star"></i>
+                </p>
+                <p class="lead">{{value: Description}}</p>
+                <h4 class="mb-4">
+                    {{value: _root.Price}}
+                </h4>
+
+                <hr />
+
+                <div class="row mt-4">
+                    <div class="col">
+                        <div class="mb-3">
+                            <label for="StockLiteral" class="form-label">Availability</label>
+                            <dot:TextBox ID="StockLiteral" 
+                                         readonly 
+                                         class="form-control-plaintext fw-bold text-success"
+                                         Text="In stock"/>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="mb-3">
+                            <label for="QuantityTextBox" class="form-label">Quantity</label>
+                            <dot:TextBox Text="{value: _root.Quantity}"
+                                         ID="QuantityTextBox"
+                                         TextMode="Number"
+                                         class="form-control"
+                                         style="width: 5em" />
+                        </div>
+                    </div>
+                    <div class="col text-end">
+                        <dot:Button Text="Add to cart"
+                                    class="btn btn-primary btn-lg" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</dot:Content>

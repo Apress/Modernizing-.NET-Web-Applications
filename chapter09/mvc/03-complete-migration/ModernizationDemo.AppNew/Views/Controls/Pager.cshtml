@@ -1,0 +1,37 @@
+﻿@model ModernizationDemo.App.Model.PagerModel
+
+<div>
+    @if (Model.PageIndex == 0)
+    {
+        <button disabled class="btn btn-secondary">First</button>
+        <button disabled class="btn btn-secondary">Previous</button>
+    }
+    else
+    {
+        <a class="btn btn-secondary"
+           href="@Url.Action(Model.ActionName, new { page = 0 })">
+            First
+        </a>
+        <a class="btn btn-secondary"
+           href="@Url.Action(Model.ActionName, new { page = Model.PageIndex - 1})">
+            Previous
+        </a>
+    }
+
+    @if (Model.PageIndex == Model.PagesCount - 1)
+    {
+        <button disabled class="btn btn-secondary">Next</button>
+        <button disabled class="btn btn-secondary">Last</button>
+    }
+    else
+    {
+        <a class="btn btn-secondary"
+           href="@Url.Action(Model.ActionName, new { page = Model.PageIndex + 1 })">
+            Next
+        </a>
+        <a class="btn btn-secondary"
+           href="@Url.Action(Model.ActionName, new { page = Model.PagesCount - 1 })">
+            Last
+        </a>
+    }
+</div>

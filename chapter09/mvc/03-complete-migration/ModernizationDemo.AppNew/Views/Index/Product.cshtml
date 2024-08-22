@@ -1,0 +1,47 @@
+﻿@model ModernizationDemo.App.Model.ProductDetailModel
+
+<div class="row">
+    <div class="col col-md-4">
+        <img src="@Model.Product.ImageUrl" alt="@Model.Product.Name" class="img-fluid" />
+    </div>
+    
+    <div class="col col-md-8">
+
+        <h2>@Model.Product.Name</h2>
+        <p class="mb-4">
+            <i class="bi bi-star-fill"></i>
+            <i class="bi bi-star-fill"></i>
+            <i class="bi bi-star-fill"></i>
+            <i class="bi bi-star-fill"></i>
+            <i class="bi bi-star"></i>
+        </p>
+        <p class="lead">@Model.Product.Description</p>
+        <h4 class="mb-4">
+            @Model.ProductPrice
+        </h4>
+        <hr />
+
+        <div class="row mt-4">
+            <div class="col">
+                <div class="mb-3">
+                    <label for="StockLiteral" class="form-label">Availability</label>
+                    <input id="StockLiteral" value="In stock" readonly
+                           class="form-control-plaintext fw-bold text-success" />
+                </div>
+            </div>
+            <div class="col">
+                <div class="mb-3">
+                    <label for="QuantityTextBox" class="form-label">Quantity</label>
+                    <input type="number" id="QuantityTextBox"
+                           class="form-control" style="width: 5em"
+                           value="1" />
+                </div>
+            </div>
+            <div class="col text-end">
+                <input type="submit"
+                       value="Add to cart"
+                       class="btn btn-primary btn-lg" />
+            </div>
+        </div>
+    </div>
+</div>

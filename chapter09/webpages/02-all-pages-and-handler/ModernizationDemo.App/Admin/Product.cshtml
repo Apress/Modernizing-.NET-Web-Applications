@@ -1,0 +1,88 @@
+﻿@using System.Web.Mvc.Html
+@using ModernizationDemo.App
+@using ModernizationDemo.BackendClient
+@{
+    Layout = "../_Layout.cshtml";
+
+    if (!User.Identity.IsAuthenticated)
+    {
+        FormsAuthentication.RedirectToLoginPage();
+    }
+
+    Validation.RequireField("Name", "Product name is required!");
+    Validation.RequireField("Description", "Product description is required!");
+    Validation.RequireField("ImageUrl", "Image URL is required!");
+
+    Guid? id = null;
+    if (UrlData.Count > 0)
+    {
+        id = new Guid(UrlData[0]);
+    }
+
+    var product = new ProductCreateEditModel();
+    if (IsPost)
+    {
+        product.Name = Request.Form["Name"];
+        product.Description = Request.Form["Description"];
+        product.ImageUrl = Request.Form["ImageUrl"];
+    }
+    else if (id != null)
+    {
+        var data = Global.GetApiClient().GetProduct(id.Value);
+        product.Name = data.Name;
+        product.Description = data.Description;
+        product.ImageUrl = data.ImageUrl;
+    }
+
+    if (IsPost && Validation.IsValid())
+    {
+        if (id == null)
+        {
+            Global.GetApiClient().AddProduct(product);
+        }
+        else
+        {
+            Global.GetApiClient().UpdateProduct(id.Value, product);
+        }
+        Response.Redirect("/admin/products");
+    }
+}
+<form method="post">
+    @if (id == null)
+    {
+        <h2>Create product</h2>
+    }
+    else
+    {
+        <h2>Update product</h2>
+    }
+
+    <div class="mb-3">
+        <label for="Name" class="form-label">Product name</label>
+        <input id="Name" name="Name" value="@product.Name" class="form-control"/>
+        @Html.ValidationMessage("Name", new { @class = "text-danger" })
+    </div>
+    <div class="mb-3">
+        <label for="Description" class="form-label">Product description</label>
+        <textarea id="Description" name="Description" rows="5" class="form-control">@product.Description</textarea>
+        @Html.ValidationMessage("Description", new { @class = "text-danger" })
+    </div>
+    <div class="mb-3">
+        <label for="ImageUrl" class="form-label">Image URL</label>
+        <input id="ImageUrl" name="ImageUrl" value="@product.ImageUrl" class="form-control"/>
+        @Html.ValidationMessage("ImageUrl", new { @class = "text-danger" })
+    </div>
+
+    <div class="text-center">
+        @if (id == null)
+        {
+            <button type="submit" class="btn btn-primary">Add product</button>
+        }
+        else
+        {
+            <button type="submit" class="btn btn-primary">Update product</button>
+        }
+        <a href="/admin/products" class="btn btn-secondary">Cancel</a>
+    </div>
+    @AntiForgery.GetHtml()
+</form>

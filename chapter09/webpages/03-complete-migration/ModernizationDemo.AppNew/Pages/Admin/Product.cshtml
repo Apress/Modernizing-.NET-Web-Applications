@@ -1,0 +1,47 @@
+﻿@page "{id?}"
+@using Microsoft.AspNetCore.Authorization
+@model ModernizationDemo.AppNew.Pages.Admin.ProductModel
+@attribute [Authorize]
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    Layout = "Shared/_Layout";
+}
+
+<form method="post" asp-page-handler="Save">
+    @if (Model.Id == null)
+    {
+        <h2>Create product</h2>
+    }
+    else
+    {
+        <h2>Update product</h2>
+    }
+
+    <div class="mb-3">
+        <label asp-for="Product.Name" class="form-label">Product name</label>
+        <input asp-for="Product.Name" class="form-control" />
+        <span asp-validation-for="Product.Name" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="Product.Description" class="form-label">Product description</label>
+        <textarea asp-for="Product.Description" rows="5" class="form-control"></textarea>
+        <span asp-validation-for="Product.Description" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="Product.ImageUrl" class="form-label">Image URL</label>
+        <input asp-for="Product.ImageUrl" class="form-control" />
+        <span asp-validation-for="Product.ImageUrl" class="text-danger"></span>
+    </div>
+
+    <div class="text-center">
+        @if (Model.Id == null)
+        {
+            <button type="submit" class="btn btn-primary">Add product</button>
+        }
+        else
+        {
+            <button type="submit" class="btn btn-primary">Update product</button>
+        }
+        <a href="/admin/products" class="btn btn-secondary">Cancel</a>
+    </div>
+</form>

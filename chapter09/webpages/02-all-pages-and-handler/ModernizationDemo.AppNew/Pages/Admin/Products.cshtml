@@ -1,0 +1,62 @@
+﻿@page
+@using Microsoft.AspNetCore.Authorization
+@model ModernizationDemo.AppNew.Pages.Admin.ProductsModel
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@attribute [Authorize]
+@{
+    Layout = "Shared/_Layout";
+}
+
+<h2>Products</h2>
+
+<div class="my-4">
+
+    <a href="/admin/product"
+       class="btn btn-primary">
+        <i class="bi bi-plus"></i> Add product
+    </a>
+</div>
+
+<table class="table table-bordered">
+    <tr>
+        <th>Image</th>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Price</th>
+        <th></th>
+        <th></th>
+    </tr>
+    @foreach (var product in Model.Products.Results)
+    {
+        <tr>
+            <td>
+                <img src="@product.ImageUrl" alt="@product.Name" class="img-fluid" />
+            </td>
+            <td>@product.Name</td>
+            <td>@product.Description</td>
+            <td>@Model.ProductPrices[product.Id]</td>
+            <td>
+                <a href="/admin/product/@product.Id" class="btn btn-secondary">
+                    <i class="bi bi-pencil"></i>
+                </a>
+            </td>
+            <td>
+                <form method="post" asp-page-handler="DeleteProduct">
+                    <input type="hidden" name="id" value="@product.Id" />
+                    <button type="submit" class="btn btn-danger">
+                        <i class="bi bi-trash"></i>
+                    </button>
+                </form>
+            </td>
+        </tr>
+    }
+    <tr>
+        <td class="grid-pager-row" colspan="6">
+            <table>
+                <tr>
+                    @await Html.PartialAsync("../Controls/NumericPager.cshtml", Model.PagerModel)
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>

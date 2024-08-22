@@ -1,0 +1,45 @@
+{
+	"Id": 1,
+	"OrderItems": [
+		{
+			"ProductId": 74,
+			"Quantity": 244,
+			"UnitPrice": 4939.35
+		},
+		{
+			"ProductId": 73,
+			"Quantity": 15,
+			"UnitPrice": 3730.00
+		},
+		{
+			"ProductId": 1,
+			"Quantity": 45,
+			"UnitPrice": 4548.90
+		},
+		{
+			"ProductId": 19,
+			"Quantity": 190,
+			"UnitPrice": 3071.19
+		},
+		{
+			"ProductId": 90,
+			"Quantity": 149,
+			"UnitPrice": 483.99
+		},
+		{
+			"ProductId": 18,
+			"Quantity": 139,
+			"UnitPrice": 2482.16
+		},
+		{
+			"ProductId": 7,
+			"Quantity": 254,
+			"UnitPrice": 922.74
+		}
+	],
+	"CreatedAt": "2023-10-30T20:54:28.0789108Z",
+	"CompletedAt": null,
+	"CanceledAt": null,
+	"TotalPrice": 2700888.71,
+	"Status": 0
+}

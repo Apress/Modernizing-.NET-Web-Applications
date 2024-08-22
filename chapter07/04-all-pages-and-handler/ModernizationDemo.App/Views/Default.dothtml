@@ -1,0 +1,30 @@
+﻿@viewModel ModernizationDemo.App.ViewModels.DefaultViewModel, ModernizationDemo.App
+@masterPage Views/Site.dotmaster
+
+<dot:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1">
+
+    <dot:Repeater DataSource="{value: Products}"
+                  class="row row-cols-1 row-cols-md-3 g-4">
+        <ItemTemplate>
+            <div class="col">
+                <div class="card h-100">
+
+                    <img src="{value: ImageUrl}" alt="{value: Name}" />
+
+                    <div class="card-body">
+                        <h5 class="card-title">{{value: Name}}</h5>
+                        <p class="card-text">{{value: Description}}</p>
+                        <webforms:HybridRouteLink class="btn btn-primary"
+                                                    RouteName="ProductDetail"
+                                                    Param-Id="{value: Id}">
+                            {{value: _root.Prices.ContainsKey(Id) ? _root.Prices[Id] : ""}}
+                        </webforms:HybridRouteLink>
+                    </div>
+                </div>
+            </div>
+        </ItemTemplate>
+    </dot:Repeater>
+    
+    <cc:CustomDataPager DataSet="{value: Products}" />
+
+</dot:Content>

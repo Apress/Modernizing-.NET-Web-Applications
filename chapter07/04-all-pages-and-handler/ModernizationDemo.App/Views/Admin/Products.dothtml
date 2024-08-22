@@ -1,0 +1,50 @@
+﻿@viewModel ModernizationDemo.App.ViewModels.Admin.ProductsViewModel, ModernizationDemo.App
+@masterPage Views/Site.dotmaster
+
+<dot:Content ContentPlaceHolderID="ContentPlaceHolder1">
+
+    <h2>Products</h2>
+
+    <div class="my-4">
+        <webforms:HybridRouteLink class="btn btn-primary" RouteName="AdminProductCreate">
+            <i class="bi bi-plus"></i> Add product
+        </webforms:HybridRouteLink>
+    </div>
+
+    <dot:GridView DataSource="{value: Products}"
+                  class="table table-bordered">
+        <Columns>
+            <dot:GridViewTemplateColumn HeaderText="Image">
+                <ContentTemplate>
+                    <img src="{value: ImageUrl}" alt="{value: Name}" class="img-fluid" />
+                </ContentTemplate>
+            </dot:GridViewTemplateColumn>
+            <dot:GridViewTextColumn ValueBinding="{value: Name}" HeaderText="Name" />
+            <dot:GridViewTextColumn ValueBinding="{value: Description}" HeaderText="Description" />
+            <dot:GridViewTemplateColumn HeaderText="Price">
+                <ContentTemplate>
+                    {{value: _root.Prices.ContainsKey(Id) ? _root.Prices[Id] : ""}}
+                </ContentTemplate>
+            </dot:GridViewTemplateColumn>
+            <dot:GridViewTemplateColumn>
+                <ContentTemplate>
+                    <webforms:HybridRouteLink RouteName="AdminProductDetail"
+                                              Param-Id="{value: Id}">
+                        <i class="bi bi-pencil"></i>
+                    </webforms:HybridRouteLink>
+                </ContentTemplate>
+            </dot:GridViewTemplateColumn>
+            <dot:GridViewTemplateColumn>
+                <ContentTemplate>
+                    <dot:LinkButton Click="{command: _root.DeleteProduct(Id)}" Validation.Enabled="false">
+                        <i class="bi bi-trash"></i>
+                    </dot:LinkButton>
+                </ContentTemplate>
+            </dot:GridViewTemplateColumn>
+        </Columns>
+    </dot:GridView>
+
+    <cc:CustomDataPager DataSet="{value: Products}" />
+
+</dot:Content>
+

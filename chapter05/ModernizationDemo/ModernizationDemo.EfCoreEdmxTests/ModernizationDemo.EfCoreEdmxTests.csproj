@@ -1,0 +1,37 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+
+    <IsPackable>false</IsPackable>
+    <IsTestProject>true</IsTestProject>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="coverlet.collector" Version="6.0.0" />
+    <PackageReference Include="EntityFramework" Version="6.4.4" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.8.0" />
+    <PackageReference Include="MSTest.TestAdapter" Version="3.1.1" />
+    <PackageReference Include="MSTest.TestFramework" Version="3.1.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Using Include="Microsoft.VisualStudio.TestTools.UnitTesting" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EntityDeploy Include="..\ModernizationDemo.EfTests\Model\DotNetCollegeContext.edmx" Link="Model\DotNetCollegeContext.edmx" />
+    <Compile Include="..\ModernizationDemo.EfTests\Model\*.cs" LinkBase="Model" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="App.Config" />
+  </ItemGroup>
+
+  <Target Name="CopyAppConfig" AfterTargets="Build">
+    <Copy SourceFiles="$(ProjectDir)\App.config" DestinationFiles="$(OutputPath)testhost.dll.config"></Copy>
+  </Target>
+
+</Project>

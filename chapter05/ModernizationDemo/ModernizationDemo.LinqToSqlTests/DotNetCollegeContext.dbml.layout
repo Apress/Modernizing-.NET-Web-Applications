@@ -1,0 +1,448 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 30.25, 26.625" name="DotNetCollegeContext">
+  <DataContextMoniker Name="/DotNetCollegeContextDataContext" />
+  <nestedChildShapes>
+    <classShape Id="c87ed755-4496-4b6c-8bb2-d2e92ce587cc" absoluteBounds="10, 11.5, 2, 2.1554996744791666">
+      <DataClassMoniker Name="/DotNetCollegeContextDataContext/Supplier" />
+      <nestedChildShapes>
+        <elementListCompartment Id="c64c089e-9e8f-41e3-bad8-98d15d0b348a" absoluteBounds="10.015, 11.96, 1.9700000000000002, 1.5954996744791665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="fbdd3080-ab19-4eb2-9d32-61765779f576" absoluteBounds="14.375, 11.5, 2, 1.7708968098958335">
+      <DataClassMoniker Name="/DotNetCollegeContextDataContext/Account" />
+      <nestedChildShapes>
+        <elementListCompartment Id="f14bd456-24ab-47d1-8f48-3dc5d8873a06" absoluteBounds="14.39, 11.96, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="0dbe4038-46b9-4a9c-9736-40fecb27db4a" absoluteBounds="20.625, 11.5, 2, 3.5016097005208309">
+      <DataClassMoniker Name="/DotNetCollegeContextDataContext/AccountTransaction" />
+      <nestedChildShapes>
+        <elementListCompartment Id="0b5bd006-411d-4825-b8ec-f5e4605b1ea2" absoluteBounds="20.64, 11.96, 1.9700000000000002, 2.941609700520833" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="4972bb45-0e32-4c16-9e1b-b52502cb9d73" absoluteBounds="9.25, 22.875, 2, 3.1170068359375023">
+      <DataClassMoniker Name="/DotNetCollegeContextDataContext/Address" />
+      <nestedChildShapes>
+        <elementListCompartment Id="515696f1-45fb-48f3-bb3a-e708fae848ed" absoluteBounds="9.265, 23.335, 1.9700000000000002, 2.5570068359375" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="98ac4cfa-26e2-4c54-bbd4-7ee04787e983" absoluteBounds="27.125, 12, 2, 1.7708968098958344">
+      <DataClassMoniker Name="/DotNetCollegeContextDataContext/Attachment" />
+      <nestedChildShapes>
+        <elementListCompartment Id="8576e56b-edd6-44b4-ae23-6dce94bdbb44" absoluteBounds="27.14, 12.46, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="0660c162-9869-4ad4-81c8-002cb2da81e0" absoluteBounds="14.75, 19.125, 2, 2.7324039713541666">
+      <DataClassMoniker Name="/DotNetCollegeContextDataContext/AttendeeRegistration" />
+      <nestedChildShapes>
+        <elementListCompartment Id="281b50bd-ccb9-4780-b057-2bda256696e0" absoluteBounds="14.765, 19.585, 1.9700000000000002, 2.1724039713541665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="a50fca32-1511-4dfb-9d7d-e80d1afdfec3" absoluteBounds="22.5, 1.625, 2, 2.1554996744791666">
+      <DataClassMoniker Name="/DotNetCollegeContextDataContext/Category" />
+      <nestedChildShapes>
+        <elementListCompartment Id="78dc58d2-579e-488a-80d4-41db7e13ddf1" absoluteBounds="22.515, 2.0850000000000009, 1.9700000000000002, 1.5954996744791665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="8afb7663-7169-4c95-9d27-8debe26399a3" absoluteBounds="19.625, 4.375, 2, 1.1939925130208344">
+      <DataClassMoniker Name="/DotNetCollegeContextDataContext/CategoryCourseTemplate" />
+      <nestedChildShapes>
+        <elementListCompartment Id="7f2d13df-0f10-400b-babf-7239a1b90de8" absoluteBounds="19.64, 4.8350000000000009, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="81d70172-57ae-4e6c-9da7-fcea846902c3" absoluteBounds="7, 21.125, 2, 1.1939925130208309">
+      <DataClassMoniker Name="/DotNetCollegeContextDataContext/Country" />
+      <nestedChildShapes>
+        <elementListCompartment Id="070d70dd-4721-4def-b525-d5ecd564bc9b" absoluteBounds="7.0150000000000006, 21.585, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="a92f8f0e-b4ed-43d3-8866-31091dbae27b" absoluteBounds="26.875, 9.625, 2, 1.5785953776041666">
+      <DataClassMoniker Name="/DotNetCollegeContextDataContext/CourseDate" />
+      <nestedChildShapes>
+        <elementListCompartment Id="a8c5e696-4612-44f7-82f6-542adc8a7383" absoluteBounds="26.89, 10.085, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="af354ac5-037a-4cd1-ac48-03c54a2780ad" absoluteBounds="16.625, 9.125, 2, 1.1939925130208344">
+      <DataClassMoniker Name="/DotNetCollegeContextDataContext/CourseLector" />
+      <nestedChildShapes>
+        <elementListCompartment Id="955091f2-f6d2-4f3b-b058-99c7a3e6fe0c" absoluteBounds="16.64, 9.585, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="24b1f25a-c9ad-4b3f-b2bf-05e5af213765" absoluteBounds="27.375, 14.25, 2, 1.7708968098958326">
+      <DataClassMoniker Name="/DotNetCollegeContextDataContext/CourseReminder" />
+      <nestedChildShapes>
+        <elementListCompartment Id="40ff7bd1-9092-435a-9fff-7cebba65cbd9" absoluteBounds="27.39, 14.71, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="e2f53f1f-5543-44be-abcd-147b059858a5" absoluteBounds="23.75, 9.625, 2, 5.0400211588541666">
+      <DataClassMoniker Name="/DotNetCollegeContextDataContext/Course" />
+      <nestedChildShapes>
+        <elementListCompartment Id="7eedc3c1-d0e7-4b9b-b3f3-ed7009b573c0" absoluteBounds="23.765, 10.085, 1.9700000000000002, 4.4800211588541661" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="c3a21939-0ec1-4d77-a136-f51a1fb31239" absoluteBounds="22.75, 5.25, 2, 1.5785953776041666">
+      <DataClassMoniker Name="/DotNetCollegeContextDataContext/CourseTemplateRelation" />
+      <nestedChildShapes>
+        <elementListCompartment Id="42bb3aea-f41b-4275-8a94-390dcd57133b" absoluteBounds="22.765, 5.7100000000000009, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="cb375d1c-2e53-4e96-b35a-4c7771742bd6" absoluteBounds="19.75, 6.5, 2, 2.9247054036458309">
+      <DataClassMoniker Name="/DotNetCollegeContextDataContext/CourseTemplate" />
+      <nestedChildShapes>
+        <elementListCompartment Id="081c6f21-e089-4832-9693-8a09877cce1c" absoluteBounds="19.765, 6.9600000000000009, 1.9700000000000002, 2.364705403645833" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="d8444c5e-43e4-40e0-be1d-2f54836cb580" absoluteBounds="24.625, 17.125, 2, 1.1939925130208344">
+      <DataClassMoniker Name="/DotNetCollegeContextDataContext/Customer" />
+      <nestedChildShapes>
+        <elementListCompartment Id="a6ebf126-9bbd-4146-89dd-0b27172480bd" absoluteBounds="24.64, 17.585, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="7a622ba5-f14d-464f-bd89-8f120a159628" absoluteBounds="22, 16, 2, 1.9631982421875023">
+      <DataClassMoniker Name="/DotNetCollegeContextDataContext/DiscountCoupon" />
+      <nestedChildShapes>
+        <elementListCompartment Id="709b5a8d-e292-41ac-aa2c-f04a34c08e90" absoluteBounds="22.015, 16.46, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="7cba2cfd-2384-4ab7-b447-cd38c2a0cfc1" absoluteBounds="28, 24, 2, 2.347801106770834">
+      <DataClassMoniker Name="/DotNetCollegeContextDataContext/InvoiceLine" />
+      <nestedChildShapes>
+        <elementListCompartment Id="02278308-6ace-485b-bfa9-90b2783b8950" absoluteBounds="28.015, 24.46, 1.9700000000000002, 1.7878011067708335" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="e1b9887a-3b4b-402d-854c-a8f393f63f55" absoluteBounds="27, 19, 2, 4.0785139973958326">
+      <DataClassMoniker Name="/DotNetCollegeContextDataContext/Invoice" />
+      <nestedChildShapes>
+        <elementListCompartment Id="438e8239-4c8e-422b-a48b-ec3f89d10245" absoluteBounds="27.015, 19.46, 1.9700000000000002, 3.518513997395833" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="3346c745-bd63-4894-a65e-2d04d5d37e7a" absoluteBounds="17.375, 1.5, 2, 1.1939925130208344">
+      <DataClassMoniker Name="/DotNetCollegeContextDataContext/LectorPrivateCourseRequest" />
+      <nestedChildShapes>
+        <elementListCompartment Id="476df388-1193-43bf-8e9f-3f8ac303d8c9" absoluteBounds="17.39, 1.9600000000000009, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="d1dfd9a9-2809-495c-9ee2-df4e7c7ff4af" absoluteBounds="16.5, 3.875, 2, 3.6939111328124987">
+      <DataClassMoniker Name="/DotNetCollegeContextDataContext/Lector" />
+      <nestedChildShapes>
+        <elementListCompartment Id="519b0fb6-3f1b-4717-a293-089996185515" absoluteBounds="16.515, 4.335, 1.9700000000000002, 3.1339111328125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="f39f20b0-d7e9-42c5-8841-56290fe39496" absoluteBounds="27.75, 6.25, 2, 2.5401025390625023">
+      <DataClassMoniker Name="/DotNetCollegeContextDataContext/Location" />
+      <nestedChildShapes>
+        <elementListCompartment Id="0e4bcf86-6eca-45be-883f-699db3459c1a" absoluteBounds="27.765, 6.7100000000000009, 1.9700000000000002, 1.9801025390625" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="b8b1f09f-9f80-4855-93b2-4c19b7375426" absoluteBounds="26.5, 1, 2, 1.3862939453124996">
+      <DataClassMoniker Name="/DotNetCollegeContextDataContext/MainCategory" />
+      <nestedChildShapes>
+        <elementListCompartment Id="2f1417a0-a2fd-46b2-89b9-425f936be198" absoluteBounds="26.515, 1.46, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="3acdd3b1-edd2-44c8-9d27-c5bb61a8d3d9" absoluteBounds="14.75, 17, 2, 1.3862939453125023">
+      <DataClassMoniker Name="/DotNetCollegeContextDataContext/OrderAvailableDate" />
+      <nestedChildShapes>
+        <elementListCompartment Id="4fc944a1-01d9-4bc2-b246-03fca0fc98d8" absoluteBounds="14.765, 17.46, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="6509b97d-0368-4adc-a84a-cd7f6b454cb5" absoluteBounds="17.5, 14.75, 2, 4.8477197265625023">
+      <DataClassMoniker Name="/DotNetCollegeContextDataContext/Order" />
+      <nestedChildShapes>
+        <elementListCompartment Id="0f186a29-2a97-477f-90fa-24dc6b1a76cf" absoluteBounds="17.515, 15.21, 1.9700000000000002, 4.2877197265625" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="0aa5717e-dcc0-4bd8-a0a7-6b8adf7b7911" absoluteBounds="14.5, 0.5, 2, 2.9247054036458309">
+      <DataClassMoniker Name="/DotNetCollegeContextDataContext/PrivateCourseRequest" />
+      <nestedChildShapes>
+        <elementListCompartment Id="18a09452-ab02-4391-a24a-6ed24e6261fd" absoluteBounds="14.515, 0.96000000000000085, 1.9700000000000002, 2.364705403645833" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="e612a05f-8fc5-4736-8fe1-9a2bb78f77d0" absoluteBounds="26.75, 4, 2, 1.7708968098958309">
+      <DataClassMoniker Name="/DotNetCollegeContextDataContext/Recording" />
+      <nestedChildShapes>
+        <elementListCompartment Id="ddb529b7-a38c-4044-97cb-dd3509a9771f" absoluteBounds="26.765, 4.4600000000000009, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(12 : 12.3854484049479); (14.375 : 12.3854484049479)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/DotNetCollegeContextDataContext/Supplier/Supplier_Account" />
+      <nodes>
+        <classShapeMoniker Id="c87ed755-4496-4b6c-8bb2-d2e92ce587cc" />
+        <classShapeMoniker Id="fbdd3080-ab19-4eb2-9d32-61765779f576" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(16.375 : 12.3854484049479); (19.0104166666667 : 12.3854484049479 : JumpStart); (19.1770833333333 : 12.3854484049479 : JumpEnd); (20.625 : 12.3854484049479)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/DotNetCollegeContextDataContext/Account/Account_AccountTransaction" />
+      <nodes>
+        <classShapeMoniker Id="fbdd3080-ab19-4eb2-9d32-61765779f576" />
+        <classShapeMoniker Id="0dbe4038-46b9-4a9c-9736-40fecb27db4a" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(10.625 : 22.875); (10.625 : 13.6554996744792)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/DotNetCollegeContextDataContext/Address/Address_Supplier" />
+      <nodes>
+        <classShapeMoniker Id="4972bb45-0e32-4c16-9e1b-b52502cb9d73" />
+        <classShapeMoniker Id="c87ed755-4496-4b6c-8bb2-d2e92ce587cc" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(22.5 : 2.70274983723958); (20.625 : 2.70274983723958); (20.625 : 4.375)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/DotNetCollegeContextDataContext/Category/Category_CategoryCourseTemplate" />
+      <nodes>
+        <classShapeMoniker Id="a50fca32-1511-4dfb-9d7d-e80d1afdfec3" />
+        <classShapeMoniker Id="8afb7663-7169-4c95-9d27-8debe26399a3" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(9 : 22.3189925130208); (9.25 : 22.875)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/DotNetCollegeContextDataContext/Country/Country_Address" />
+      <nodes>
+        <classShapeMoniker Id="81d70172-57ae-4e6c-9da7-fcea846902c3" />
+        <classShapeMoniker Id="4972bb45-0e32-4c16-9e1b-b52502cb9d73" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(23.75 : 13.0825105794271); (22.625 : 13.0825105794271)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/DotNetCollegeContextDataContext/Course/Course_AccountTransaction" />
+      <nodes>
+        <classShapeMoniker Id="e2f53f1f-5543-44be-abcd-147b059858a5" />
+        <classShapeMoniker Id="0dbe4038-46b9-4a9c-9736-40fecb27db4a" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(25.75 : 12.8854484049479); (27.125 : 12.8854484049479)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/DotNetCollegeContextDataContext/Course/Course_Attachment" />
+      <nodes>
+        <classShapeMoniker Id="e2f53f1f-5543-44be-abcd-147b059858a5" />
+        <classShapeMoniker Id="98ac4cfa-26e2-4c54-bbd4-7ee04787e983" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(25.75 : 10.4142976888021); (26.875 : 10.4142976888021)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/DotNetCollegeContextDataContext/Course/Course_CourseDate" />
+      <nodes>
+        <classShapeMoniker Id="e2f53f1f-5543-44be-abcd-147b059858a5" />
+        <classShapeMoniker Id="a92f8f0e-b4ed-43d3-8866-31091dbae27b" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(23.75 : 9.97199625651042); (20.2395833333333 : 9.97199625651042 : JumpStart); (20.0729166666667 : 9.97199625651042 : JumpEnd); (18.625 : 9.97199625651042)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/DotNetCollegeContextDataContext/Course/Course_CourseLector" />
+      <nodes>
+        <classShapeMoniker Id="e2f53f1f-5543-44be-abcd-147b059858a5" />
+        <classShapeMoniker Id="af354ac5-037a-4cd1-ac48-03c54a2780ad" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(25.75 : 14.4575105794271); (27.375 : 14.4575105794271)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/DotNetCollegeContextDataContext/Course/Course_CourseReminder" />
+      <nodes>
+        <classShapeMoniker Id="e2f53f1f-5543-44be-abcd-147b059858a5" />
+        <classShapeMoniker Id="24b1f25a-c9ad-4b3f-b2bf-05e5af213765" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(11 : 11.5); (11 : 11.0571203173828); (11.4479191666667 : 11.0571203173828 : JumpStart); (11.6145858333333 : 11.0571203173828 : JumpEnd); (15.2916666666667 : 11.0571203173828 : JumpStart); (15.4583333333333 : 11.0571203173828 : JumpEnd); (15.8229191666667 : 11.0571203173828 : JumpStart); (15.9895858333333 : 11.0571203173828 : JumpEnd); (19.0104166666667 : 11.0571203173828 : JumpStart); (19.1770833333333 : 11.0571203173828 : JumpEnd); (20.0729166666667 : 11.0571203173828 : JumpStart); (20.2395833333333 : 11.0571203173828 : JumpEnd); (23.75 : 11.0571203173828)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/DotNetCollegeContextDataContext/Supplier/Supplier_Course" />
+      <nodes>
+        <classShapeMoniker Id="c87ed755-4496-4b6c-8bb2-d2e92ce587cc" />
+        <classShapeMoniker Id="e2f53f1f-5543-44be-abcd-147b059858a5" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(20.6875 : 6.5); (20.6875 : 5.56899251302083)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/DotNetCollegeContextDataContext/CourseTemplate/CourseTemplate_CategoryCourseTemplate" />
+      <nodes>
+        <classShapeMoniker Id="cb375d1c-2e53-4e96-b35a-4c7771742bd6" />
+        <classShapeMoniker Id="8afb7663-7169-4c95-9d27-8debe26399a3" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(21.75 : 8.407900390625); (23.78125 : 8.407900390625); (23.78125 : 9.625)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/DotNetCollegeContextDataContext/CourseTemplate/CourseTemplate_Course" />
+      <nodes>
+        <classShapeMoniker Id="cb375d1c-2e53-4e96-b35a-4c7771742bd6" />
+        <classShapeMoniker Id="e2f53f1f-5543-44be-abcd-147b059858a5" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(21.75 : 7.58699588411458); (23.265625 : 7.58699588411458); (23.265625 : 6.82859537760417)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/DotNetCollegeContextDataContext/CourseTemplate/CourseTemplate_CourseTemplateRelation" />
+      <nodes>
+        <classShapeMoniker Id="cb375d1c-2e53-4e96-b35a-4c7771742bd6" />
+        <classShapeMoniker Id="c3a21939-0ec1-4d77-a136-f51a1fb31239" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(21.75 : 8.94755539713541); (24.265625 : 8.94755539713541); (24.265625 : 6.82859537760417)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/DotNetCollegeContextDataContext/CourseTemplate/CourseTemplate_CourseTemplateRelation1" />
+      <nodes>
+        <classShapeMoniker Id="cb375d1c-2e53-4e96-b35a-4c7771742bd6" />
+        <classShapeMoniker Id="c3a21939-0ec1-4d77-a136-f51a1fb31239" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(25.1875 : 17.125); (25.1875 : 14.6650211588542)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/DotNetCollegeContextDataContext/Customer/Customer_Course" />
+      <nodes>
+        <classShapeMoniker Id="d8444c5e-43e4-40e0-be1d-2f54836cb580" />
+        <classShapeMoniker Id="e2f53f1f-5543-44be-abcd-147b059858a5" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(11.25 : 24.4335034179688); (25.35937375 : 24.4335034179688); (25.35937375 : 18.3189925130208)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/DotNetCollegeContextDataContext/Address/Address_Customer" />
+      <nodes>
+        <classShapeMoniker Id="4972bb45-0e32-4c16-9e1b-b52502cb9d73" />
+        <classShapeMoniker Id="d8444c5e-43e4-40e0-be1d-2f54836cb580" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(24.2812505 : 14.6650211588542); (24.2812505 : 16.53125); (24 : 16.53125)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/DotNetCollegeContextDataContext/Course/Course_DiscountCoupon" />
+      <nodes>
+        <classShapeMoniker Id="e2f53f1f-5543-44be-abcd-147b059858a5" />
+        <classShapeMoniker Id="7a622ba5-f14d-464f-bd89-8f120a159628" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(27 : 20.5997404227702); (21.28125 : 20.5997404227702); (21.28125 : 15.0016097005208)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/DotNetCollegeContextDataContext/Invoice/Invoice_AccountTransaction" />
+      <nodes>
+        <classShapeMoniker Id="e1b9887a-3b4b-402d-854c-a8f393f63f55" />
+        <classShapeMoniker Id="0dbe4038-46b9-4a9c-9736-40fecb27db4a" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(28.5 : 23.0785139973958); (28.5 : 24)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/DotNetCollegeContextDataContext/Invoice/Invoice_InvoiceLine" />
+      <nodes>
+        <classShapeMoniker Id="e1b9887a-3b4b-402d-854c-a8f393f63f55" />
+        <classShapeMoniker Id="7cba2cfd-2384-4ab7-b447-cd38c2a0cfc1" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(11.25 : 23.5392594986979); (27.46875 : 23.5392594986979); (27.46875 : 23.0785139973958)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/DotNetCollegeContextDataContext/Address/Address_Invoice" />
+      <nodes>
+        <classShapeMoniker Id="4972bb45-0e32-4c16-9e1b-b52502cb9d73" />
+        <classShapeMoniker Id="e1b9887a-3b4b-402d-854c-a8f393f63f55" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(26.1562525 : 18.3189925130208); (26.1562525 : 21.9006209822591); (27 : 21.9006209822591)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/DotNetCollegeContextDataContext/Customer/Customer_Invoice" />
+      <nodes>
+        <classShapeMoniker Id="d8444c5e-43e4-40e0-be1d-2f54836cb580" />
+        <classShapeMoniker Id="e1b9887a-3b4b-402d-854c-a8f393f63f55" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(11.65625 : 13.6554996744792); (11.65625 : 22.3662019856771); (25.2760404166667 : 22.3662019856771 : JumpStart); (25.4427070833333 : 22.3662019856771 : JumpEnd); (27 : 22.3662019856771)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/DotNetCollegeContextDataContext/Supplier/Supplier_Invoice" />
+      <nodes>
+        <classShapeMoniker Id="c87ed755-4496-4b6c-8bb2-d2e92ce587cc" />
+        <classShapeMoniker Id="e1b9887a-3b4b-402d-854c-a8f393f63f55" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(16.5 : 6.64783656575521); (15.9895858333333 : 6.64783656575521 : JumpStart); (15.8229191666667 : 6.64783656575521 : JumpEnd); (15.375 : 6.64783656575521); (15.375 : 11.5)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/DotNetCollegeContextDataContext/Lector/Lector_Account" />
+      <nodes>
+        <classShapeMoniker Id="d1dfd9a9-2809-495c-9ee2-df4e7c7ff4af" />
+        <classShapeMoniker Id="fbdd3080-ab19-4eb2-9d32-61765779f576" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(17.5625 : 7.5689111328125); (17.5625 : 9.125)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/DotNetCollegeContextDataContext/Lector/Lector_CourseLector" />
+      <nodes>
+        <classShapeMoniker Id="d1dfd9a9-2809-495c-9ee2-df4e7c7ff4af" />
+        <classShapeMoniker Id="af354ac5-037a-4cd1-ac48-03c54a2780ad" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(17.9375 : 3.875); (17.9375 : 2.69399251302083)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/DotNetCollegeContextDataContext/Lector/Lector_LectorPrivateCourseRequest" />
+      <nodes>
+        <classShapeMoniker Id="d1dfd9a9-2809-495c-9ee2-df4e7c7ff4af" />
+        <classShapeMoniker Id="3346c745-bd63-4894-a65e-2d04d5d37e7a" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(15.9062525 : 11.5); (15.9062525 : 4.73837599934896); (16.5 : 4.73837599934896)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/DotNetCollegeContextDataContext/Account/Account_Lector" />
+      <nodes>
+        <classShapeMoniker Id="fbdd3080-ab19-4eb2-9d32-61765779f576" />
+        <classShapeMoniker Id="d1dfd9a9-2809-495c-9ee2-df4e7c7ff4af" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(11.5312525 : 11.5); (11.5312525 : 5.69310628255209); (15.8229191666667 : 5.69310628255208 : JumpStart); (15.9895858333333 : 5.69310628255209 : JumpEnd); (16.5 : 5.69310628255209)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/DotNetCollegeContextDataContext/Supplier/Supplier_Lector" />
+      <nodes>
+        <classShapeMoniker Id="c87ed755-4496-4b6c-8bb2-d2e92ce587cc" />
+        <classShapeMoniker Id="d1dfd9a9-2809-495c-9ee2-df4e7c7ff4af" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(27.75 : 7.89949788411458); (25.4254093996983 : 7.89949788411458 : JumpStart); (25.2587427330317 : 7.89949788411458 : JumpEnd); (24.87164713273 : 7.89949788411458); (24.87164713273 : 9.625)]" manuallyRouted="true" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/DotNetCollegeContextDataContext/Location/Location_Course" />
+      <nodes>
+        <classShapeMoniker Id="f39f20b0-d7e9-42c5-8841-56290fe39496" />
+        <classShapeMoniker Id="e2f53f1f-5543-44be-abcd-147b059858a5" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(26.5 : 2.00564697265625); (24.5 : 2.00564697265625)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/DotNetCollegeContextDataContext/MainCategory/MainCategory_Category" />
+      <nodes>
+        <classShapeMoniker Id="b8b1f09f-9f80-4855-93b2-4c19b7375426" />
+        <classShapeMoniker Id="a50fca32-1511-4dfb-9d7d-e80d1afdfec3" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(17.5 : 19.3613598632813); (16.75 : 19.3613598632813)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/DotNetCollegeContextDataContext/Order/Order_AttendeeRegistration" />
+      <nodes>
+        <classShapeMoniker Id="6509b97d-0368-4adc-a84a-cd7f6b454cb5" />
+        <classShapeMoniker Id="0660c162-9869-4ad4-81c8-002cb2da81e0" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(17.5 : 17.6931469726563); (16.75 : 17.6931469726563)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/DotNetCollegeContextDataContext/Order/Order_OrderAvailableDate" />
+      <nodes>
+        <classShapeMoniker Id="6509b97d-0368-4adc-a84a-cd7f6b454cb5" />
+        <classShapeMoniker Id="3acdd3b1-edd2-44c8-9d27-c5bb61a8d3d9" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(9.9687475 : 22.875); (9.9687475 : 15.84375); (10.5416666666667 : 15.84375 : JumpStart); (10.7083333333333 : 15.84375 : JumpEnd); (11.5729166666667 : 15.84375 : JumpStart); (11.7395833333333 : 15.84375 : JumpEnd); (17.5 : 15.84375)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/DotNetCollegeContextDataContext/Address/Address_Order" />
+      <nodes>
+        <classShapeMoniker Id="4972bb45-0e32-4c16-9e1b-b52502cb9d73" />
+        <classShapeMoniker Id="6509b97d-0368-4adc-a84a-cd7f6b454cb5" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(23.75 : 10.6142406347656); (20.2395833333333 : 10.6142406347656 : JumpStart); (20.0729166666667 : 10.6142406347656 : JumpEnd); (19.09375 : 10.6142406347656); (19.09375 : 14.75)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/DotNetCollegeContextDataContext/Course/Course_Order" />
+      <nodes>
+        <classShapeMoniker Id="e2f53f1f-5543-44be-abcd-147b059858a5" />
+        <classShapeMoniker Id="6509b97d-0368-4adc-a84a-cd7f6b454cb5" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(20.15625 : 9.42470540364583); (20.15625 : 17.3309147135417); (19.5 : 17.3309147135417)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/DotNetCollegeContextDataContext/CourseTemplate/CourseTemplate_Order" />
+      <nodes>
+        <classShapeMoniker Id="cb375d1c-2e53-4e96-b35a-4c7771742bd6" />
+        <classShapeMoniker Id="6509b97d-0368-4adc-a84a-cd7f6b454cb5" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(22 : 16.6029573567708); (21.3645833333333 : 16.6029573567708 : JumpStart); (21.1979166666667 : 16.6029573567708 : JumpEnd); (20.2395833333333 : 16.6029573567708 : JumpStart); (20.0729166666667 : 16.6029573567708 : JumpEnd); (19.5 : 16.6029573567708)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/DotNetCollegeContextDataContext/DiscountCoupon/DiscountCoupon_Order" />
+      <nodes>
+        <classShapeMoniker Id="7a622ba5-f14d-464f-bd89-8f120a159628" />
+        <classShapeMoniker Id="6509b97d-0368-4adc-a84a-cd7f6b454cb5" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(27 : 19.2988598632813); (26.2395858333333 : 19.2988598632813 : JumpStart); (26.0729191666667 : 19.2988598632813 : JumpEnd); (25.4427070833333 : 19.2988598632813 : JumpStart); (25.2760404166667 : 19.2988598632813 : JumpEnd); (21.3645833333333 : 19.2988598632813 : JumpStart); (21.1979166666667 : 19.2988598632813 : JumpEnd); (19.5 : 19.2988598632813)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/DotNetCollegeContextDataContext/Invoice/Invoice_Order" />
+      <nodes>
+        <classShapeMoniker Id="e1b9887a-3b4b-402d-854c-a8f393f63f55" />
+        <classShapeMoniker Id="6509b97d-0368-4adc-a84a-cd7f6b454cb5" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(27 : 19.0869299316406); (21.3645833333333 : 19.0869299316406 : JumpStart); (21.1979166666667 : 19.0869299316406 : JumpEnd); (19.5 : 19.0869299316406)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/DotNetCollegeContextDataContext/Invoice/Invoice_Order1" />
+      <nodes>
+        <classShapeMoniker Id="e1b9887a-3b4b-402d-854c-a8f393f63f55" />
+        <classShapeMoniker Id="6509b97d-0368-4adc-a84a-cd7f6b454cb5" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(16.5 : 2.09699625651042); (17.375 : 2.09699625651042)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/DotNetCollegeContextDataContext/PrivateCourseRequest/PrivateCourseRequest_LectorPrivateCourseRequest" />
+      <nodes>
+        <classShapeMoniker Id="0aa5717e-dcc0-4bd8-a0a7-6b8adf7b7911" />
+        <classShapeMoniker Id="3346c745-bd63-4894-a65e-2d04d5d37e7a" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(25.342076066365 : 9.625); (25.342076066365 : 4.59375); (26.75 : 4.59375)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/DotNetCollegeContextDataContext/Course/Course_Recording" />
+      <nodes>
+        <classShapeMoniker Id="e2f53f1f-5543-44be-abcd-147b059858a5" />
+        <classShapeMoniker Id="e612a05f-8fc5-4736-8fe1-9a2bb78f77d0" />
+      </nodes>
+    </associationConnector>
+  </nestedChildShapes>
+</ordesignerObjectsDiagram>

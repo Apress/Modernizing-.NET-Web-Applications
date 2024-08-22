@@ -1,0 +1,41 @@
+﻿@model ModernizationDemo.App.Model.AdminProductDetailModel
+
+@using (Html.BeginForm("Product", "Admin", FormMethod.Post))
+{
+    if (ViewContext.RouteData.Values["id"] == null)
+    {
+        <h2>Create product</h2>
+    }
+    else
+    {
+        <h2>Update product</h2>
+    }
+
+    <div class="mb-3">
+        @Html.LabelFor(m => m.Name, "Product name", new { @class = "form-label" })
+        @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Name, "", new { @class = "text-danger" })
+    </div>
+    <div class="mb-3">
+        @Html.LabelFor(m => m.Description, "Product description", new { @class = "form-label" })
+        @Html.TextAreaFor(m => m.Description, new { @class = "form-control", rows = 5 })
+        @Html.ValidationMessageFor(m => m.Description, "", new { @class = "text-danger" })
+    </div>
+    <div class="mb-3">
+        @Html.LabelFor(m => m.ImageUrl, "Image URL", new { @class = "form-label" })
+        @Html.TextBoxFor(m => m.ImageUrl, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.ImageUrl, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="text-center">
+        @if (ViewContext.RouteData.Values["id"] == null)
+        {
+            <button type="submit" class="btn btn-primary">Add product</button>
+        }
+        else
+        {
+            <button type="submit" class="btn btn-primary">Update product</button>
+        }
+        <a href="/admin/products" class="btn btn-secondary">Cancel</a>
+    </div>
+}

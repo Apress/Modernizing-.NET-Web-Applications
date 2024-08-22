@@ -1,0 +1,92 @@
+﻿@using ModernizationDemo.AppNew.Services
+@using ModernizationDemo.BackendClient
+@using ModernizationDemo.AppNew.Components.Controls
+@page "/"
+@inject ApiClient apiClient
+@inject SelectedCurrencyService selectedCurrencyService
+@inject Utils utils
+@implements IDisposable
+
+<div class="row row-cols-1 row-cols-md-3 g-4">
+    @if (Products != null && ProductPrices != null)
+    {
+        @foreach (var product in Products)
+        {
+            <div class="col">
+                <div class="card h-100">
+
+                    <img src="@product.ImageUrl" alt="@product.Name"/>
+
+                    <div class="card-body">
+                        <h5 class="card-title">@product.Name</h5>
+                        <p class="card-text">@product.Description</p>
+                        <a class="btn btn-primary"
+                           href="@($"/product/{product.Id}")">
+                            @ProductPrices[product.Id]
+                        </a>
+                    </div>
+                </div>
+            </div>
+        }
+    }
+</div>
+
+<div class="mt-4 text-center">
+    <Pager PageSize="@PageSize"
+           PageIndex="@PageIndex"
+           TotalRecordsCount="@TotalRecords"
+           OnPageIndexChanged="@(async (pageIndex) => await OnPageIndexChanged(pageIndex))"/>
+</div>       
+
+@code {
+
+    private const int PageSize = 12;
+    
+    public int PageIndex { get; set; }
+
+    public int TotalRecords { get; set; }
+
+    public ICollection<ProductModel>? Products { get; set; }
+
+    public Dictionary<Guid, string>? ProductPrices { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadData();
+        selectedCurrencyService.SelectedCurrencyChanged += OnSelectedCurrencyChanged;
+        
+        await base.OnInitializedAsync();
+    }
+
+    public void Dispose()
+    {
+        selectedCurrencyService.SelectedCurrencyChanged -= OnSelectedCurrencyChanged;
+    }
+
+    private async Task OnPageIndexChanged(int pageIndex)
+    {
+        PageIndex = pageIndex;
+        await LoadData();
+    }
+
+    private async void OnSelectedCurrencyChanged()
+    {
+        await LoadData();
+        StateHasChanged();
+    }
+
+    private async Task LoadData()
+    {
+        var result = await apiClient.GetProductsAsync(PageIndex * PageSize, PageSize);
+        Products = result.Results;
+        TotalRecords = result.TotalRecordCount;
+
+        ProductPrices = new Dictionary<Guid, string>();
+        foreach (var product in Products)
+        {
+            var price = await utils.GetProductPriceWithCaching(product.Id, await selectedCurrencyService.GetCurrency());
+            ProductPrices[product.Id] = price;
+        }
+    }
+
+}

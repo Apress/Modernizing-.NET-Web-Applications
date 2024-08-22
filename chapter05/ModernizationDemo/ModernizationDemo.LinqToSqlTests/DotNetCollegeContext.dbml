@@ -1,0 +1,404 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="dotnetcollege" Class="DotNetCollegeContextDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Table Name="dbo.Suppliers" Member="Suppliers">
+    <Type Name="Supplier">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
+      <Column Name="AddressId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Currency" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="VATRate" Type="System.Decimal" DbType="Decimal(18,2) NOT NULL" CanBeNull="false" />
+      <Column Name="IsVATPayer" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="IsAutomated" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Association Name="Supplier_Account" Member="Accounts" ThisKey="Id" OtherKey="SupplierId" Type="Account" />
+      <Association Name="Supplier_Course" Member="Courses" ThisKey="Id" OtherKey="SupplierId" Type="Course" />
+      <Association Name="Supplier_Invoice" Member="Invoices" ThisKey="Id" OtherKey="SupplierId" Type="Invoice" />
+      <Association Name="Supplier_Lector" Member="Lectors" ThisKey="Id" OtherKey="DefaultSupplierId" Type="Lector" />
+      <Association Name="Address_Supplier" Member="Address" ThisKey="AddressId" OtherKey="Id" Type="Address" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Accounts" Member="Accounts">
+    <Type Name="Account">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="SupplierId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="LectorId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Discriminator" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Association Name="Account_AccountTransaction" Member="AccountTransactions" ThisKey="Id" OtherKey="AccountId" Type="AccountTransaction" />
+      <Association Name="Account_Lector" Member="Lectors" ThisKey="Id" OtherKey="CommissionAccountId" Type="Lector" />
+      <Association Name="Supplier_Account" Member="Supplier" ThisKey="SupplierId" OtherKey="Id" Type="Supplier" IsForeignKey="true" />
+      <Association Name="Lector_Account" Member="Lector" ThisKey="LectorId" OtherKey="Id" Type="Lector" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.AccountTransactions" Member="AccountTransactions">
+    <Type Name="AccountTransaction">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="AccountId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Amount" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="CreatedDate" Type="System.DateTime" DbType="DateTime2" CanBeNull="true" />
+      <Column Name="PaidDate" Type="System.DateTime" DbType="DateTime2" CanBeNull="true" />
+      <Column Name="CourseId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="LectorInvoiceUrl" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
+      <Column Name="Discriminator" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="InvoiceId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Description" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="InvoiceUrl" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
+      <Column Name="CustomAccountTransaction_Amount" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="CustomAccountTransaction_CreatedDate" Type="System.DateTime" DbType="DateTime2" CanBeNull="true" />
+      <Column Name="CustomAccountTransaction_PaidDate" Type="System.DateTime" DbType="DateTime2" CanBeNull="true" />
+      <Association Name="Account_AccountTransaction" Member="Account" ThisKey="AccountId" OtherKey="Id" Type="Account" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+      <Association Name="Course_AccountTransaction" Member="Course" ThisKey="CourseId" OtherKey="Id" Type="Course" IsForeignKey="true" DeleteRule="CASCADE" />
+      <Association Name="Invoice_AccountTransaction" Member="Invoice" ThisKey="InvoiceId" OtherKey="Id" Type="Invoice" IsForeignKey="true" DeleteRule="CASCADE" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Addresses" Member="Addresses">
+    <Type Name="Address">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
+      <Column Name="Street" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
+      <Column Name="City" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
+      <Column Name="ZIP" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="IC" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="DIC" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="CountryId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="CompanyRegistration" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
+      <Column Name="BankAccount" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Iban" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Swift" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Association Name="Address_Supplier" Member="Suppliers" ThisKey="Id" OtherKey="AddressId" Type="Supplier" />
+      <Association Name="Address_Customer" Member="Customers" ThisKey="Id" OtherKey="AddressId" Type="Customer" />
+      <Association Name="Address_Invoice" Member="Invoices" ThisKey="Id" OtherKey="AddressId" Type="Invoice" />
+      <Association Name="Address_Order" Member="Orders" ThisKey="Id" OtherKey="BillingAddressId" Type="Order" />
+      <Association Name="Country_Address" Member="Country" ThisKey="CountryId" OtherKey="Id" Type="Country" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Attachments" Member="Attachments">
+    <Type Name="Attachment">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Url" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
+      <Column Name="CourseId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="FileName" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
+      <Column Name="Description" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Association Name="Course_Attachment" Member="Course" ThisKey="CourseId" OtherKey="Id" Type="Course" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.AttendeeRegistrations" Member="AttendeeRegistrations">
+    <Type Name="AttendeeRegistration">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="UserId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="OrderId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="CreatedDate" Type="System.DateTime" DbType="DateTime2 NOT NULL" CanBeNull="false" />
+      <Column Name="IsDeleted" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="FirstName" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
+      <Column Name="LastName" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
+      <Column Name="Email" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
+      <Column Name="IsUnknown" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="Day" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="Order_AttendeeRegistration" Member="Order" ThisKey="OrderId" OtherKey="Id" Type="Order" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Categories" Member="Categories">
+    <Type Name="Category">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
+      <Column Name="UrlName" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
+      <Column Name="Description" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="PromotionOrder" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="MainCategoryId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ImageUrl" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Association Name="Category_CategoryCourseTemplate" Member="CategoryCourseTemplates" ThisKey="Id" OtherKey="CategoriesId" Type="CategoryCourseTemplate" />
+      <Association Name="MainCategory_Category" Member="MainCategory" ThisKey="MainCategoryId" OtherKey="Id" Type="MainCategory" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.CategoryCourseTemplate" Member="CategoryCourseTemplates">
+    <Type Name="CategoryCourseTemplate">
+      <Column Name="CategoriesId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="CourseTemplatesId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Association Name="Category_CategoryCourseTemplate" Member="Category" ThisKey="CategoriesId" OtherKey="Id" Type="Category" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+      <Association Name="CourseTemplate_CategoryCourseTemplate" Member="CourseTemplate" ThisKey="CourseTemplatesId" OtherKey="Id" Type="CourseTemplate" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Countries" Member="Countries">
+    <Type Name="Country">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
+      <Association Name="Country_Address" Member="Addresses" ThisKey="Id" OtherKey="CountryId" Type="Address" />
+    </Type>
+  </Table>
+  <Table Name="dbo.CourseDates" Member="CourseDates">
+    <Type Name="CourseDate">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="CourseId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="BeginDate" Type="System.DateTime" DbType="DateTime2 NOT NULL" CanBeNull="false" />
+      <Column Name="EndDate" Type="System.DateTime" DbType="DateTime2 NOT NULL" CanBeNull="false" />
+      <Association Name="Course_CourseDate" Member="Course" ThisKey="CourseId" OtherKey="Id" Type="Course" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.CourseLector" Member="CourseLectors">
+    <Type Name="CourseLector">
+      <Column Name="CoursesId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="LectorsId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Association Name="Course_CourseLector" Member="Course" ThisKey="CoursesId" OtherKey="Id" Type="Course" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+      <Association Name="Lector_CourseLector" Member="Lector" ThisKey="LectorsId" OtherKey="Id" Type="Lector" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.CourseReminders" Member="CourseReminders">
+    <Type Name="CourseReminder">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="CourseId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="AppUserId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ReminderDate" Type="System.DateTime" DbType="DateTime2 NOT NULL" CanBeNull="false" />
+      <Column Name="WasReminded" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Association Name="Course_CourseReminder" Member="Course" ThisKey="CourseId" OtherKey="Id" Type="Course" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Courses" Member="Courses">
+    <Type Name="Course">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="BeginDate" Type="System.DateTime" DbType="DateTime2 NOT NULL" CanBeNull="false" />
+      <Column Name="IsEveningCourse" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="NumberOfDays" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="CourseTemplateId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="LocationNotes" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="ContentNotes" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="Type" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="LocationId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Price" Type="System.Decimal" DbType="Decimal(18,2) NOT NULL" CanBeNull="false" />
+      <Column Name="IsApproved" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="IsDeleted" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="SupplierId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="CourseSubtitle" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
+      <Column Name="IsRegistrationClosed" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="AllowOnlinePayments" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="AllowCashPayments" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="ClosedDate" Type="System.DateTime" DbType="DateTime2" CanBeNull="true" />
+      <Column Name="CustomerId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Margin" Type="System.Decimal" DbType="Decimal(18,2) NOT NULL" CanBeNull="false" />
+      <Column Name="PricePerDay" Type="System.Decimal" DbType="Decimal(18,2) NOT NULL" CanBeNull="false" />
+      <Column Name="MinimumNumberOfAttendees" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Course_AccountTransaction" Member="AccountTransactions" ThisKey="Id" OtherKey="CourseId" Type="AccountTransaction" />
+      <Association Name="Course_Attachment" Member="Attachments" ThisKey="Id" OtherKey="CourseId" Type="Attachment" />
+      <Association Name="Course_CourseDate" Member="CourseDates" ThisKey="Id" OtherKey="CourseId" Type="CourseDate" />
+      <Association Name="Course_CourseLector" Member="CourseLectors" ThisKey="Id" OtherKey="CoursesId" Type="CourseLector" />
+      <Association Name="Course_CourseReminder" Member="CourseReminders" ThisKey="Id" OtherKey="CourseId" Type="CourseReminder" />
+      <Association Name="Course_DiscountCoupon" Member="DiscountCoupons" ThisKey="Id" OtherKey="RestrictToCourseId" Type="DiscountCoupon" />
+      <Association Name="Course_Order" Member="Orders" ThisKey="Id" OtherKey="CourseId" Type="Order" />
+      <Association Name="Course_Recording" Member="Recordings" ThisKey="Id" OtherKey="CourseId" Type="Recording" />
+      <Association Name="Supplier_Course" Member="Supplier" ThisKey="SupplierId" OtherKey="Id" Type="Supplier" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+      <Association Name="CourseTemplate_Course" Member="CourseTemplate" ThisKey="CourseTemplateId" OtherKey="Id" Type="CourseTemplate" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+      <Association Name="Customer_Course" Member="Customer" ThisKey="CustomerId" OtherKey="Id" Type="Customer" IsForeignKey="true" />
+      <Association Name="Location_Course" Member="Location" ThisKey="LocationId" OtherKey="Id" Type="Location" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.CourseTemplateRelations" Member="CourseTemplateRelations">
+    <Type Name="CourseTemplateRelation">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="CourseTemplateId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="RelatedCourseTemplateId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Type" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="CourseTemplate_CourseTemplateRelation" Member="CourseTemplate" ThisKey="CourseTemplateId" OtherKey="Id" Type="CourseTemplate" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+      <Association Name="CourseTemplate_CourseTemplateRelation1" Member="CourseTemplate1" ThisKey="RelatedCourseTemplateId" OtherKey="Id" Type="CourseTemplate" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.CourseTemplates" Member="CourseTemplates">
+    <Type Name="CourseTemplate">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="IsDeleted" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
+      <Column Name="Description" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="RequiredKnowledge" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
+      <Column Name="TypicalNumberOfDays" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="IsPrivate" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="Code" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="UrlName" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
+      <Column Name="Keywords" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="PromotionOrder" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="CourseTemplate_CategoryCourseTemplate" Member="CategoryCourseTemplates" ThisKey="Id" OtherKey="CourseTemplatesId" Type="CategoryCourseTemplate" />
+      <Association Name="CourseTemplate_Course" Member="Courses" ThisKey="Id" OtherKey="CourseTemplateId" Type="Course" />
+      <Association Name="CourseTemplate_CourseTemplateRelation" Member="CourseTemplateRelations" ThisKey="Id" OtherKey="CourseTemplateId" Type="CourseTemplateRelation" />
+      <Association Name="CourseTemplate_CourseTemplateRelation1" Member="CourseTemplateRelations1" ThisKey="Id" OtherKey="RelatedCourseTemplateId" Type="CourseTemplateRelation" />
+      <Association Name="CourseTemplate_Order" Member="Orders" ThisKey="Id" OtherKey="CourseTemplateId" Type="Order" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Customers" Member="Customers">
+    <Type Name="Customer">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="AddressId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Customer_Course" Member="Courses" ThisKey="Id" OtherKey="CustomerId" Type="Course" />
+      <Association Name="Customer_Invoice" Member="Invoices" ThisKey="Id" OtherKey="CustomerId" Type="Invoice" />
+      <Association Name="Address_Customer" Member="Address" ThisKey="AddressId" OtherKey="Id" Type="Address" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.DiscountCoupons" Member="DiscountCoupons">
+    <Type Name="DiscountCoupon">
+      <Column Name="Code" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="[Percent]" Member="Percent" Type="System.Decimal" DbType="Decimal(18,2) NOT NULL" CanBeNull="false" />
+      <Column Name="RestrictToCourseId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="IsOneTime" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="ExpirationDate" Type="System.DateTime" DbType="DateTime2" CanBeNull="true" />
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Association Name="DiscountCoupon_Order" Member="Orders" ThisKey="Id" OtherKey="DiscountCouponId" Type="Order" />
+      <Association Name="Course_DiscountCoupon" Member="Course" ThisKey="RestrictToCourseId" OtherKey="Id" Type="Course" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.InvoiceLines" Member="InvoiceLines">
+    <Type Name="InvoiceLine">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="InvoiceId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Text" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="UnitPrice" Type="System.Decimal" DbType="Decimal(18,2) NOT NULL" CanBeNull="false" />
+      <Column Name="VATRate" Type="System.Decimal" DbType="Decimal(18,2) NOT NULL" CanBeNull="false" />
+      <Column Name="Units" Type="System.Decimal" DbType="Decimal(18,2) NOT NULL" CanBeNull="false" />
+      <Column Name="UnitName" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="TotalAmount" Type="System.Decimal" DbType="Decimal(18,2) NOT NULL" CanBeNull="false" />
+      <Association Name="Invoice_InvoiceLine" Member="Invoice" ThisKey="InvoiceId" OtherKey="Id" Type="Invoice" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Invoices" Member="Invoices">
+    <Type Name="Invoice">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Number" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="CreatedDate" Type="System.DateTime" DbType="DateTime2 NOT NULL" CanBeNull="false" />
+      <Column Name="DueDate" Type="System.DateTime" DbType="DateTime2 NOT NULL" CanBeNull="false" />
+      <Column Name="PaidDate" Type="System.DateTime" DbType="DateTime2" CanBeNull="true" />
+      <Column Name="Notes" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="IsFinalInvoice" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="FileUrl" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
+      <Column Name="Currency" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="TotalAmount" Type="System.Decimal" DbType="Decimal(18,2) NOT NULL" CanBeNull="false" />
+      <Column Name="SupplierId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="AddressId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="CustomerId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="IsCorrectionInvoice" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="CorrectedInvoiceNumber" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="TotalAmountWithoutVAT" Type="System.Decimal" DbType="Decimal(18,2) NOT NULL" CanBeNull="false" />
+      <Column Name="TaxDate" Type="System.DateTime" DbType="DateTime2" CanBeNull="true" />
+      <Association Name="Invoice_AccountTransaction" Member="AccountTransactions" ThisKey="Id" OtherKey="InvoiceId" Type="AccountTransaction" />
+      <Association Name="Invoice_InvoiceLine" Member="InvoiceLines" ThisKey="Id" OtherKey="InvoiceId" Type="InvoiceLine" />
+      <Association Name="Invoice_Order" Member="Orders" ThisKey="Id" OtherKey="FinalInvoiceId" Type="Order" />
+      <Association Name="Invoice_Order1" Member="Orders1" ThisKey="Id" OtherKey="ProformaInvoiceId" Type="Order" />
+      <Association Name="Address_Invoice" Member="Address" ThisKey="AddressId" OtherKey="Id" Type="Address" IsForeignKey="true" />
+      <Association Name="Customer_Invoice" Member="Customer" ThisKey="CustomerId" OtherKey="Id" Type="Customer" IsForeignKey="true" />
+      <Association Name="Supplier_Invoice" Member="Supplier" ThisKey="SupplierId" OtherKey="Id" Type="Supplier" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.LectorPrivateCourseRequest" Member="LectorPrivateCourseRequests">
+    <Type Name="LectorPrivateCourseRequest">
+      <Column Name="LectorsId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="PrivateCourseRequestsId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Association Name="Lector_LectorPrivateCourseRequest" Member="Lector" ThisKey="LectorsId" OtherKey="Id" Type="Lector" IsForeignKey="true" />
+      <Association Name="PrivateCourseRequest_LectorPrivateCourseRequest" Member="PrivateCourseRequest" ThisKey="PrivateCourseRequestsId" OtherKey="Id" Type="PrivateCourseRequest" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Lectors" Member="Lectors">
+    <Type Name="Lector">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Bio" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="Blog" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
+      <Column Name="LinkedIn" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
+      <Column Name="Twitter" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
+      <Column Name="UserId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="UrlName" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
+      <Column Name="Website" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
+      <Column Name="[Order]" Member="Order" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="AvatarUrl" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
+      <Column Name="IsDeleted" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="CommissionPrice" Type="System.Decimal" DbType="Decimal(18,2) NOT NULL" CanBeNull="false" />
+      <Column Name="CommissionPercent" Type="System.Decimal" DbType="Decimal(18,2) NOT NULL" CanBeNull="false" />
+      <Column Name="CommissionAccountId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="DefaultSupplierId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Lector_Account" Member="Accounts" ThisKey="Id" OtherKey="LectorId" Type="Account" />
+      <Association Name="Lector_CourseLector" Member="CourseLectors" ThisKey="Id" OtherKey="LectorsId" Type="CourseLector" />
+      <Association Name="Lector_LectorPrivateCourseRequest" Member="LectorPrivateCourseRequests" ThisKey="Id" OtherKey="LectorsId" Type="LectorPrivateCourseRequest" />
+      <Association Name="Account_Lector" Member="Account" ThisKey="CommissionAccountId" OtherKey="Id" Type="Account" IsForeignKey="true" />
+      <Association Name="Supplier_Lector" Member="Supplier" ThisKey="DefaultSupplierId" OtherKey="Id" Type="Supplier" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Locations" Member="Locations">
+    <Type Name="Location">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
+      <Column Name="Address" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
+      <Column Name="City" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
+      <Column Name="ZIP" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
+      <Column Name="Latitude" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="Longitude" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="HowToGetThere" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="GeekcoreLocationId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Location_Course" Member="Courses" ThisKey="Id" OtherKey="LocationId" Type="Course" />
+    </Type>
+  </Table>
+  <Table Name="dbo.MainCategories" Member="MainCategories">
+    <Type Name="MainCategory">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
+      <Column Name="UrlName" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
+      <Association Name="MainCategory_Category" Member="Categories" ThisKey="Id" OtherKey="MainCategoryId" Type="Category" />
+    </Type>
+  </Table>
+  <Table Name="dbo.OrderAvailableDates" Member="OrderAvailableDates">
+    <Type Name="OrderAvailableDate">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="OrderId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Date" Type="System.DateTime" DbType="DateTime2 NOT NULL" CanBeNull="false" />
+      <Association Name="Order_OrderAvailableDate" Member="Order" ThisKey="OrderId" OtherKey="Id" Type="Order" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Orders" Member="Orders">
+    <Type Name="Order">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="CreatedDate" Type="System.DateTime" DbType="DateTime2 NOT NULL" CanBeNull="false" />
+      <Column Name="UserId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Notes" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="BillingAddressId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="CourseId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="CourseTemplateId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="DiscountCouponId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ContactEmail" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="ContactPhone" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="TotalPrice" Type="System.Decimal" DbType="Decimal(18,2) NOT NULL" CanBeNull="false" />
+      <Column Name="VATRate" Type="System.Decimal" DbType="Decimal(18,2) NOT NULL" CanBeNull="false" />
+      <Column Name="HasVAT" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="PaidDate" Type="System.DateTime" DbType="DateTime2" CanBeNull="true" />
+      <Column Name="Currency" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="UnitPrice" Type="System.Decimal" DbType="Decimal(18,2) NOT NULL" CanBeNull="false" />
+      <Column Name="DiscountPercent" Type="System.Decimal" DbType="Decimal(18,2) NOT NULL" CanBeNull="false" />
+      <Column Name="ProformaInvoiceId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="FinalInvoiceId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="CanceledDate" Type="System.DateTime" DbType="DateTime2" CanBeNull="true" />
+      <Column Name="BraintreeTransactionId" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
+      <Association Name="Order_AttendeeRegistration" Member="AttendeeRegistrations" ThisKey="Id" OtherKey="OrderId" Type="AttendeeRegistration" />
+      <Association Name="Order_OrderAvailableDate" Member="OrderAvailableDates" ThisKey="Id" OtherKey="OrderId" Type="OrderAvailableDate" />
+      <Association Name="Address_Order" Member="Address" ThisKey="BillingAddressId" OtherKey="Id" Type="Address" IsForeignKey="true" />
+      <Association Name="Course_Order" Member="Course" ThisKey="CourseId" OtherKey="Id" Type="Course" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+      <Association Name="CourseTemplate_Order" Member="CourseTemplate" ThisKey="CourseTemplateId" OtherKey="Id" Type="CourseTemplate" IsForeignKey="true" />
+      <Association Name="DiscountCoupon_Order" Member="DiscountCoupon" ThisKey="DiscountCouponId" OtherKey="Id" Type="DiscountCoupon" IsForeignKey="true" />
+      <Association Name="Invoice_Order" Member="Invoice" ThisKey="FinalInvoiceId" OtherKey="Id" Type="Invoice" IsForeignKey="true" />
+      <Association Name="Invoice_Order1" Member="Invoice1" ThisKey="ProformaInvoiceId" OtherKey="Id" Type="Invoice" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.PrivateCourseRequests" Member="PrivateCourseRequests">
+    <Type Name="PrivateCourseRequest">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Topic" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="CompanyName" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="City" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="NumberOfAttendees" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Dates" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="Notes" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="AppUserId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="CreatedDate" Type="System.DateTime" DbType="DateTime2 NOT NULL" CanBeNull="false" />
+      <Column Name="CourseLength" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="GrantFinancing" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Association Name="PrivateCourseRequest_LectorPrivateCourseRequest" Member="LectorPrivateCourseRequests" ThisKey="Id" OtherKey="PrivateCourseRequestsId" Type="LectorPrivateCourseRequest" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Recordings" Member="Recordings">
+    <Type Name="Recording">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="AzureAssetId" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="PublicLinkUrl" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="Description" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="CourseId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Course_Recording" Member="Course" ThisKey="CourseId" OtherKey="Id" Type="Course" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+</Database>

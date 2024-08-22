@@ -1,0 +1,129 @@
+﻿@using BlazorWebFormsComponents
+@using Microsoft.AspNetCore.Authorization
+@using ModernizationDemo.AppNew.Services
+@using ModernizationDemo.BackendClient
+@using ModernizationDemo.AppNew.Components.Controls
+@page "/admin/products"
+@inject ApiClient apiClient
+@inject SelectedCurrencyService selectedCurrencyService
+@inject Utils utils
+@implements IDisposable
+@attribute [Authorize]
+
+<h2>Products</h2>
+
+<div class="my-4">
+    <a href="/admin/product"
+       class="btn btn-primary">
+        <i class="bi bi-plus"></i> Add product
+    </a>
+</div>
+
+@if (Items != null && ProductPrices != null)
+{
+    <GridView ItemType="ProductModel"
+              Items="Items"
+              DataKeyNames="Id"
+              AutoGenerateColumns="false" 
+              CssClass="table table-bordered">
+        <Columns>
+            <TemplateField HeaderText="Image" ItemType="ProductModel">
+                <ItemTemplate Context="item">
+                    <img src="@item.ImageUrl" alt="@item.Name" class="img-fluid" />
+                </ItemTemplate>
+            </TemplateField>
+            <BoundField DataField="Name" HeaderText="Name" ItemType="ProductModel" />
+            <BoundField DataField="Description" HeaderText="Description" ItemType="ProductModel" />
+            <TemplateField HeaderText="Price" ItemType="ProductModel">
+                <ItemTemplate Context="item">
+                    @ProductPrices[item.Id]
+                </ItemTemplate>
+            </TemplateField>
+            <TemplateField ItemType="ProductModel">
+                <ItemTemplate Context="item">
+                    <a href="/admin/product/@item.Id">
+                        <i class="bi bi-pencil"></i>
+                    </a>
+                </ItemTemplate>
+            </TemplateField>
+            <TemplateField ItemType="ProductModel">
+                <ItemTemplate Context="item">
+                    <a href="" @onclick="async () => await DeleteProduct(item.Id)" @onclick:preventDefault>
+                        <i class="bi bi-trash"></i>
+                    </a>
+                </ItemTemplate>
+            </TemplateField>
+        </Columns>
+    </GridView>
+}
+<table class="grid-pager-row">
+    <NumericPager PageSize="@PageSize"
+           PageIndex="@PageIndex"
+           TotalRecordsCount="@TotalRecords"
+           OnPageIndexChanged="@(async (pageIndex) => await OnPageIndexChanged(pageIndex))"/>
+</table>   
+
+@code {
+
+    private const int PageSize = 12;
+    
+    public int PageIndex { get; set; }
+
+    public int TotalRecords { get; set; }
+
+    public ICollection<ProductModel>? Items { get; set; }
+
+    public Dictionary<Guid, string>? ProductPrices { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadData();
+        selectedCurrencyService.SelectedCurrencyChanged += OnSelectedCurrencyChanged;
+        
+        await base.OnInitializedAsync();
+    }
+
+    public void Dispose()
+    {
+        selectedCurrencyService.SelectedCurrencyChanged -= OnSelectedCurrencyChanged;
+    }
+
+    private async Task OnPageIndexChanged(int pageIndex)
+    {
+        PageIndex = pageIndex;
+        await LoadData();
+    }
+
+    private async void OnSelectedCurrencyChanged()
+    {
+        await LoadData();
+        StateHasChanged();
+    }
+
+    public IQueryable<ProductModel> GetData(int maximumRows, int startRowIndex, string sortByExpression, out int totalRowCount)
+    {
+        totalRowCount = TotalRecords;
+        return Items!.AsQueryable();
+    }
+
+    private async Task LoadData()
+    {
+        var result = await apiClient.GetProductsAsync(PageIndex * PageSize, PageSize);
+        Items = result.Results;
+        TotalRecords = result.TotalRecordCount;
+
+        ProductPrices = new Dictionary<Guid, string>();
+        foreach (var product in Items)
+        {
+            var price = await utils.GetProductPriceWithCaching(product.Id, await selectedCurrencyService.GetCurrency());
+            ProductPrices[product.Id] = price;
+        }
+    }
+
+    public async Task DeleteProduct(Guid id)
+    {
+        await apiClient.DeleteProductAsync(id);
+        await LoadData();
+    }
+
+}

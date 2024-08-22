@@ -1,0 +1,35 @@
+﻿@model ModernizationDemo.App.Model.LoginModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col col-md-4 mx-auto">
+
+        <h2>Sign in</h2>
+        <p>Use your Contoso Shop account to sign in.</p>
+
+        @using (Html.BeginForm("Login", "Index", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+            <div class="mb-3">
+                @Html.LabelFor(m => m.UserName, "Product name", new { @class = "form-label" })
+                @Html.TextBoxFor(m => m.UserName, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.UserName, "", new { @class = "text-danger" })
+            </div>
+            <div class="mb-3">
+                @Html.LabelFor(m => m.Password, "Product name", new { @class = "form-label" })
+                @Html.TextBoxFor(m => m.Password, new { @class = "form-control", type = "password" })
+                @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+            </div>
+            <div class="mb-4">
+                <input value="Sign In" class="btn btn-primary" type="submit" />
+            </div>
+            <p class="text-danger">
+                @ViewBag.FailureText
+            </p>
+        }
+    </div>
+</div>
+
+

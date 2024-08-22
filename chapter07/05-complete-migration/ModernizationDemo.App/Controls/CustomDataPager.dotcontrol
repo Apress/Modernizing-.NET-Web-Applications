@@ -1,0 +1,22 @@
+@viewModel System.Object
+@property DotVVM.Framework.Controls.IPageableGridViewDataSet DataSet
+
+<div class="mt-4 text-center">
+    <dot:Button Text="First"
+                Click="{command: _control.DataSet.GoToPage(0)}"
+                Enabled="{value: _control.DataSet.PagingOptions.PageIndex > 0}"
+                class="btn btn-secondary" />
+    <dot:Button Text="Previous"
+                Click="{command: _control.DataSet.GoToPage(_control.DataSet.PagingOptions.PageIndex - 1)}"
+                Enabled="{value: _control.DataSet.PagingOptions.PageIndex > 0}"
+                class="btn btn-secondary" />
+
+    <dot:Button Text="Next"
+                Click="{command: _control.DataSet.GoToPage(_control.DataSet.PagingOptions.PageIndex + 1)}"
+                Enabled="{value: _control.DataSet.PagingOptions.PageIndex < _control.DataSet.PagingOptions.PagesCount - 1}"
+                class="btn btn-secondary" />
+    <dot:Button Text="Last"
+                Click="{command: _control.DataSet.GoToPage(_control.DataSet.PagingOptions.PagesCount - 1)}"
+                Enabled="{value: _control.DataSet.PagingOptions.PageIndex < _control.DataSet.PagingOptions.PagesCount - 1}"
+                class="btn btn-secondary" />
+</div>
